@@ -9837,7 +9837,7 @@ azL:function azL(){},
 a8p:function a8p(){},
 SN:function SN(a){this.a=a},
 ON:function ON(a){this.a=a},
-P6:function P6(a,b,c,d,e,f,g,h,i,j,k){var _=this
+P6:function P6(a,b,c,d,e,f,g,h,i,j,k,l){var _=this
 _.c=a
 _.d=b
 _.e=c
@@ -9848,7 +9848,8 @@ _.x=g
 _.y=h
 _.z=i
 _.Q=j
-_.a=k},
+_.as=k
+_.a=l},
 abp:function abp(a){this.a=a},
 abo:function abo(a,b,c){this.a=a
 this.b=b
@@ -10065,7 +10066,7 @@ aoQ:function aoQ(){},
 aoP:function aoP(a){this.a=a},
 aoO:function aoO(a,b){this.a=a
 this.b=b},
-nZ:function nZ(a,b,c,d,e,f,g,h,i,j,k,l){var _=this
+nZ:function nZ(a,b,c,d,e,f,g,h,i,j,k,l,m){var _=this
 _.b=a
 _.c=b
 _.d=c
@@ -10074,10 +10075,11 @@ _.f=e
 _.r=f
 _.w=g
 _.x=h
-_.y=i
-_.z=j
-_.Q=k
-_.as=l},
+_.z=i
+_.Q=j
+_.as=k
+_.at=l
+_.ax=m},
 auu:function auu(){},
 auv:function auv(){},
 auw:function auw(){},
@@ -55615,9 +55617,18 @@ break}else throw A.c(A.bf("Failed to load data"))
 case 1:return A.w(q,r)}})
 return A.x($async$Ey,r)}}
 A.ajA.prototype={
-$1(a){var s=J.Y(a)
-s.i(a,"id")
-return new A.nZ(s.i(a,"appTitle"),s.i(a,"body"),s.i(a,"appLogo"),s.i(a,"appBanner"),s.i(a,"banner1"),s.i(a,"banner2"),s.i(a,"banner3"),s.i(a,"banner4"),s.i(a,"urlAppStore"),s.i(a,"urlPlayStore"),s.i(a,"urlAppGallery"),s.i(a,"urlMacAppStore"))},
+$1(a){var s,r,q,p,o,n,m,l,k=J.Y(a)
+k.i(a,"id")
+s=k.i(a,"appTitle")
+r=k.i(a,"body")
+q=k.i(a,"appLogo")
+p=k.i(a,"appBanner")
+o=k.i(a,"banner1")
+n=k.i(a,"banner2")
+m=k.i(a,"banner3")
+l=k.i(a,"banner4")
+k.i(a,"aboutApp2")
+return new A.nZ(s,r,q,p,o,n,m,l,k.i(a,"aboutApp3"),k.i(a,"urlAppStore"),k.i(a,"urlPlayStore"),k.i(a,"urlAppGallery"),k.i(a,"urlMacAppStore"))},
 $S:360}
 A.mq.prototype={
 kg(){this.o_()},
@@ -56150,7 +56161,7 @@ p=A.a7(51,p>>>16&255,p>>>8&255,p&255)
 o=j.ax
 o===$&&A.b()
 n=t.p
-return new A.b4(h.a.a,g.a.b,new A.as(B.ca,A.bW(B.a6,A.a([s,new A.as(B.Kk,A.aNZ(A.a([r,B.JI,q,B.iu,A.aA(l,A.b6K(0,B.a8,!0,o,new A.abo(m,j,i),4,270,!1,new A.abp(j),A.HF(a).a_A(A.cM([B.al,B.aT],t.B)),0.2),B.h,p,l,l,l,450,l,l,B.bf,l,l),B.VC,A.rn(a,A.p5(a,new A.as(B.oM,A.bv(A.da("about_app2"),l,l,A.bq(l,l,A.br(a),l,l,l,l,l,k,l,l,18,l,l,l,l,l,!0,l,l,l,l,l,l,l,l),l,l),l),l),l,l),B.iu,A.rn(a,A.p5(a,new A.as(B.oM,A.bv(A.da("about_app3"),l,l,A.bq(l,l,A.br(a),l,l,l,l,l,k,l,l,14,l,l,l,l,1.5,!0,l,l,l,l,l,l,l,l),l,l),l),l),l,l),B.iu,A.hw(A.rn(a,new A.as(B.aq,A.cE(A.a([A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.pt,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appStoreI"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abq(m,j),l,l,l,l,l),B.h,l,l,B.nc,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.M0,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("playStore"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abr(m,j),l,l,l,l,l),B.h,l,l,B.Ei,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.M_,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appGallery"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abs(m,j),l,l,l,l,l),B.h,l,l,B.Ej,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.pt,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appStoreD"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abt(m,j),l,l,l,l,l),B.h,l,l,B.nc,l,l,l,l,l,l,l)],n),B.o,B.w,B.z),l),l,l),B.A)],n)),l)],n),B.q,B.J),l),l)}}
+return new A.b4(h.a.a,g.a.b,new A.as(B.ca,A.bW(B.a6,A.a([s,new A.as(B.Kk,A.aNZ(A.a([r,B.JI,q,B.iu,A.aA(l,A.b6K(0,B.a8,!0,o,new A.abo(m,j,i),4,270,!1,new A.abp(j),A.HF(a).a_A(A.cM([B.al,B.aT],t.B)),0.2),B.h,p,l,l,l,450,l,l,B.bf,l,l),B.VC,A.rn(a,A.p5(a,new A.as(B.oM,A.bv(A.da("about_app2"),l,l,A.bq(l,l,A.br(a),l,l,l,l,l,k,l,l,18,l,l,l,l,l,!0,l,l,l,l,l,l,l,l),l,l),l),l),l,l),B.iu,A.rn(a,A.p5(a,new A.as(B.oM,A.bv(A.da(m.as),l,l,A.bq(l,l,A.br(a),l,l,l,l,l,k,l,l,14,l,l,l,l,1.5,!0,l,l,l,l,l,l,l,l),l,l),l),l),l,l),B.iu,A.hw(A.rn(a,new A.as(B.aq,A.cE(A.a([A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.pt,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appStoreI"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abq(m,j),l,l,l,l,l),B.h,l,l,B.nc,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.M0,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("playStore"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abr(m,j),l,l,l,l,l),B.h,l,l,B.Ei,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.M_,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appGallery"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abs(m,j),l,l,l,l,l),B.h,l,l,B.Ej,l,l,l,l,l,l,l),B.jQ,A.aA(l,A.j6(!1,l,!0,A.cg(A.a([B.pt,A.aA(l,l,B.h,B.l,l,l,l,20,l,B.bO,l,l,2),A.bv(A.da("appStoreD"),l,l,B.iz,l,l)],n),B.o,B.w,B.z,l),l,!0,l,l,l,l,l,l,l,l,l,new A.abt(m,j),l,l,l,l,l),B.h,l,l,B.nc,l,l,l,l,l,l,l)],n),B.o,B.w,B.z),l),l,l),B.A)],n)),l)],n),B.q,B.J),l),l)}}
 A.abp.prototype={
 $1(a){var s=this.a
 if(s.ay!==a)s.ay=a},
@@ -56226,7 +56237,7 @@ q[n]=A.dB(h,A.aA(h,A.cE(A.a([m,new A.as(B.bf,new A.tx(B.a2,B.y,B.h,l,h),h),A.bv(
 $S:435}
 A.apm.prototype={
 $0(){var s=this.b,r=this.c,q=J.Y(s)
-return A.aZZ(this.a,new A.P6(q.i(s,r).d,q.i(s,r).b,q.i(s,r).y,q.i(s,r).z,q.i(s,r).Q,q.i(s,r).as,q.i(s,r).f,q.i(s,r).r,q.i(s,r).w,q.i(s,r).x,null))},
+return A.aZZ(this.a,new A.P6(q.i(s,r).d,q.i(s,r).b,q.i(s,r).Q,q.i(s,r).as,q.i(s,r).at,q.i(s,r).ax,q.i(s,r).f,q.i(s,r).r,q.i(s,r).w,q.i(s,r).x,q.i(s,r).z,null))},
 $S:0}
 A.Pm.prototype={
 F(a){var s,r=null,q=A.aYO(a),p=A.aYO(a),o=A.bg0(a,new A.aco()),n=$.b_(),m=t.OQ,l=n.$1$0(m).ch,k=A.cF(l.gk(l)?B.Lv:B.Lw,r,r,24),j=t.p
