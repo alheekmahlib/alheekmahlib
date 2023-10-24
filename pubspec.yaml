@@ -1,0 +1,115 @@
+name: alheekmahlib_website
+description: A new Flutter project.
+
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.0
+
+
+
+  cupertino_icons: ^1.0.5
+  theme_provider: ^0.6.0
+  bloc: ^8.1.2
+  flutter_bloc: ^8.1.3
+  flutter_svg: ^2.0.6
+  flutter_staggered_animations: ^1.1.1
+  shared_preferences: ^2.1.1
+  another_xlider: ^3.0.1
+#  dropdown_button2: ^2.1.3
+  get: ^4.6.5
+  lottie: ^2.4.0
+  clipboard: ^0.1.3
+  share_plus: ^7.0.2
+  url_launcher: ^6.1.11
+  animations: ^2.0.7
+  infinite_carousel: ^1.0.3
+  hijri: ^3.0.0
+  arabic_numbers: ^1.0.0
+  sliding_up_panel: ^2.0.0+1
+  auto_size_text: ^3.0.0
+  flutter_native_splash: ^2.3.1
+  get_it: ^7.6.4
+  flutter_slider_drawer: ^2.1.3
+  expansion_tile_card: ^3.0.0
+  scrollable_positioned_list: ^0.3.8
+  http: ^1.1.0
+  easy_image_viewer: ^1.2.1
+  just_audio: ^0.9.35
+  bot_toast: ^4.1.3
+  flutter_sliding_up_panel: ^2.1.1
+  animated_toggle_switch: ^0.8.0
+  rxdart: ^0.27.7
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  generate: true
+
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/svg/
+    - assets/svg/hijri/
+    - assets/svg/surah_name/
+    - assets/images/
+    - assets/lottie/
+    - assets/json/
+    - assets/apps_images/
+    - assets/apps_banner/
+    - assets/locales/
+    - assets/svg/juz/
+    - assets/json/translate/
+  #   - images/a_dot_ham.jpeg
+
+
+  fonts:
+    - family: uthmanic
+      fonts:
+        - asset: assets/fonts/UthmanTN1_Ver10.otf
+
+    - family: uthmanic2
+      fonts:
+        - asset: assets/fonts/UthmanicHafs_V20.ttf
+
+    - family: kufi
+      fonts:
+        - asset: assets/fonts/Kufam-Italic-VariableFont_wght.ttf
+          style: italic
+        - asset: assets/fonts/Kufam-VariableFont_wght.ttf
+          weight: 500
+        - asset: assets/fonts/Kufam-Regular.ttf
+          weight: 100
+
+    - family: naskh
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
+
+flutter_native_splash:
+  color_web: "#f3efdf"
+  color_dark_web: "#3F3F3F"
+  image_web: assets/images/alheekmah_logo.png
+  image_dark_web: assets/images/alheekmah_logo_dark.png
+  fullscreen: true
