@@ -12,8 +12,8 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-<!--  <base href="/">-->
-  <base href="https://alheekmahlib.com/">
+  <base href="/">
+<!--  <base href="https://alheekmahlib.com/">-->
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -33,7 +33,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "2123137561";
+    const serviceWorkerVersion = "4101646695";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer=""></script>
@@ -118,6 +118,13 @@
       <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+
+  <script>
+    const regExp = new RegExp("bot|google|baidu|bing|msn|teoma|slurp|yandex", "i");
+    if (regExp.test(navigator.userAgent)) {
+      window.flutterWebRenderer = "html";
+    }
+  </script>
   
   <script>
     window.addEventListener('load', function(ev) {
