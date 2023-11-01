@@ -97,6 +97,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "appStoreI": "للتحميل من متجر |App Store|",
+  "@appStoreI": {
+    "type": "text",
+    "placeholders": {}
+  },
   "playStore": "للتحميل من متجر |Google Store|",
   "@playStore": {
     "type": "text",
