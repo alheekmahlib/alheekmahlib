@@ -161,6 +161,11 @@
   "@appStoreD": {
     "type": "text",
     "placeholders": {}
+  },
+  "notFound": "এই পৃষ্ঠাটি খুঁজে পাওয়া যায় না।:",
+  "@notFound": {
+    "type": "text",
+    "placeholders": {}
   }
 }
 

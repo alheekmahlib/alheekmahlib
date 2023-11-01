@@ -181,5 +181,10 @@
   "@azkar": {
     "type": "text",
     "placeholders": {}
+  },
+  "notFound": "This page cannot be found:",
+  "@notFound": {
+    "type": "text",
+    "placeholders": {}
   }
 }
