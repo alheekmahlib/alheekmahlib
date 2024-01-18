@@ -48728,7 +48728,7 @@ case 3:n=c
 if(n.b===200){o=J.kG(B.aL.KH(0,A.aLd(J.aw(A.aJX(n.e).c.a,"charset")).dK(0,n.w),null),new A.ajh(),t.sD)
 o=A.a5(o,!0,A.l(o).h("b0.E"))
 p.k1=o
-q=A.a([o[a]],t.Az)
+q=A.a([o[a-1]],t.Az)
 s=1
 break}else throw A.c(A.bu("Failed to load data"))
 case 1:return A.w(q,r)}})
