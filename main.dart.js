@@ -48728,7 +48728,7 @@ case 3:n=c
 if(n.b===200){o=J.kG(B.aL.KH(0,A.aLd(J.aw(A.aJX(n.e).c.a,"charset")).dK(0,n.w),null),new A.ajh(),t.sD)
 o=A.a5(o,!0,A.l(o).h("b0.E"))
 p.k1=o
-q=A.a([o[a-1]],t.Az)
+q=A.a([o[a]],t.Az)
 s=1
 break}else throw A.c(A.bu("Failed to load data"))
 case 1:return A.w(q,r)}})
@@ -49371,7 +49371,7 @@ $S:0}
 A.ti.prototype={
 E(a){var s,r,q,p=null,o="assets/svg/alheekmah_logo.svg",n=A.D(a),m=A.he(new A.v4(15,A.dM(o,new A.j0(A.bl(a),B.bs,p,B.bL),B.W,100,p),p),p,0.2),l=t.w,k=A.aA(a,B.A,l).w
 k=A.aB(p,p,B.h,A.D(a).ax.cy,p,p,p,10,p,B.jy,p,p,k.a.a)
-s=A.aP_($.aJ().$1$0(t.C).k1[this.c+1].d,80,80)
+s=A.aP_($.aJ().$1$0(t.C).k1[this.c].d,80,80)
 r=A.dM(o,new A.j0(A.bl(a),B.bs,p,B.bL),B.W,p,80)
 l=A.aA(a,B.A,l).w
 q=t.p
