@@ -1,5 +1,6 @@
 import 'package:alheekmahlib_website/core/utils/helpers/navigation_keys.dart';
 import 'package:alheekmahlib_website/core/utils/helpers/url_updater.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quran_library/quran.dart';
 
@@ -10,118 +11,95 @@ class QuranScreenController extends GetxController {
       GetInstance().putOrFind(() => QuranScreenController());
 
   Worker? _pageUrlSyncWorker;
-  int? _initialTargetPage; // الصفحة المطلوبة من رابط الدخول
-  bool _initialApplied = false;
-  int _attempts = 0;
-  static const int _maxAttempts = 20;
-  int? _initialAyahTarget;
-  bool _ayahApplied = false;
-  int _ayahAttempts = 0;
-  static const int _ayahMaxAttempts = 20;
+  int? _initialPage; // رقم الصفحة من الرابط (1-based)
+  int? _initialAyah; // رقم الآية الفريد من الرابط
+  bool _applying = false; // أثناء التطبيق الأولي نتجنّب تحديث الرابط
+  bool _deepLinkApplied = false; // تم تطبيق الصفحة/الآية
+  int _applyAttempts = 0; // عدد المحاولات
+  static const int _maxApplyAttempts =
+      60; // زيادة المحاولات لإتاحة وقت تحميل المكتبة
 
   @override
   void onInit() {
     super.onInit();
-    _readInitialPageFromUrl();
+    _parseDeepLink();
     _pageUrlSyncWorker = debounce<int>(
       QuranCtrl.instance.state.currentPageNumber,
-      onPageChanged,
-      time: const Duration(milliseconds: 200),
+      _onPageChanged,
+      time: const Duration(milliseconds: 160),
     );
-    // محاولات متكررة خفيفة لتطبيق الصفحة المطلوبة بعد البناء
-    _scheduleRetryApply();
+    _scheduleApply();
   }
 
-  void onPageChanged(int page) {
-    if (page <= 0) return;
-    // استخدم rootNavigatorKey للحصول على سياق النافيجيتور ثم استخرج GoRouter مباشرة
+  // تحديث الرابط عند تقليب الصفحات (بعد التطبيق الأولي فقط)
+  void _onPageChanged(int page) {
+    if (page <= 0 || _applying) return;
     final ctx = rootNavigatorKey.currentContext;
     if (ctx == null) return;
-    // استخلص الموقع الحالي بشكل متوافق مع الويب (يدعم Hash strategy)
     final uri = () {
-      final frag = Uri.base.fragment; // مثال: '/quran?page=123'
-      if (frag.isNotEmpty && frag.startsWith('/')) {
-        return Uri.parse(frag);
-      }
-      // بدون hash
+      final frag = Uri.base.fragment;
+      if (frag.isNotEmpty && frag.startsWith('/')) return Uri.parse(frag);
       return Uri(
           path: Uri.base.path, queryParameters: Uri.base.queryParameters);
     }();
-    // حدّث الرابط فقط عندما نكون في مسار القرآن
     if (!uri.path.startsWith('/quran')) return;
-
-    final currentPage = uri.queryParameters['page'];
-    if (currentPage == '$page') return;
-
+    final currentPageParam = uri.queryParameters['page'];
+    if (currentPageParam == '$page') return;
     final newUri = Uri(path: uri.path, queryParameters: {
       ...uri.queryParameters,
       'page': '$page',
     });
-    // حدّث الرابط دون تحفيز إعادة بناء الملاح (على الويب)، أو عبر go_router في المنصات الأخرى
     updateBrowserUrl(newUri.toString(), replace: true);
   }
 
-  void _readInitialPageFromUrl() {
-    final frag = Uri.base.fragment; // مع استراتيجية الهاش
+  // استخراج قيم page / ayah من الرابط
+  void _parseDeepLink() {
+    final frag = Uri.base.fragment;
     final full = frag.isNotEmpty ? Uri.parse(frag) : Uri.base;
-    final raw = full.queryParameters['page'];
-    final parsed = int.tryParse(raw ?? '');
-    if (parsed != null && parsed > 0) {
-      _initialTargetPage = parsed.clamp(1, 700); // حد أعلى احتياطي
-    }
+    final pageRaw = full.queryParameters['page'];
+    final p = int.tryParse(pageRaw ?? '');
+    if (p != null && p > 0) _initialPage = p.clamp(1, 700);
     final ayahRaw = full.queryParameters['ayah'];
-    final ayahParsed = int.tryParse(ayahRaw ?? '');
-    if (ayahParsed != null && ayahParsed > 0) {
-      _initialAyahTarget = ayahParsed;
-    }
+    final a = int.tryParse(ayahRaw ?? '');
+    if (a != null && a > 0) _initialAyah = a;
   }
 
-  void _scheduleRetryApply() {
-    if (_initialTargetPage == null || _initialApplied) return;
-    // إذا كانت الصفحة الحالية بالفعل الهدف اعتبرها مطبقة
-    if (QuranCtrl.instance.state.currentPageNumber.value ==
-        _initialTargetPage) {
-      _initialApplied = true;
-      return;
-    }
-    // جرّب القفز ثم أعد المحاولة لاحقًا حتى تنجح أو تنتهي المحاولات
-    Future.delayed(const Duration(milliseconds: 250), () {
-      if (_initialApplied) return;
-      _attempts++;
-      try {
-        if (_initialTargetPage != null) {
-          QuranLibrary().jumpToPage(_initialTargetPage!);
-        }
-        // تحقق إن تم التغيير فعلاً
-        if (QuranCtrl.instance.state.currentPageNumber.value ==
-            _initialTargetPage) {
-          _initialApplied = true;
-        }
-      } catch (_) {}
-      if (!_initialApplied && _attempts < _maxAttempts) {
-        _scheduleRetryApply();
+  // تطبيق الصفحة والآية بمحاولات خفيفة متتالية حتى النجاح أو انتهاء العدد
+  void _scheduleApply() {
+    if (_initialPage == null && _initialAyah == null) return;
+    _applying = true;
+    void attempt() {
+      if (_deepLinkApplied) return;
+      _applyAttempts++;
+      final current = QuranCtrl.instance.state.currentPageNumber.value;
+      // جرّب القفز للصفحة إن لم تصل بعد
+      if (_initialPage != null && current != _initialPage) {
+        try {
+          QuranLibrary().jumpToPage(_initialPage!);
+        } catch (_) {}
       }
-      // بعد تطبيق الصفحة بنجاح، ابدأ محاولات اختيار الآية (إن وُجدت)
-      if (_initialApplied && _initialAyahTarget != null && !_ayahApplied) {
-        _scheduleAyahRetry();
-      }
-    });
-  }
+      final after = QuranCtrl.instance.state.currentPageNumber.value;
+      final pageOk = _initialPage == null || after == _initialPage;
 
-  void _scheduleAyahRetry() {
-    if (_initialAyahTarget == null || _ayahApplied == true) return;
-    Future.delayed(const Duration(milliseconds: 250), () {
-      if (_ayahApplied) return;
-      _ayahAttempts++;
-      try {
-        QuranLibrary.quranCtrl.toggleAyahSelection(_initialAyahTarget!);
-        // لا توجد حالة مباشرة للتحقق، نفترض النجاح بعد أول تنفيذ ونترك إعادة المحاولة عند الفشل غير المرئي
-        _ayahApplied = true;
-      } catch (_) {}
-      if (!_ayahApplied && _ayahAttempts < _ayahMaxAttempts) {
-        _scheduleAyahRetry();
+      // طبّق الآية إذا نجحت الصفحة أو إذا وصلنا الحد الأقصى (أفضل جهد)
+      if (_initialAyah != null &&
+          (pageOk || _applyAttempts >= _maxApplyAttempts)) {
+        try {
+          QuranLibrary.quranCtrl.toggleAyahSelection(_initialAyah!);
+        } catch (_) {}
+        _initialAyah = null; // محاولة واحدة فقط
       }
-    });
+
+      // إنهاء إذا نجحت الصفحة أو انتهت المحاولات
+      if (pageOk || _applyAttempts >= _maxApplyAttempts) {
+        _deepLinkApplied = true;
+        _applying = false;
+        return;
+      }
+      WidgetsBinding.instance.addPostFrameCallback((_) => attempt());
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => attempt());
   }
 
   @override
