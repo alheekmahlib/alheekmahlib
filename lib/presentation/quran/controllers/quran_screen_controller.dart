@@ -14,6 +14,10 @@ class QuranScreenController extends GetxController {
   bool _initialApplied = false;
   int _attempts = 0;
   static const int _maxAttempts = 20;
+  int? _initialAyahTarget;
+  bool _ayahApplied = false;
+  int _ayahAttempts = 0;
+  static const int _ayahMaxAttempts = 20;
 
   @override
   void onInit() {
@@ -65,6 +69,11 @@ class QuranScreenController extends GetxController {
     if (parsed != null && parsed > 0) {
       _initialTargetPage = parsed.clamp(1, 700); // حد أعلى احتياطي
     }
+    final ayahRaw = full.queryParameters['ayah'];
+    final ayahParsed = int.tryParse(ayahRaw ?? '');
+    if (ayahParsed != null && ayahParsed > 0) {
+      _initialAyahTarget = ayahParsed;
+    }
   }
 
   void _scheduleRetryApply() {
@@ -91,6 +100,26 @@ class QuranScreenController extends GetxController {
       } catch (_) {}
       if (!_initialApplied && _attempts < _maxAttempts) {
         _scheduleRetryApply();
+      }
+      // بعد تطبيق الصفحة بنجاح، ابدأ محاولات اختيار الآية (إن وُجدت)
+      if (_initialApplied && _initialAyahTarget != null && !_ayahApplied) {
+        _scheduleAyahRetry();
+      }
+    });
+  }
+
+  void _scheduleAyahRetry() {
+    if (_initialAyahTarget == null || _ayahApplied == true) return;
+    Future.delayed(const Duration(milliseconds: 250), () {
+      if (_ayahApplied) return;
+      _ayahAttempts++;
+      try {
+        QuranLibrary.quranCtrl.toggleAyahSelection(_initialAyahTarget!);
+        // لا توجد حالة مباشرة للتحقق، نفترض النجاح بعد أول تنفيذ ونترك إعادة المحاولة عند الفشل غير المرئي
+        _ayahApplied = true;
+      } catch (_) {}
+      if (!_ayahApplied && _ayahAttempts < _ayahMaxAttempts) {
+        _scheduleAyahRetry();
       }
     });
   }
