@@ -1,8 +1,9 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Deploy Flutter Web (Self Repo Pages)
 
+# يعمل عند الدفع إلى فرعي main أو hawazen داخل الريبو الجديد (بعد نقل الكود إليه)
 on:
   push:
-    branches: [ main ]
+    branches: [ main, hawazen ]
   workflow_dispatch:
 
 permissions:
@@ -10,11 +11,14 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  BASE_HREF: /alheekmahlib/  # يجب أن يطابق اسم الريبو في GitHub Pages
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Source
         uses: actions/checkout@v4
 
       - name: Setup Flutter
@@ -23,13 +27,13 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Flutter Pub Get
+      - name: Pub Get
         run: flutter pub get
 
       - name: Build Web Release
-        run: flutter build web --release --base-href /quran_library_web/
+        run: flutter build web --release --base-href $BASE_HREF --pwa-strategy none
 
-      - name: Upload artifact
+      - name: Upload artifact (Pages)
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
@@ -44,3 +48,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
