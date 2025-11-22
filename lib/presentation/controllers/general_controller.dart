@@ -13,7 +13,8 @@ import '../books/books.dart';
 import '../contact_us/screens/contact_us_page.dart';
 import '../home_screen/home_screen.dart';
 import '../our_apps/data/model/our_app_info_model.dart';
-import '../quran_text/screens/surah_text_screen.dart';
+import '../quran/screens/quran_screen.dart';
+import '../quran_sound/screen/quran_sound_screen.dart';
 
 class GeneralController extends GetxController {
   static GeneralController get instance =>
@@ -100,12 +101,20 @@ class GeneralController extends GetxController {
   //   }
   // }
 
-  List screensViews = [
-    const HomeScreen(),
-    const SurahTextScreen(),
+  // ترتيب الصفحات يجب أن يطابق ترتيب التبويبات والمسارات:
+  // 0: Home (/)
+  // 1: Quran (/quran)
+  // 2: Quran Sound (/sound)
+  // 3: Books (/books)
+  // 4: Athkar (/athkar)
+  // 5: Contact Us (/contact-us)
+  List screensViews = const [
+    HomeScreen(),
+    QuranScreen(),
+    QuranSoundScreen(),
     BooksScreen(),
-    const AzkarView(),
-    const ContactUsPage(),
+    AzkarView(),
+    ContactUsPage(),
   ];
 
   Future<List<OurAppInfo>> fetchApps() async {
@@ -118,12 +127,5 @@ class GeneralController extends GetxController {
     } else {
       throw Exception('Failed to load data');
     }
-  }
-
-  /// Greeting
-  updateGreeting() {
-    final now = DateTime.now();
-    final isMorning = now.hour < 12;
-    greeting.value = isMorning ? 'صبحكم الله بالخير' : 'مساكم الله بالخير';
   }
 }

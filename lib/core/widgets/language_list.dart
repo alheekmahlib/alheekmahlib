@@ -2,10 +2,10 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../presentation/controllers/settings_controller.dart';
 import '../services/services_locator.dart';
-import '../services/shared_pref_services.dart';
 import '../utils/constants/extensions/dimensions.dart';
 import '../utils/constants/shared_preferences_constants.dart';
 import '../utils/helpers/languages/app_constants.dart';
@@ -48,7 +48,7 @@ class _LanguageDropdown extends StatelessWidget {
         ? maxMenuHeight
         : (itemsCount * itemHeight);
     final double dropdownWidth =
-        (MediaQuery.sizeOf(context).width * 0.9).clamp(220.0, 220.0);
+        (MediaQuery.sizeOf(context).width * 0.9).clamp(200.0, 200.0);
 
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
@@ -156,11 +156,9 @@ class _LanguageDropdown extends StatelessWidget {
           if (code == null) return;
           final lang = languages.firstWhere((e) => e.languageCode == code);
           localizationController.setLanguage(Locale(code, ''));
-          await sl<SharedPrefServices>().saveString(LANG, code);
-          await sl<SharedPrefServices>()
-              .saveString(LANG_NAME, lang.languageName);
-          await sl<SharedPrefServices>()
-              .saveString(LANGUAGE_FONT, 'noto'); // استخدام خط افتراضي
+          GetStorage().write(LANG, code);
+          GetStorage().write(LANG_NAME, lang.languageName);
+          GetStorage().write(LANGUAGE_FONT, 'noto'); // استخدام خط افتراضي
           settings.languageName.value = lang.languageName;
           settings.languageFont.value = 'noto'; // استخدام خط افتراضي
         },
@@ -171,7 +169,7 @@ class _LanguageDropdown extends StatelessWidget {
         ),
         buttonStyleData: ButtonStyleData(
           height: buttonHeight - 4,
-          width: 160,
+          width: 220,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
