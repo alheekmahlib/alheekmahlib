@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quran_library/quran.dart';
 
 import '/presentation/athkar_screen/controllers/athkar_controller.dart';
 import '/presentation/controllers/general_controller.dart';
@@ -265,14 +264,6 @@ class AppRouter {
     } else if (path.startsWith(routeQuran)) {
       pageIndex = 1;
       sl<GeneralController>().tapIndex.value = 1;
-      // دعم ?page= للانتقال إلى صفحة معيّنة داخل المصحف عند فتح الرابط مباشرة
-      final pageParam = uri.queryParameters['page'];
-      final pageNumber = int.tryParse(pageParam ?? '');
-      if (pageNumber != null && pageNumber > 0) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          QuranLibrary().jumpToPage(pageNumber);
-        });
-      }
     } else if (path.startsWith(routeQuranSound)) {
       pageIndex = 2;
       sl<GeneralController>().tapIndex.value = 2;

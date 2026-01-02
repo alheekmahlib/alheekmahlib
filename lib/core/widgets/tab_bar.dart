@@ -28,7 +28,7 @@ class TabBarUI extends StatelessWidget {
     return Container(
       // height: screenSize(context, 240.0, 56.0),
       width: MediaQuery.sizeOf(context).width,
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(14)),
@@ -92,7 +92,8 @@ class _WebTabs extends StatelessWidget {
             return SizedBox(
               width: 110,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
                 child: MouseRegion(
                   onEnter: (_) => onHover(i),
                   onExit: (_) => onHover(null),
@@ -100,7 +101,7 @@ class _WebTabs extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 160),
                     curve: Curves.easeOut,
-                    height: 40,
+                    height: 30,
                     decoration: BoxDecoration(
                       color: selected
                           ? Theme.of(context)

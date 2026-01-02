@@ -1,3 +1,4 @@
+import 'package:alheekmahlib_website/core/utils/constants/extensions/convert_number_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ class BottomBar extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final width = MediaQuery.sizeOf(context).width;
     final isWide = width > 820;
-    final year = DateTime.now().year.toString();
 
     return Container(
       height: 50,
@@ -55,7 +55,7 @@ class BottomBar extends StatelessWidget {
                             size: 14, color: scheme.onSurfaceVariant),
                         const Gap(6),
                         Text(
-                          '${'appName'.tr} • $year',
+                          '${'appName'.tr} • ${'1446'.convertNumbers()}',
                           style: TextStyle(
                             color: scheme.onSurfaceVariant,
                             fontFamily: 'cairo',
@@ -73,7 +73,7 @@ class BottomBar extends StatelessWidget {
                         isWide
                             ? ElevatedButton.icon(
                                 onPressed: () =>
-                                    sl<AppRouter>().onItemTapped(4, context),
+                                    sl<AppRouter>().onItemTapped(5, context),
                                 icon: const Icon(Icons.send_outlined, size: 16),
                                 label: Text(
                                   'cta_start_project'.tr,
