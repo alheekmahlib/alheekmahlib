@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:gap/gap.dart';
 
 import '../../core/services/services_locator.dart';
@@ -27,25 +28,46 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: HeroHeader(),
+              const FadeIn(
+                config: BaseAnimationConfig(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: HeroHeader(),
+                  ),
+                ),
               ),
               const Gap(32),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: ServicesSection(),
+              const FadeInUp(
+                config: BaseAnimationConfig(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ServicesSection(),
+                  ),
+                ),
               ),
               const Gap(32),
-              KeyedSubtree(
-                  key: sl<GeneralController>().ourAppsKey,
-                  child: const OurApps()),
+              FadeInUp(
+                config: BaseAnimationConfig(
+                  child: KeyedSubtree(
+                    key: sl<GeneralController>().ourAppsKey,
+                    child: const OurApps(),
+                  ),
+                ),
+              ),
               const Gap(32),
-              const AboutUsSection(),
+              const FadeInUp(
+                config: BaseAnimationConfig(
+                  child: AboutUsSection(),
+                ),
+              ),
               const Gap(32),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: FaqSection(),
+              const FadeInUp(
+                config: BaseAnimationConfig(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: FaqSection(),
+                  ),
+                ),
               ),
               const Gap(32),
             ],

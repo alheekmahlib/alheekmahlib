@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  arabic_justified_text:
+    dependency: transitive
+    description:
+      name: arabic_justified_text
+      sha256: "0a0516fe91ec3cbdebd0afc701ea280fe9bc8c51ab0b8a41b614688aed98e995"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   arabic_numbers:
     dependency: "direct main"
     description:
@@ -149,10 +157,10 @@ packages:
     dependency: "direct main"
     description:
       name: clipboard
-      sha256: "1920c0337f8808be4166c5f1b236301ff381ef69633b0757c502d97f1f740102"
+      sha256: "45f26eb08784c1ef11d58acd8c918ee3690ab619e286ff0ce4e4f78436f8a2b2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "3.0.9"
   clock:
     dependency: transitive
     description:
@@ -257,14 +265,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.7"
   expansion_tile_card:
     dependency: "direct main"
     description:
@@ -309,23 +309,31 @@ packages:
     dependency: "direct main"
     description:
       name: flex_color_picker
-      sha256: f5b0b53d4ae0d59b1e28dfc21d5398e5028cf8e764518e491a52fd050aa23881
+      sha256: a0979dd61f21b634717b98eb4ceaed2bfe009fe020ce8597aaf164b9eeb57aaa
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.2"
+    version: "3.8.0"
   flex_seed_scheme:
     dependency: transitive
     description:
       name: flex_seed_scheme
-      sha256: "828291a5a4d4283590541519d8b57821946660ac61d2e07d955f81cfcab22e5d"
+      sha256: a3183753bbcfc3af106224bff3ab3e1844b73f58062136b7499919f49f3667e7
       url: "https://pub.dev"
     source: hosted
-    version: "3.6.1"
+    version: "4.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animate_on_scroll:
+    dependency: "direct main"
+    description:
+      name: flutter_animate_on_scroll
+      sha256: c8d1250fb1670b3a182fc6fd33098a6ecbd8490d730b4dbe3c6db2b36af92d49
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -379,14 +387,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.3"
-  flutter_sliding_panel:
-    dependency: transitive
-    description:
-      name: flutter_sliding_panel
-      sha256: "2bb06ac71954b8304092485a0e6fdd03eafb4bb0d2b915ce98e61a62fc8a580d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.5"
   flutter_sliding_up_panel:
     dependency: "direct main"
     description:
@@ -415,10 +415,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: "055de8921be7b8e8b98a233c7a5ef84b3a6fcc32f46f1ebf5b9bb3576d108355"
+      sha256: "87fbd7c534435b6c5d9d98b01e1fd527812b82e68ddd8bd35fc45ed0fa8f0a95"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.2"
+    version: "2.2.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -441,18 +441,18 @@ packages:
     dependency: "direct main"
     description:
       name: get
-      sha256: c79eeb4339f1f3deffd9ec912f8a923834bec55f7b49c9e882b8fef2c139d425
+      sha256: "5ed34a7925b85336e15d472cc4cfe7d9ebf4ab8e8b9f688585bf6b50f4c3d79a"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.2"
+    version: "4.7.3"
   get_it:
     dependency: "direct main"
     description:
       name: get_it
-      sha256: "84792561b731b6463d053e9761a5236da967c369da10b134b8585a5e18429956"
+      sha256: "1d648d2dd2047d7f7450d5727ca24ee435f240385753d90b49650e3cdff32e56"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.5"
+    version: "9.2.0"
   get_storage:
     dependency: "direct main"
     description:
@@ -465,10 +465,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: c92d18e1fe994cb06d48aa786c46b142a5633067e8297cff6b5a3ac742620104
+      sha256: eff94d2a6fc79fa8b811dde79c7549808c2346037ee107a1121b4a644c745f2a
       url: "https://pub.dev"
     source: hosted
-    version: "17.0.0"
+    version: "17.0.1"
   google_huawei_availability:
     dependency: "direct main"
     description:
@@ -778,10 +778,10 @@ packages:
     dependency: "direct main"
     description:
       name: quran_library
-      sha256: "700fecee54cd7622a195c808265199b79f5a6fbb74e254721c83f8eba1a7e46e"
+      sha256: "3022aeb7ab8fbd5ddf364292c8fb1b273d69e9ac67d047b2d3cef2cd89a86538"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.5"
   rxdart:
     dependency: "direct main"
     description:
@@ -1141,4 +1141,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.9.0 <4.0.0"
-  flutter: ">=3.35.0"
+  flutter: ">=3.38.0"

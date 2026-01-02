@@ -43,9 +43,9 @@ class HeroHeader extends StatelessWidget {
           runSpacing: 12,
           alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
           children: [
-            // ابدأ مشروعك -> تبويب التواصل (4)
+            // ابدأ مشروعك -> تبويب التواصل (5)
             _cta(context, Icons.rocket_launch_outlined, 'cta_start_project'.tr,
-                () => sl<AppRouter>().onItemTapped(4, context)),
+                () => sl<AppRouter>().onItemTapped(5, context)),
             // تطبيقاتنا -> سكرول داخلي لقسم OurApps ضمن الرئيسية
             _ctaOutlined(context, Icons.apps_outlined, 'cta_our_apps'.tr, () {
               // انتقل للرئيسية ثم مرّر للقسم

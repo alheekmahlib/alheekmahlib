@@ -19,6 +19,8 @@ class ContactSection extends StatelessWidget {
       // Fallback to ensure the widget doesn't crash if DI order changes
       controller = Get.put(ContactController(), permanent: true);
     }
+    // إنشاء مفتاح جديد لتجنب مشكلة Duplicate GlobalKey
+    controller.resetFormKey();
     final inputDecoration = InputDecoration(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       enabledBorder: OutlineInputBorder(

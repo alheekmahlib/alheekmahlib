@@ -13,7 +13,12 @@ import 'package:http/http.dart' as http;
 class ContactController extends GetxController {
   static ContactController get instance =>
       GetInstance().putOrFind(() => ContactController());
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  /// إعادة إنشاء formKey لتجنب مشكلة Duplicate GlobalKey
+  void resetFormKey() {
+    formKey = GlobalKey<FormState>();
+  }
 
   // Controllers for the fields
   final TextEditingController nameController = TextEditingController();
@@ -168,6 +173,7 @@ class ContactController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    resetFormKey();
     _bindFormListeners();
   }
 
