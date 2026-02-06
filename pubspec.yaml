@@ -24,6 +24,7 @@ dependencies:
   easy_image_viewer: ^1.5.1
   expansion_tile_card: ^3.0.0
   flex_color_picker: ^3.8.0
+  floating_menu_expendable: ^1.0.0
   flutter:
     sdk: flutter
   flutter_animate_on_scroll: ^0.3.0

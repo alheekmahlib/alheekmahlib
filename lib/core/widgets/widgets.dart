@@ -299,19 +299,23 @@ screenModalBottomSheet(BuildContext context, Widget child) {
       });
 }
 
-Widget customClose(BuildContext context) {
+Widget customClose(BuildContext context, {Function()? onTap, double? size}) {
   return GestureDetector(
+    onTap: onTap ??
+        () {
+          Navigator.of(context).pop();
+        },
     child: Stack(
       alignment: Alignment.center,
       children: [
         Icon(Icons.close_outlined,
-            size: 35, color: Theme.of(context).colorScheme.surface),
-        Icon(Icons.close_outlined, size: 20, color: context.surfaceDarkColor),
+            size: size ?? 35,
+            color: context.textDarkColor.withValues(alpha: .5)),
+        Icon(Icons.close_outlined,
+            size: size != null ? size * 0.57 : 20,
+            color: context.textDarkColor),
       ],
     ),
-    onTap: () {
-      Navigator.of(context).pop();
-    },
   );
 }
 
