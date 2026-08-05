@@ -1,0 +1,47 @@
+name: Deploy Flutter Web to GitHub Pages (gh-pages)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web (GitHub Pages base href)
+        run: flutter build web --release --pwa-strategy=none --base-href "/${{ github.event.repository.name }}/"
+
+      - name: Disable Jekyll
+        run: touch build/web/.nojekyll
+
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build/web
+          clean: true
+          single-commit: true
+          commit-message: "Deploy Flutter web to gh-pages"

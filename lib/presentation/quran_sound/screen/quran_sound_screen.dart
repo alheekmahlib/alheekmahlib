@@ -8,18 +8,15 @@ class QuranSoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 48.0),
-      child: SurahAudioScreen(
-        style: SurahAudioStyle.defaults(
-          isDark: ThemeController.instance.isDarkMode,
-          context: context,
-        ).copyWith(
-          withAppBar: false,
-          ayahSingularText: 'ayah'.tr,
-          ayahPluralText: 'ayahs'.tr,
-          lastListenText: 'last_listen'.tr,
-        ),
+    return SurahAudioScreen(
+      style: SurahAudioStyle.defaults(
+        isDark: ThemeController.instance.isDarkMode,
+        context: context,
+      ).copyWith(
+        withAppBar: false,
+        ayahSingularText: 'ayah'.tr,
+        ayahPluralText: 'ayahs'.tr,
+        lastListenText: 'last_listen'.tr,
       ),
     );
   }

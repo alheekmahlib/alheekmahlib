@@ -28,7 +28,7 @@ class TabBarUI extends StatelessWidget {
     return Container(
       // height: screenSize(context, 240.0, 56.0),
       width: MediaQuery.sizeOf(context).width,
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(14)),

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الحكمة · داكن متحفي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=El+Messiri:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A;
+    --bg-2:#111111;
+    --surface:#161616;
+    --surface-2:#1C1C1C;
+    --line:rgba(212,175,55,.14);
+    --line-soft:rgba(255,255,255,.06);
+    --gold:#D4AF37;
+    --gold-bright:#F4D77A;
+    --gold-dim:#8B7530;
+    --text:#F5F1E8;
+    --text-soft:#A8A39A;
+    --text-faint:#6B6862;
+    --emerald:#2D6A4F;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--bg);color:var(--text);
+    line-height:1.7;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--bg)}
+  /* subtle grain texture */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.4;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  }
+
+  /* ===== Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,10,10,.8);backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1320px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;cursor:pointer}
+  .brand-mark{
+    width:42px;height:42px;border-radius:0;
+    border:1px solid var(--gold);
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,rgba(212,175,55,.1),transparent);
+    position:relative;
+  }
+  .brand-mark::before,.brand-mark::after{
+    content:'';position:absolute;width:6px;height:6px;border:1px solid var(--gold);
+  }
+  .brand-mark::before{top:-1px;right:-1px;border-left:none;border-bottom:none;background:var(--bg)}
+  .brand-mark::after{bottom:-1px;left:-1px;border-right:none;border-top:none;background:var(--bg)}
+  .brand-mark svg{width:22px;height:22px;color:var(--gold)}
+  .brand-name{
+    font-family:'El Messiri';font-weight:700;font-size:1.35rem;
+    color:var(--gold-bright);letter-spacing:.5px;
+  }
+  .brand-sub{font-size:.68rem;color:var(--gold-dim);letter-spacing:4px;font-weight:600}
+
+  .nav-links{display:flex;align-items:center;gap:4px}
+  .nav-links a{
+    font-family:'El Messiri';font-weight:500;font-size:.95rem;
+    color:var(--text-soft);text-decoration:none;
+    padding:8px 16px;position:relative;transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--gold-bright)}
+  .nav-links a.active{color:var(--gold-bright)}
+  .nav-links a.active::before{
+    content:'';position:absolute;bottom:-2px;right:16px;left:16px;
+    height:1px;background:var(--gold);
+  }
+  .icon-btn{
+    width:40px;height:40px;border-radius:0;border:1px solid var(--line);
+    background:transparent;display:grid;place-items:center;cursor:pointer;
+    color:var(--gold);transition:all .2s;
+  }
+  .icon-btn:hover{background:var(--gold);color:var(--bg)}
+
+  /* ===== Hero — editorial asymmetric ===== */
+  .hero{
+    max-width:1320px;margin:0 auto;padding:90px 32px 70px;
+    display:grid;grid-template-columns:1.3fr .7fr;gap:60px;align-items:end;
+    position:relative;
+  }
+  .hero-meta{
+    display:flex;align-items:center;gap:14px;margin-bottom:28px;
+    font-family:'El Messiri';font-size:.82rem;color:var(--gold-dim);
+    letter-spacing:3px;text-transform:uppercase;
+  }
+  .hero-meta .line{flex:1;max-width:60px;height:1px;background:var(--gold-dim)}
+  h1.hero-title{
+    font-family:'El Messiri';font-weight:700;
+    font-size:clamp(3rem,7vw,6rem);line-height:1.05;letter-spacing:-1px;
+    margin-bottom:28px;color:var(--text);
+  }
+  h1.hero-title .gold{
+    color:var(--gold-bright);font-style:italic;
+    font-family:'Amiri';font-weight:700;
+    text-shadow:0 0 40px rgba(212,175,55,.3);
+  }
+  .hero-sub{
+    font-family:'Amiri';font-size:1.25rem;color:var(--text-soft);
+    max-width:520px;margin-bottom:40px;line-height:1.8;
+  }
+  .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .btn-gold{
+    font-family:'El Messiri';font-weight:600;font-size:1rem;
+    padding:15px 34px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    color:var(--bg);letter-spacing:.5px;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:all .25s;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  }
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(212,175,55,.3)}
+  .btn-line{
+    font-family:'El Messiri';font-weight:600;font-size:1rem;
+    padding:14px 32px;border-radius:0;cursor:pointer;
+    background:transparent;color:var(--text);
+    border:1px solid var(--line);
+    display:inline-flex;align-items:center;gap:10px;transition:all .25s;
+  }
+  .btn-line:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+  /* hero side panel */
+  .hero-side{
+    border:1px solid var(--line);padding:32px;
+    background:linear-gradient(180deg,var(--surface),transparent);
+    position:relative;
+  }
+  .hero-side::before{
+    content:'';position:absolute;top:0;left:0;width:30px;height:1px;background:var(--gold);
+  }
+  .hero-side::after{
+    content:'';position:absolute;top:0;left:0;width:1px;height:30px;background:var(--gold);
+  }
+  .side-label{
+    font-family:'El Messiri';font-size:.72rem;color:var(--gold-dim);
+    letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;
+  }
+  .side-ayah{
+    font-family:'Amiri';font-size:1.4rem;color:var(--gold-bright);
+    line-height:1.9;margin-bottom:18px;font-style:italic;
+  }
+  .side-ref{
+    font-family:'El Messiri';color:var(--text-faint);font-size:.85rem;
+    padding-top:18px;border-top:1px solid var(--line-soft);
+  }
+
+  /* ===== Numbered section divider ===== */
+  .section-divider-row{
+    max-width:1320px;margin:0 auto;padding:0 32px;
+    display:flex;align-items:center;gap:24px;
+  }
+  .section-divider-row .num{
+    font-family:'El Messiri';font-size:3rem;font-weight:300;
+    color:var(--gold);line-height:1;
+  }
+  .section-divider-row .title-block{flex:1}
+  .section-divider-row .title-block h2{
+    font-family:'El Messiri';font-size:clamp(1.6rem,3vw,2.2rem);
+    font-weight:600;color:var(--text);
+  }
+  .section-divider-row .title-block p{color:var(--text-faint);font-size:.9rem;margin-top:4px;font-family:'El Messiri'}
+  .section-divider-row .meta{font-family:'El Messiri';color:var(--gold-dim);font-size:.78rem;letter-spacing:2px}
+
+  /* ===== Services — editorial grid with numbers ===== */
+  .section{max-width:1320px;margin:0 auto;padding:80px 32px}
+  .services-list{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+  .service-row{
+    display:grid;grid-template-columns:80px 1fr 1.5fr auto;gap:32px;
+    align-items:center;padding:32px 0;border-bottom:1px solid var(--line);
+    cursor:pointer;transition:all .3s;position:relative;
+  }
+  .service-row::before{
+    content:'';position:absolute;top:0;bottom:0;right:0;width:0;
+    background:linear-gradient(90deg,rgba(212,175,55,.06),transparent);
+    transition:width .35s;
+  }
+  .service-row:hover::before{width:100%}
+  .service-row:hover .s-num{color:var(--gold-bright)}
+  .service-row:hover .s-title{transform:translateX(-8px)}
+  .s-num{
+    font-family:'El Messiri';font-size:1.6rem;font-weight:300;
+    color:var(--gold-dim);transition:color .3s;
+  }
+  .s-icon{
+    display:flex;align-items:center;gap:18px;
+  }
+  .s-icon .icon-box{
+    width:54px;height:54px;border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--gold);
+    transition:all .3s;
+  }
+  .service-row:hover .icon-box{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .s-icon svg{width:26px;height:26px}
+  .s-title{
+    font-family:'El Messiri';font-size:1.6rem;font-weight:600;
+    color:var(--text);transition:transform .3s;
+  }
+  .s-desc{color:var(--text-soft);font-size:.95rem;font-family:'Amiri'}
+  .s-arrow{
+    color:var(--gold-dim);transition:all .3s;
+  }
+  .service-row:hover .s-arrow{color:var(--gold-bright);transform:translateX(-8px)}
+
+  /* ===== Ayah feature — large editorial ===== */
+  .ayah-feature{
+    max-width:1320px;margin:40px auto;padding:100px 32px;
+    text-align:center;position:relative;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .ayah-feature::before,.ayah-feature::after{
+    content:'✦';position:absolute;color:var(--gold);font-size:1rem;
+    top:50%;transform:translateY(-50%);
+  }
+  .ayah-feature::before{right:32px}
+  .ayah-feature::after{left:32px}
+  .ayah-label{
+    font-family:'El Messiri';color:var(--gold-dim);font-size:.78rem;
+    letter-spacing:5px;text-transform:uppercase;margin-bottom:32px;
+  }
+  .ayah-text-big{
+    font-family:'Amiri';font-style:italic;font-weight:400;
+    font-size:clamp(2rem,4.5vw,3.5rem);line-height:1.5;
+    color:var(--gold-bright);max-width:900px;margin:0 auto 28px;
+  }
+  .ayah-ref{
+    font-family:'El Messiri';color:var(--text-faint);
+    font-size:.95rem;letter-spacing:2px;
+  }
+
+  /* ===== Our apps — magazine grid ===== */
+  .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .app-card{
+    background:var(--bg);padding:40px 32px;cursor:pointer;
+    transition:background .3s;position:relative;
+  }
+  .app-card:hover{background:var(--surface)}
+  .app-card .app-num{
+    font-family:'El Messiri';font-size:.78rem;color:var(--gold-dim);
+    letter-spacing:3px;margin-bottom:24px;
+  }
+  .app-icon-wrap{
+    width:64px;height:64px;margin-bottom:24px;
+    border:1px solid var(--line);display:grid;place-items:center;
+    color:var(--gold-bright);transition:all .3s;
+  }
+  .app-card:hover .app-icon-wrap{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .app-icon-wrap svg{width:32px;height:32px}
+  .app-card h4{font-family:'El Messiri';font-size:1.5rem;font-weight:600;margin-bottom:10px;color:var(--text)}
+  .app-card p{font-family:'Amiri';color:var(--text-soft);font-size:.98rem;margin-bottom:20px;line-height:1.7}
+  .app-meta{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:20px;border-top:1px solid var(--line-soft);
+  }
+  .app-tag{
+    font-family:'El Messiri';font-size:.72rem;color:var(--gold-dim);letter-spacing:2px;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--bg-2);border-top:1px solid var(--line);
+    padding:64px 32px 32px;margin-top:60px;
+  }
+  .footer-inner{max-width:1320px;margin:0 auto}
+  .footer-grid{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;
+  }
+  .footer-brand-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .footer-brand-name{font-family:'El Messiri';color:var(--gold-bright);font-size:1.4rem;font-weight:700}
+  .footer-desc{color:var(--text-soft);font-family:'Amiri';font-size:.98rem;max-width:300px;line-height:1.8}
+  .footer-col h5{
+    font-family:'El Messiri';color:var(--gold);font-size:.85rem;
+    margin-bottom:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  }
+  .footer-col a{
+    display:block;color:var(--text-soft);text-decoration:none;
+    font-family:'Amiri';font-size:.95rem;padding:6px 0;transition:color .2s;
+  }
+  .footer-col a:hover{color:var(--gold-bright)}
+  .footer-bottom{
+    border-top:1px solid var(--line-soft);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--text-faint);font-family:'El Messiri';font-size:.85rem;letter-spacing:1px;
+  }
+
+  @media(max-width:920px){
+    .hero{grid-template-columns:1fr;padding:50px 20px;gap:40px}
+    .nav-links{display:none}
+    .service-row{grid-template-columns:50px 1fr;gap:16px}
+    .s-desc,.s-arrow{display:none}
+    .apps-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+      <div>
+        <div class="brand-name">الحكمة</div>
+        <div class="brand-sub">AL HEEKMAH</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#">القرآن</a>
+      <a href="#">القلايد</a>
+      <a href="#">الأذكار</a>
+      <a href="#">اتصل بنا</a>
+    </div>
+    <button class="icon-btn" title="تبديل النمط"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="hero-meta"><span class="line"></span><span>إصدار ٢٠٢٦</span></div>
+    <h1 class="hero-title">حيث تلتقي<br><span class="gold">الحكمة</span> بالنور</h1>
+    <p class="hero-sub">مكتبة شاملة للقرآن الكريم ومرتليه، والأذكار، والعلم النافع — في تجربة روحانية مصاغة بعناية المتاحف.</p>
+    <div class="cta-row">
+      <button class="btn-gold">
+        ابدأ القراءة
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </button>
+      <button class="btn-line">
+        تطبيقاتنا
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+      </button>
+    </div>
+  </div>
+  <aside class="hero-side">
+    <div class="side-label">آية اليوم</div>
+    <p class="side-ayah">«أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ»</p>
+    <div class="side-ref">سورة الرعد — آية ٢٨</div>
+  </aside>
+</section>
+
+<section class="section" style="padding-top:40px;padding-bottom:20px">
+  <div class="section-divider-row">
+    <div class="num">٠١</div>
+    <div class="title-block">
+      <h2>بوابات الحكمة</h2>
+      <p>أربع خدمات رئيسية تخدم رحلتك</p>
+    </div>
+    <div class="meta">٠٤ خدمات</div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="services-list">
+    <div class="service-row">
+      <div class="s-num">٠١</div>
+      <div class="s-icon">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div class="s-title">القرآن الكريم</div>
+      </div>
+      <div class="s-desc">قراءة وتصفح بالرسم العثماني، مع التفسير والترجمة لكل آية، وبصوتيات أشهر المرتلين.</div>
+      <div class="s-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></div>
+    </div>
+    <div class="service-row">
+      <div class="s-num">٠٢</div>
+      <div class="s-icon">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="s-title">الصوتيات</div>
+      </div>
+      <div class="s-desc">استماع لأكثر من خمسين قارئًا، مع إمكانية التكرار والتعليم وتخصيص الورد.</div>
+      <div class="s-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></div>
+    </div>
+    <div class="service-row">
+      <div class="s-num">٠٣</div>
+      <div class="s-icon">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="s-title">القلائد</div>
+      </div>
+      <div class="s-desc">مكتبة قيّمة من الكتب والحديث والتفسير، منتقاة بعناية لتكون بين يديك في أي وقت.</div>
+      <div class="s-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></div>
+    </div>
+    <div class="service-row">
+      <div class="s-num">٠٤</div>
+      <div class="s-icon">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><path d="M9 9h6M12 6v6"/></svg></div>
+        <div class="s-title">الأذكار</div>
+      </div>
+      <div class="s-desc">أذكار الصباح والمساء، وحصن المسلم، بمتناسق عملي يساعدك على الثبات والمداومة.</div>
+      <div class="s-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<section class="ayah-feature">
+  <div class="ayah-label">— من القرآن الكريم —</div>
+  <p class="ayah-text-big">وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ</p>
+  <div class="ayah-ref">سورة الإسراء · آية ٨٢</div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="section-divider-row" style="margin-bottom:40px">
+    <div class="num">٠٢</div>
+    <div class="title-block">
+      <h2>من عائلة الحكمة</h2>
+      <p>تطبيقات تواكب حياتك اليومية</p>
+    </div>
+    <div class="meta">٠٣ تطبيقات</div>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card">
+      <div class="app-num">— ٠١</div>
+      <div class="app-icon-wrap"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+      <h4>القرآن الكريم</h4>
+      <p>تطبيق متكامل لقراءة القرآن الكريم بصوتيات ومرتليه، مع التفسير والترجمة.</p>
+      <div class="app-meta"><span class="app-tag">iOS · ANDROID</span><span class="app-tag">٢٠٢٦</span></div>
+    </div>
+    <div class="app-card">
+      <div class="app-num">— ٠٢</div>
+      <div class="app-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <h4>حصن المسلم</h4>
+      <p>الأذكار والأدعية من الكتاب والسنة، بتنسيق عملي ويومي يساعدك على المداومة.</p>
+      <div class="app-meta"><span class="app-tag">iOS · ANDROID</span><span class="app-tag">٢٠٢٦</span></div>
+    </div>
+    <div class="app-card">
+      <div class="app-num">— ٠٣</div>
+      <div class="app-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h4>القلائد</h4>
+      <p>مكتبة رقمية للكتب الإسلامية والعلم النافع، منتقاة بعناية بين يديك.</p>
+      <div class="app-meta"><span class="app-tag">iOS · ANDROID</span><span class="app-tag">٢٠٢٦</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">
+          <div class="brand-mark" style="width:34px;height:34px"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+          <div class="footer-brand-name">الحكمة</div>
+        </div>
+        <p class="footer-desc">منصة إسلامية شاملة لنشر العلم النافع وخدمة كتاب الله وسنة نبيه ﷺ.</p>
+      </div>
+      <div class="footer-col"><h5>روابط</h5><a href="#">القرآن الكريم</a><a href="#">القلايد</a><a href="#">الأذكار</a></div>
+      <div class="footer-col"><h5>المطورون</h5><a href="#">المكتبة</a><a href="#">واجهة API</a><a href="#">التحميلات</a></div>
+      <div class="footer-col"><h5>تواصل</h5><a href="#">اتصل بنا</a><a href="#">من نحن</a></div>
+    </div>
+    <div class="footer-bottom"><span>© مكتبة الحكمة · ١٤٤٦هـ</span><span>صُنع بإتقان</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

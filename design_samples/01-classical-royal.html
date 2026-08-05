@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الحكمة · كلاسيكي إسلامي فاخر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#B8860B;
+    --gold-bright:#D4AF37;
+    --gold-light:#E8C766;
+    --emerald:#1B4332;
+    --emerald-deep:#0D2818;
+    --emerald-mid:#2D6A4F;
+    --cream:#F5EBD6;
+    --cream-light:#FBF5E8;
+    --parchment:#F8F1DF;
+    --ink:#2A1810;
+    --ink-soft:#5C4434;
+    --border:rgba(184,134,11,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Amiri',serif;
+    background:var(--cream-light);
+    color:var(--ink);
+    line-height:1.8;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(212,175,55,.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(27,67,50,.05) 0%, transparent 45%);
+  }
+
+  /* ===== Top bar ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(251,245,232,.82);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    max-width:1240px;margin:0 auto;
+    padding:18px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;cursor:pointer}
+  .brand-mark{
+    width:48px;height:48px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    border-radius:50%;
+    box-shadow:0 4px 18px rgba(184,134,11,.32), inset 0 0 0 3px var(--cream-light);
+  }
+  .brand-mark svg{width:26px;height:26px}
+  .brand-name{
+    font-family:'Aref Ruqaa',serif;font-weight:700;
+    font-size:1.55rem;color:var(--emerald);letter-spacing:.5px;
+  }
+  .brand-sub{font-size:.72rem;color:var(--gold);letter-spacing:3px;font-family:'Reem Kufi'}
+
+  .nav-links{display:flex;align-items:center;gap:6px}
+  .nav-links a{
+    font-family:'Reem Kufi';font-weight:500;font-size:.95rem;
+    color:var(--ink-soft);text-decoration:none;
+    padding:9px 16px;border-radius:8px;
+    transition:all .25s ease;position:relative;
+  }
+  .nav-links a:hover{color:var(--emerald);background:rgba(184,134,11,.08)}
+  .nav-links a.active{color:var(--emerald);background:rgba(184,134,11,.14);font-weight:600}
+  .nav-links a.active::after{
+    content:'';position:absolute;bottom:2px;right:50%;transform:translateX(50%);
+    width:18px;height:2px;background:var(--gold-bright);border-radius:2px;
+  }
+  .theme-pill{
+    width:40px;height:40px;border-radius:50%;
+    border:1.5px solid var(--border);background:var(--cream);
+    display:grid;place-items:center;cursor:pointer;
+    transition:all .25s;
+  }
+  .theme-pill:hover{background:var(--gold-bright);color:var(--cream-light)}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    max-width:1240px;margin:0 auto;
+    padding:90px 28px 70px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B8860B' fill-opacity='0.05'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:120px;opacity:.6;pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Reem Kufi';font-size:.82rem;letter-spacing:2px;
+    color:var(--emerald-mid);font-weight:500;
+    padding:7px 16px;border-radius:30px;
+    background:rgba(27,67,50,.06);
+    border:1px solid rgba(27,67,50,.16);
+    margin-bottom:26px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-bright)}
+  h1.hero-title{
+    font-family:'Aref Ruqaa',serif;font-weight:700;
+    font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.25;
+    color:var(--emerald-deep);margin-bottom:24px;
+  }
+  h1.hero-title em{color:var(--gold-bright);font-style:normal;position:relative}
+  h1.hero-title em::after{
+    content:'';position:absolute;left:0;right:0;bottom:-6px;height:3px;
+    background:linear-gradient(90deg,transparent,var(--gold-bright),transparent);
+  }
+  .hero-sub{
+    font-size:1.18rem;color:var(--ink-soft);max-width:520px;
+    margin-bottom:36px;line-height:1.9;
+  }
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{
+    font-family:'Reem Kufi';font-weight:600;font-size:1rem;
+    padding:15px 32px;border-radius:12px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--emerald),var(--emerald-deep));
+    color:var(--gold-light);
+    box-shadow:0 8px 24px rgba(13,40,24,.28);
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,40,24,.36)}
+  .btn-ghost{
+    font-family:'Reem Kufi';font-weight:600;font-size:1rem;
+    padding:15px 32px;border-radius:12px;cursor:pointer;
+    background:transparent;color:var(--emerald);
+    border:1.5px solid var(--border);
+    display:inline-flex;align-items:center;gap:10px;
+    transition:all .25s;
+  }
+  .btn-ghost:hover{border-color:var(--gold-bright);background:rgba(184,134,11,.06)}
+
+  /* Hero visual — mihrab arch */
+  .hero-visual{position:relative;z-index:2;display:grid;place-items:center}
+  .mihrab{
+    position:relative;width:340px;height:420px;
+    background:linear-gradient(180deg,var(--emerald) 0%,var(--emerald-deep) 100%);
+    border-radius:170px 170px 18px 18px;
+    box-shadow:0 30px 70px rgba(13,40,24,.4),inset 0 0 0 8px rgba(212,175,55,.18);
+    display:grid;place-items:center;
+    overflow:hidden;
+  }
+  .mihrab::before{
+    content:'';position:absolute;inset:14px;
+    border:2px solid rgba(212,175,55,.35);
+    border-radius:160px 160px 12px 12px;
+  }
+  .mihrab-bismillah{
+    font-family:'Aref Ruqaa';font-size:1.4rem;color:var(--gold-light);
+    text-align:center;padding:0 20px;line-height:1.8;
+  }
+  .mihrab-star{
+    position:absolute;top:50px;width:50px;height:50px;
+    color:var(--gold-bright);opacity:.9;
+  }
+  .mihrab-deco{
+    position:absolute;bottom:30px;width:80%;
+    height:60px;opacity:.5;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 30 Q25 0 50 30 T100 30 T150 30 T200 30' stroke='%23D4AF37' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") repeat-x;
+  }
+
+  /* ===== Services ===== */
+  .section{max-width:1240px;margin:0 auto;padding:80px 28px}
+  .section-head{text-align:center;margin-bottom:54px}
+  .section-eyebrow{
+    font-family:'Reem Kufi';color:var(--gold);letter-spacing:4px;
+    font-size:.78rem;font-weight:600;text-transform:uppercase;margin-bottom:14px;
+  }
+  .section-title{
+    font-family:'Aref Ruqaa';font-size:clamp(2rem,3.5vw,2.8rem);
+    color:var(--emerald-deep);font-weight:700;
+  }
+  .section-divider{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin-top:18px;
+  }
+  .section-divider::before,.section-divider::after{
+    content:'';height:1px;width:70px;
+    background:linear-gradient(90deg,transparent,var(--gold-bright));
+  }
+  .section-divider::after{background:linear-gradient(90deg,var(--gold-bright),transparent)}
+  .section-divider svg{width:24px;height:24px;color:var(--gold-bright)}
+
+  .services-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  }
+  .service-card{
+    position:relative;
+    background:linear-gradient(180deg,var(--cream-light),var(--parchment));
+    border:1px solid var(--border);
+    border-radius:18px;padding:38px 26px;
+    text-align:center;cursor:pointer;
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+    overflow:hidden;
+  }
+  .service-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-bright),var(--gold));
+    transform:scaleX(0);transform-origin:right;transition:transform .35s;
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(184,134,11,.16);border-color:var(--gold-bright)}
+  .service-card:hover::before{transform:scaleX(1)}
+  .service-icon{
+    width:74px;height:74px;margin:0 auto 22px;
+    display:grid;place-items:center;border-radius:50%;
+    background:radial-gradient(circle,var(--cream) 0%,rgba(212,175,55,.12) 100%);
+    border:1.5px solid rgba(184,134,11,.25);
+  }
+  .service-icon svg{width:36px;height:36px;color:var(--emerald-mid)}
+  .service-card h3{
+    font-family:'Aref Ruqaa';font-size:1.4rem;color:var(--emerald);
+    margin-bottom:10px;font-weight:700;
+  }
+  .service-card p{font-size:.98rem;color:var(--ink-soft);line-height:1.7}
+
+  /* ===== Ayah band ===== */
+  .ayah-band{
+    position:relative;margin:40px 0;
+    background:linear-gradient(135deg,var(--emerald-deep),var(--emerald));
+    padding:64px 28px;text-align:center;overflow:hidden;
+  }
+  .ayah-band::before,.ayah-band::after{
+    content:'';position:absolute;width:200px;height:200px;
+    border:1px solid rgba(212,175,55,.2);border-radius:50%;
+  }
+  .ayah-band::before{top:-100px;right:-50px}
+  .ayah-band::after{bottom:-100px;left:-50px}
+  .ayah-text{
+    font-family:'Amiri';font-size:clamp(1.6rem,3vw,2.2rem);
+    color:var(--gold-light);max-width:780px;margin:0 auto;line-height:1.9;
+    position:relative;z-index:2;
+  }
+  .ayah-ref{
+    font-family:'Reem Kufi';color:var(--gold-bright);
+    margin-top:20px;letter-spacing:2px;font-size:.92rem;
+  }
+
+  /* ===== Our apps ===== */
+  .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .app-card{
+    background:var(--cream-light);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;cursor:pointer;
+    transition:all .3s;
+  }
+  .app-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(27,67,50,.14)}
+  .app-banner{
+    height:160px;
+    background:linear-gradient(135deg,var(--emerald-mid),var(--emerald));
+    display:grid;place-items:center;position:relative;
+  }
+  .app-banner svg{width:60px;height:60px;color:var(--gold-light)}
+  .app-body{padding:22px}
+  .app-body h4{font-family:'Aref Ruqaa';font-size:1.3rem;color:var(--emerald);margin-bottom:8px}
+  .app-body p{color:var(--ink-soft);font-size:.92rem;margin-bottom:14px}
+  .app-tags{display:flex;gap:8px}
+  .app-tag{
+    font-family:'Reem Kufi';font-size:.74rem;padding:4px 11px;border-radius:20px;
+    background:rgba(184,134,11,.12);color:var(--gold);font-weight:500;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--emerald-deep);color:var(--cream);
+    padding:56px 28px 30px;margin-top:60px;
+  }
+  .footer-inner{max-width:1240px;margin:0 auto}
+  .footer-grid{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;
+  }
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .footer-brand .brand-name{color:var(--gold-light);font-size:1.3rem}
+  .footer-desc{color:rgba(245,235,214,.7);font-size:.92rem;max-width:280px}
+  .footer-col h5{
+    font-family:'Reem Kufi';color:var(--gold-bright);font-size:.95rem;
+    margin-bottom:16px;font-weight:600;letter-spacing:1px;
+  }
+  .footer-col a{
+    display:block;color:rgba(245,235,214,.7);text-decoration:none;
+    font-size:.92rem;padding:5px 0;transition:color .2s;
+  }
+  .footer-col a:hover{color:var(--gold-light)}
+  .footer-bottom{
+    border-top:1px solid rgba(212,175,55,.18);
+    padding-top:24px;display:flex;justify-content:space-between;align-items:center;
+    color:rgba(245,235,214,.55);font-size:.85rem;font-family:'Reem Kufi';
+  }
+
+  @media(max-width:920px){
+    .hero{grid-template-columns:1fr;text-align:center;padding:50px 20px}
+    .hero-content{align-items:center}
+    .hero-visual{order:-1}
+    .mihrab{width:280px;height:340px}
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .apps-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== Top bar ====== -->
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FBF5E8" stroke-width="2"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">مكتبة الحكمة</div>
+        <div class="brand-sub">AL HEEKMAH</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#">القرآن الكريم</a>
+      <a href="#">القلايد</a>
+      <a href="#">الأذكار</a>
+      <a href="#">اتصل بنا</a>
+    </div>
+    <div class="theme-pill" title="تبديل النمط">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B4332" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+  </nav>
+</header>
+
+<!-- ====== Hero ====== -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">منصة إسلامية متكاملة</span>
+    <h1 class="hero-title">نورٌ من <em>الحكمة</em><br>ينير دربك إلى الله</h1>
+    <p class="hero-sub">مكتبة شاملة تجمع القرآن الكريم بصوتياته ومرتليه، والأذكار، والقلائد من العلم النافع — في تجربة روحانية أصيلة تجمع بين الأصالة والجمال.</p>
+    <div class="cta-row">
+      <button class="btn-primary">
+        ابدأ رحلتك
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </button>
+      <button class="btn-ghost">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+        تطبيقاتنا
+      </button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="mihrab">
+      <svg class="mihrab-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+      <div class="mihrab-bismillah">بِسْمِ اللَّهِ<br>الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="mihrab-deco"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Ayah band ====== -->
+<section class="ayah-band">
+  <p class="ayah-text">«وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ»</p>
+  <div class="ayah-ref">سورة الإسراء · آية ٨٢</div>
+</section>
+
+<!-- ====== Services ====== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">خدماتنا</div>
+    <h2 class="section-title">بوابات الحكمة الأربع</h2>
+    <div class="section-divider">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <h3>القرآن الكريم</h3>
+      <p>قراءة وتصفح بالرسم العثماني مع التفسير والترجمة لكل آية.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <h3>الصوتيات</h3>
+      <p>استماع بأصوات نخبة من المرتلين مع إمكانية التكرار والتعليم.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h3>القلائد</h3>
+      <p>مكتبة قيّمة من الكتب والحديث والتفسير في متناول يدك.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><path d="M9 9h6M12 6v6"/></svg></div>
+      <h3>الأذكار</h3>
+      <p>أذكار الصباح والمساء وحصن المسلم بمتناسق يساعدك على الثبات.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Our apps ====== -->
+<section class="section" style="padding-top:20px">
+  <div class="section-head">
+    <div class="section-eyebrow">تطبيقاتنا</div>
+    <h2 class="section-title">من عائلة الحكمة</h2>
+    <div class="section-divider">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+    </div>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+      <div class="app-body">
+        <h4>القرآن الكريم</h4>
+        <p>تطبيق متكامل لقراءة القرآن بصوتيات ومرتليه.</p>
+        <div class="app-tags"><span class="app-tag">iOS</span><span class="app-tag">Android</span></div>
+      </div>
+    </div>
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="app-body">
+        <h4>حصن المسلم</h4>
+        <p>الأذكار والأدعية من الكتاب والسنة بتنسيق عملي.</p>
+        <div class="app-tags"><span class="app-tag">iOS</span><span class="app-tag">Android</span></div>
+      </div>
+    </div>
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="app-body">
+        <h4>القلائد</h4>
+        <p>مكتبة الكتب الإسلامية والعلم النافع بين يديك.</p>
+        <div class="app-tags"><span class="app-tag">iOS</span><span class="app-tag">Android</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <div class="brand-mark" style="width:38px;height:38px">
+            <svg viewBox="0 0 24 24" fill="#FBF5E8" stroke="none" width="20" height="20"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+          </div>
+          <div class="brand-name">مكتبة الحكمة</div>
+        </div>
+        <p class="footer-desc">منصة إسلامية شاملة لنشر العلم النافع وخدمة كتاب الله وسنة نبيه ﷺ.</p>
+      </div>
+      <div class="footer-col">
+        <h5>روابط سريعة</h5>
+        <a href="#">القرآن الكريم</a>
+        <a href="#">القلايد</a>
+        <a href="#">الأذكار</a>
+      </div>
+      <div class="footer-col">
+        <h5>المطورون</h5>
+        <a href="#">المكتبة</a>
+        <a href="#">واجهة API</a>
+        <a href="#">التحميلات</a>
+      </div>
+      <div class="footer-col">
+        <h5>تواصل معنا</h5>
+        <a href="#">اتصل بنا</a>
+        <a href="#">من نحن</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© مكتبة الحكمة · ١٤٤٦هـ</span>
+      <span>صُنع بحب لخدمة كتاب الله</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الحكمة · التصميم النهائي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Mada:wght@300;400;500;600;700;800;900&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== Warm parchment + brown + gold palette ===== */
+    --bg:#FBF7EE;          /* warm parchment */
+    --bg-warm:#F2EBD7;     /* slightly deeper warm */
+    --paper:#FFFEF8;       /* clean paper */
+    --paper-2:#F8F2E2;     /* tinted card */
+    --ink:#2A1F12;         /* deep espresso brown (text) */
+    --ink-2:#3D2817;       /* dark brown */
+    --ink-soft:#6B5A42;    /* muted brown text */
+    --ink-faint:#A89770;   /* faint brown */
+    --brown:#8B6F47;       /* medium brown */
+    --brown-deep:#5C4A2E;  /* deep brown */
+    --gold:#C9962B;        /* honey gold */
+    --gold-bright:#E0B341; /* bright gold */
+    --gold-soft:#E8C97A;   /* soft gold */
+    --gold-deep:#9A7420;   /* deep gold */
+    --rule:#D9CCAE;        /* warm border */
+    --rule-soft:#E8DFC8;   /* faint border */
+    --shadow-sm:0 1px 2px rgba(61,40,23,.04),0 4px 12px rgba(61,40,23,.04);
+    --shadow:0 2px 8px rgba(61,40,23,.06),0 16px 40px rgba(61,40,23,.06);
+    --shadow-lg:0 8px 24px rgba(61,40,23,.1),0 30px 70px rgba(61,40,23,.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    font-family:'Mada',sans-serif;
+    background:var(--bg);color:var(--ink);
+    line-height:1.7;overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--paper)}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+
+  /* ===== Typography helpers ===== */
+  .display{font-family:'Amiri',serif;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+  .eyebrow{font-family:'Mada';font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+
+  /* ===== Scroll reveal ===== */
+  [data-r]{opacity:0;transform:translateY(48px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+  [data-r=fade]{transform:none}
+  [data-r=right]{transform:translateX(56px)}
+  [data-r=left]{transform:translateX(-56px)}
+  [data-r=zoom]{transform:scale(.94)}
+  [data-r].in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .stagger.in>*{opacity:1;transform:none}
+  .stagger.in>*:nth-child(1){transition-delay:0ms}
+  .stagger.in>*:nth-child(2){transition-delay:90ms}
+  .stagger.in>*:nth-child(3){transition-delay:180ms}
+  .stagger.in>*:nth-child(4){transition-delay:270ms}
+  .stagger.in>*:nth-child(5){transition-delay:360ms}
+  .stagger.in>*:nth-child(6){transition-delay:450ms}
+
+  #bar{position:fixed;top:0;right:0;height:3px;width:0;z-index:300;background:linear-gradient(90deg,var(--gold),var(--gold-bright));transition:width .08s linear}
+
+  /* ===== NAV ===== */
+  header.nav-wrap{
+    position:sticky;top:0;z-index:100;
+    background:rgba(251,247,238,.88);backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .nav{
+    max-width:1280px;margin:0 auto;padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+  .brand-mark{
+    width:42px;height:42px;border-radius:10px;
+    background:linear-gradient(135deg,var(--brown-deep),var(--ink-2));
+    display:grid;place-items:center;position:relative;
+    box-shadow:0 4px 12px rgba(61,40,23,.18);
+  }
+  .brand-mark svg{width:24px;height:24px;color:var(--gold-soft)}
+  .brand-name{font-family:'Reem Kufi';font-weight:700;font-size:1.3rem;color:var(--ink);line-height:1}
+  .brand-name .g{color:var(--gold-deep)}
+  .brand-tag{font-size:.62rem;letter-spacing:.32em;color:var(--brown);text-transform:uppercase;font-weight:600;margin-top:2px}
+
+  .nav-links{display:flex;gap:4px;align-items:center}
+  .nav-links a{
+    font-size:.92rem;font-weight:600;color:var(--ink-soft);
+    padding:9px 16px;border-radius:8px;position:relative;transition:all .2s;
+  }
+  .nav-links a::after{content:'';position:absolute;bottom:4px;right:50%;left:50%;height:1.5px;background:var(--gold);transition:right .3s,left .3s}
+  .nav-links a:hover,.nav-links a.active{color:var(--ink)}
+  .nav-links a:hover::after,.nav-links a.active::after{right:16px;left:16px}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .icon-btn{
+    width:38px;height:38px;border-radius:10px;border:1px solid var(--rule);
+    background:var(--paper);display:grid;place-items:center;cursor:pointer;
+    color:var(--brown-deep);transition:all .2s;
+  }
+  .icon-btn:hover{background:var(--ink-2);color:var(--gold-soft);border-color:var(--ink-2)}
+  .btn-primary{
+    font-weight:700;font-size:.88rem;color:var(--paper);
+    background:var(--ink-2);padding:10px 20px;border-radius:24px;border:none;cursor:pointer;transition:all .2s;
+  }
+  .btn-primary:hover{background:var(--gold-deep)}
+
+  /* ===== HERO ===== */
+  .hero{max-width:1280px;margin:0 auto;padding:72px 32px 64px;position:relative}
+  .hero::before{
+    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:1px;height:60px;background:linear-gradient(180deg,transparent,var(--gold));
+  }
+  .hero-inner{
+    background:var(--paper);border:1px solid var(--rule);
+    border-radius:24px;padding:64px 56px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  /* corner ornaments */
+  .hero-inner::before,.hero-inner::after{
+    content:'';position:absolute;width:80px;height:80px;
+    border:1px solid var(--gold);opacity:.4;pointer-events:none;
+  }
+  .hero-inner::before{top:24px;right:24px;border-left:none;border-bottom:none}
+  .hero-inner::after{bottom:24px;left:24px;border-right:none;border-top:none}
+
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative;z-index:2}
+  .hero-kicker{display:inline-flex;align-items:center;gap:12px;margin-bottom:28px}
+  .hero-kicker .line{width:36px;height:1px;background:var(--gold)}
+  h1.hero-title{
+    font-family:'Amiri';font-weight:700;
+    font-size:clamp(2.6rem,5.5vw,4.4rem);line-height:1.1;letter-spacing:-1px;
+    color:var(--ink);margin-bottom:22px;
+  }
+  h1.hero-title .it{font-style:italic;color:var(--gold-deep)}
+  .hero-sub{font-size:1.12rem;color:var(--ink-soft);max-width:520px;margin-bottom:34px;line-height:1.8}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-gold{
+    font-weight:700;font-size:.95rem;color:var(--paper);
+    background:linear-gradient(135deg,var(--gold),var(--gold-bright));
+    padding:14px 30px;border-radius:12px;border:none;cursor:pointer;
+    display:inline-flex;align-items:center;gap:10px;transition:all .25s;
+    box-shadow:0 8px 22px rgba(201,150,43,.3);
+  }
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,150,43,.42)}
+  .btn-outline{
+    font-weight:700;font-size:.95rem;color:var(--ink-2);
+    background:transparent;padding:14px 30px;border-radius:12px;cursor:pointer;
+    border:1.5px solid var(--rule);
+    display:inline-flex;align-items:center;gap:10px;transition:all .25s;
+  }
+  .btn-outline:hover{border-color:var(--gold);background:var(--paper-2)}
+
+  /* hero visual */
+  .hero-visual{position:relative;display:grid;place-items:center;min-height:340px}
+  .hero-card-deco{
+    position:relative;width:100%;max-width:340px;
+    background:linear-gradient(160deg,var(--ink-2),var(--brown-deep));
+    border-radius:20px;padding:36px;text-align:center;overflow:hidden;
+    box-shadow:0 24px 60px rgba(42,31,18,.3);
+  }
+  .hero-card-deco::before{
+    content:'';position:absolute;inset:0;opacity:.12;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z' fill='none' stroke='%23E8C97A' stroke-width='1'/%3E%3C/svg%3E");
+    background-size:60px;
+  }
+  .hero-card-deco::after{
+    content:'';position:absolute;inset:14px;border:1px solid rgba(232,201,122,.3);border-radius:12px;
+  }
+  .hcd-inner{position:relative;z-index:2}
+  .hcd-star{width:42px;height:42px;margin:0 auto 18px;color:var(--gold-soft)}
+  .hcd-ayah{font-family:'Amiri';font-weight:700;font-size:1.4rem;color:var(--gold-soft);line-height:1.7;margin-bottom:14px}
+  .hcd-ref{font-size:.78rem;letter-spacing:.2em;color:rgba(232,201,122,.7);text-transform:uppercase}
+
+  /* hero stats strip */
+  .hero-stats{
+    display:flex;justify-content:space-between;gap:20px;
+    margin-top:44px;padding-top:32px;border-top:1px solid var(--rule-soft);
+    position:relative;z-index:2;
+  }
+  .hero-stat{text-align:center;flex:1}
+  .hero-stat .n{font-family:'Amiri';font-size:2rem;font-weight:700;color:var(--ink);line-height:1}
+  .hero-stat .n .g{color:var(--gold-deep)}
+  .hero-stat .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.1em;margin-top:6px;text-transform:uppercase}
+
+  /* ===== Section heading ===== */
+  .section{max-width:1280px;margin:0 auto;padding:80px 32px}
+  .section-head{
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;
+    margin-bottom:44px;padding-bottom:20px;border-bottom:1px solid var(--rule);
+  }
+  .section-head h2{font-family:'Amiri';font-weight:700;font-size:clamp(1.9rem,3.5vw,2.7rem);letter-spacing:-.5px;line-height:1.1;color:var(--ink)}
+  .section-head h2 .g{color:var(--gold-deep);font-style:italic}
+  .section-head .lede{font-size:.95rem;color:var(--ink-soft);margin-top:8px;max-width:480px}
+  .section-head .more{
+    font-size:.86rem;font-weight:700;color:var(--ink);
+    display:inline-flex;align-items:center;gap:8px;transition:gap .25s,color .2s;
+    padding:8px 16px;border:1px solid var(--rule);border-radius:20px;background:var(--paper);
+  }
+  .section-head .more:hover{gap:12px;color:var(--gold-deep);border-color:var(--gold)}
+
+  /* ===== SERVICES (4 cards) ===== */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .service-card{
+    position:relative;background:var(--paper);border:1px solid var(--rule);
+    border-radius:18px;padding:34px 26px;cursor:pointer;
+    transition:all .35s cubic-bezier(.16,1,.3,1);overflow:hidden;
+  }
+  .service-card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-bright));
+    transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold-soft)}
+  .service-card:hover::before{transform:scaleX(1)}
+  .service-num{font-family:'Amiri';font-size:.92rem;color:var(--gold-deep);font-weight:700;letter-spacing:.1em;margin-bottom:14px}
+  .service-ic{
+    width:58px;height:58px;margin-bottom:20px;
+    border-radius:14px;display:grid;place-items:center;
+    background:var(--paper-2);border:1px solid var(--rule-soft);
+    color:var(--brown-deep);transition:all .35s;
+  }
+  .service-card:hover .service-ic{background:var(--ink-2);color:var(--gold-soft);border-color:var(--ink-2);transform:translateY(-2px)}
+  .service-ic svg{width:28px;height:28px}
+  .service-card h3{font-family:'Amiri';font-weight:700;font-size:1.35rem;color:var(--ink);margin-bottom:10px}
+  .service-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.7}
+  .service-read{
+    display:inline-flex;align-items:center;gap:6px;margin-top:16px;
+    font-size:.82rem;font-weight:700;color:var(--gold-deep);transition:gap .25s;
+  }
+  .service-card:hover .service-read{gap:10px}
+
+  /* ===== AYAH band ===== */
+  .ayah-band{
+    max-width:1280px;margin:40px auto;padding:80px 32px;text-align:center;
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--ink-2),var(--brown-deep));
+    border-radius:24px;
+  }
+  .ayah-band::before{
+    content:'';position:absolute;inset:0;opacity:.1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23E8C97A' stroke-width='1'%3E%3Cpath d='M50 0L62 38L100 50L62 62L50 100L38 62L0 50L38 38Z'/%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:90px;
+  }
+  .ayah-band::after{
+    content:'';position:absolute;inset:16px;border:1px solid rgba(232,201,122,.25);border-radius:14px;pointer-events:none;
+  }
+  .ayah-content{position:relative;z-index:2}
+  .ayah-deco{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px;color:var(--gold-soft)}
+  .ayah-deco .ln{height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold-soft))}
+  .ayah-deco .ln.r{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+  .ayah-deco svg{width:24px;height:24px}
+  .ayah-text{
+    font-family:'Amiri';font-weight:700;font-style:italic;
+    font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.6;
+    color:var(--gold-soft);max-width:800px;margin:0 auto 20px;
+  }
+  .ayah-ref{font-size:.88rem;color:rgba(232,201,122,.75);letter-spacing:.2em}
+
+  /* ===== OUR APPS ===== */
+  .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .app-card{
+    background:var(--paper);border:1px solid var(--rule);
+    border-radius:18px;overflow:hidden;cursor:pointer;
+    transition:all .35s cubic-bezier(.16,1,.3,1);
+    display:flex;flex-direction:column;
+  }
+  .app-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold-soft)}
+  .app-banner{
+    height:180px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--ink-2),var(--brown-deep));
+    display:grid;place-items:center;
+  }
+  .app-banner::before{
+    content:'';position:absolute;inset:0;opacity:.16;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Cpath d='M35 0L43 27L70 35L43 43L35 70L27 43L0 35L27 27Z' fill='none' stroke='%23E8C97A' stroke-width='1'/%3E%3C/svg%3E");
+    background-size:55px;
+  }
+  .app-banner svg{width:56px;height:56px;color:var(--gold-soft);position:relative;z-index:2;transition:transform .4s}
+  .app-card:hover .app-banner svg{transform:scale(1.12) rotate(-5deg)}
+  .app-body{padding:24px;flex:1;display:flex;flex-direction:column}
+  .app-body h4{font-family:'Amiri';font-weight:700;font-size:1.4rem;color:var(--ink);margin-bottom:8px}
+  .app-body p{color:var(--ink-soft);font-size:.92rem;margin-bottom:16px;line-height:1.7;flex:1}
+  .app-meta{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--rule-soft)}
+  .app-tag{
+    font-size:.74rem;font-weight:700;padding:5px 12px;border-radius:20px;
+    background:var(--paper-2);color:var(--brown-deep);border:1px solid var(--rule-soft);
+  }
+  .app-arrow{color:var(--gold-deep);transition:transform .2s}
+  .app-card:hover .app-arrow{transform:translateX(-4px)}
+
+  /* ===== ABOUT US ===== */
+  .about{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+    background:var(--paper);border:1px solid var(--rule);border-radius:24px;
+    padding:64px 56px;box-shadow:var(--shadow);
+  }
+  .about-text h2{font-family:'Amiri';font-weight:700;font-size:clamp(1.9rem,3.5vw,2.6rem);line-height:1.15;margin-bottom:18px;color:var(--ink)}
+  .about-text h2 .g{color:var(--gold-deep);font-style:italic}
+  .about-text p{color:var(--ink-soft);font-size:1.02rem;line-height:1.9;margin-bottom:16px}
+  .about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .about-feat{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--ink-soft)}
+  .about-feat svg{width:20px;height:20px;color:var(--gold-deep);flex-shrink:0;margin-top:2px}
+  .about-feat strong{color:var(--ink);font-weight:700;display:block;margin-bottom:2px}
+  .about-visual{
+    position:relative;min-height:340px;
+    background:linear-gradient(160deg,var(--paper-2),var(--bg-warm));
+    border-radius:18px;border:1px solid var(--rule-soft);
+    display:grid;place-items:center;overflow:hidden;
+  }
+  .about-visual::before{
+    content:'';position:absolute;inset:0;opacity:.4;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z' fill='%23C9962B' opacity='0.15'/%3E%3C/svg%3E");
+    background-size:70px;
+  }
+  .about-visual-content{position:relative;z-index:2;text-align:center;padding:32px}
+  .about-visual-content .mark{font-family:'Amiri';font-size:5rem;color:var(--gold);line-height:.5;margin-bottom:16px}
+  .about-visual-content .quote{font-family:'Amiri';font-style:italic;font-size:1.25rem;color:var(--ink-2);line-height:1.7;max-width:340px;margin:0 auto}
+  .about-visual-content .ref{font-size:.8rem;color:var(--brown);margin-top:16px;letter-spacing:.1em}
+
+  /* ===== FAQ ===== */
+  .faq-list{display:flex;flex-direction:column;gap:14px;max-width:880px;margin:0 auto}
+  .faq-item{
+    background:var(--paper);border:1px solid var(--rule);
+    border-radius:14px;overflow:hidden;transition:all .3s;
+  }
+  .faq-item:hover{border-color:var(--gold-soft)}
+  .faq-item[open]{border-color:var(--gold);box-shadow:var(--shadow)}
+  .faq-q{
+    padding:22px 26px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-weight:700;font-size:1.02rem;color:var(--ink);list-style:none;
+  }
+  .faq-q::-webkit-details-marker{display:none}
+  .faq-q .ic{
+    width:28px;height:28px;border-radius:50%;background:var(--paper-2);
+    display:grid;place-items:center;color:var(--gold-deep);flex-shrink:0;
+    transition:transform .3s,background .3s,color .3s;
+  }
+  .faq-item[open] .faq-q .ic{transform:rotate(45deg);background:var(--gold);color:var(--paper)}
+  .faq-a{padding:0 26px 24px;color:var(--ink-soft);font-size:.96rem;line-height:1.8}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink-2);color:var(--bg);padding:72px 32px 32px;margin-top:60px;position:relative}
+  footer::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent);
+  }
+  .footer-inner{max-width:1280px;margin:0 auto}
+  .footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:44px;padding-bottom:36px;border-bottom:1px solid rgba(232,201,122,.15)}
+  .footer-brand-name{font-family:'Reem Kufi';font-size:1.5rem;font-weight:700;margin-bottom:14px;color:var(--gold-soft)}
+  .footer-brand-name .g{color:var(--gold)}
+  .footer-desc{color:rgba(251,247,238,.7);font-size:.92rem;line-height:1.8;max-width:300px}
+  .footer-social{display:flex;gap:10px;margin-top:18px}
+  .footer-social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(232,201,122,.2);display:grid;place-items:center;color:rgba(251,247,238,.7);transition:all .25s}
+  .footer-social a:hover{background:var(--gold);color:var(--ink-2);border-color:var(--gold)}
+  .footer-col h5{font-family:'Amiri';font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--gold-soft)}
+  .footer-col a{display:block;color:rgba(251,247,238,.7);font-size:.9rem;padding:6px 0;transition:color .2s}
+  .footer-col a:hover{color:var(--gold-soft)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;color:rgba(251,247,238,.55);font-size:.85rem;flex-wrap:wrap;gap:12px}
+
+  /* ===== Responsive ===== */
+  @media(max-width:1024px){
+    .hero-grid,.about{grid-template-columns:1fr;gap:36px}
+    .hero-inner,.about{padding:40px 32px}
+    .services-grid{grid-template-columns:1fr 1fr}
+    .apps-grid{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+  @media(max-width:640px){
+    .nav-actions .btn-primary{display:none}
+    .hero-stats{flex-wrap:wrap;gap:20px}
+    .hero-stat{flex:1 1 40%}
+    .services-grid,.apps-grid{grid-template-columns:1fr}
+    .about-features{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .section-head{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    [data-r],.stagger>*{opacity:1!important;transform:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- ===== NAV ===== -->
+<header class="nav-wrap">
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">مكتبة <span class="g">الحكمة</span></div>
+        <div class="brand-tag">AL HEEKMAH</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#services">القرآن</a>
+      <a href="#apps">تطبيقاتنا</a>
+      <a href="#about">من نحن</a>
+      <a href="#faq">الأسئلة الشائعة</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" title="تبديل النمط"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <button class="btn-primary">اتصل بنا</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner" data-r="zoom">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker"><span class="line"></span><span class="eyebrow">منصة إسلامية متكاملة</span></div>
+        <h1 class="hero-title">حيث يُتلى <span class="it">القرآن</span><br>وتُكتب الحكمة</h1>
+        <p class="hero-sub">مكتبة شاملة تجمع القرآن الكريم بصوتياته ومرتليه، والأذكار، والعلم النافع — في تجربة قراءة هادئة وعميقة، مصممة بعنايةٍ لتمنحك زادًا روحيًا يوميًا.</p>
+        <div class="hero-ctas">
+          <button class="btn-gold">ابدأ القراءة
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+          </button>
+          <button class="btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+            تطبيقاتنا
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-deco">
+          <div class="hcd-inner">
+            <svg class="hcd-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+            <div class="hcd-ayah">«أَلَا بِذِكْرِ اللَّهِ<br>تَطْمَئِنُّ الْقُلُوبُ»</div>
+            <div class="hcd-ref">سورة الرعد · ٢٨</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n"><span class="g" data-count="604">٠</span></div><div class="l">صفحة قرآنية</div></div>
+      <div class="hero-stat"><div class="n" data-count="114">٠</div><div class="l">سورة</div></div>
+      <div class="hero-stat"><div class="n"><span class="g" data-count="53">٠</span></div><div class="l">قارئًا</div></div>
+      <div class="hero-stat"><div class="n" data-count="10">٠</div><div class="l">لغات</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="section" id="services">
+  <div class="section-head">
+    <div data-r="right">
+      <span class="eyebrow">خدماتنا</span>
+      <h2>بوابات <span class="g">الحكمة</span> الأربع</h2>
+      <p class="lede">أربع خدماتٌ متكاملة تأخذ بيدك في رحلةٍ روحانيةٍ من القراءة إلى الاستماع إلى الذكر.</p>
+    </div>
+    <a href="#" class="more" data-r="left">كل الخدمات
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="services-grid stagger">
+    <div class="service-card">
+      <div class="service-num">٠١</div>
+      <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <h3>القرآن الكريم</h3>
+      <p>قراءةٌ بالرسم العثماني مع التفسير والترجمة لكل آيةٍ من آيات الكتاب.</p>
+      <span class="service-read">تصفح
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">٠٢</div>
+      <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <h3>الصوتيات</h3>
+      <p>استماعٌ بأصوات نخبةٍ من المرتلين، مع إمكانية التكرار والتعليم.</p>
+      <span class="service-read">استمع
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">٠٣</div>
+      <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h3>القلائد</h3>
+      <p>مكتبةٌ قيّمة من الكتب والحديث والتفسير، منتقاةٌ بعنايةٍ بين يديك.</p>
+      <span class="service-read">اقرأ
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">٠٤</div>
+      <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><path d="M9 9h6M12 6v6"/></svg></div>
+      <h3>الأذكار</h3>
+      <p>أذكار الصباح والمساء وحصن المسلم، بمتناسقٍ عمليٍّ يساعدك على الثبات.</p>
+      <span class="service-read">راجع
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AYAH BAND ===== -->
+<section style="max-width:1280px;margin:0 auto;padding:0 32px">
+  <div class="ayah-band" data-r="zoom">
+    <div class="ayah-content">
+      <div class="ayah-deco">
+        <span class="ln"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+        <span class="ln r"></span>
+      </div>
+      <p class="ayah-text">وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ</p>
+      <div class="ayah-ref">سورة الإسراء · آية ٨٢</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OUR APPS ===== -->
+<section class="section" id="apps">
+  <div class="section-head">
+    <div data-r="right">
+      <span class="eyebrow">تطبيقاتنا</span>
+      <h2>من عائلة <span class="g">الحكمة</span></h2>
+      <p class="lede">تطبيقاتٌ مصممة بعنايةٍ لتواكب حياتك اليومية وتكون رفيقك في الطريق إلى الله.</p>
+    </div>
+    <a href="#" class="more" data-r="left">كل التطبيقات
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="apps-grid stagger">
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+      <div class="app-body">
+        <h4>القرآن الكريم</h4>
+        <p>تطبيقٌ متكامل لقراءة القرآن الكريم بصوتياته ومرتليه، مع التفسير والترجمة لكل آية.</p>
+        <div class="app-meta"><span class="app-tag">iOS · Android</span><span class="app-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></span></div>
+      </div>
+    </div>
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="app-body">
+        <h4>حصن المسلم</h4>
+        <p>الأذكار والأدعية من الكتاب والسنة، بتنسيقٍ عمليٍّ ويوميٍّ يساعدك على المداومة.</p>
+        <div class="app-meta"><span class="app-tag">iOS · Android</span><span class="app-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></span></div>
+      </div>
+    </div>
+    <div class="app-card">
+      <div class="app-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="app-body">
+        <h4>القلائد</h4>
+        <p>مكتبةٌ رقمية للكتب الإسلامية والعلم النافع، منتقاةٌ لتكون بين يديك في أي وقت.</p>
+        <div class="app-meta"><span class="app-tag">iOS · Android</span><span class="app-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT US ===== -->
+<section class="section" id="about">
+  <div class="about">
+    <div class="about-text" data-r="right">
+      <span class="eyebrow">من نحن</span>
+      <h2>رسالةٌ من <span class="g">العلم النافع</span><br>إلى كل مسلمٍ</h2>
+      <p>مكتبة الحكمة منصة إسلامية شاملة، وُلدت من شغفٍ بخدمة كتاب الله وسنة نبيه ﷺ. نؤمن بأن العلم النافع أمانةٌ يجب أن تصل لكل بيتٍ بأسهل الطرق وأجملها.</p>
+      <p>نجمع بين أصالة المحتوى وجمال التجربة، لنقدّم لك القرآن بصوتياته ومرتليه، والأذكار، والكتب المختارة — في واجهةٍ واحدةٍ متناغمة.</p>
+      <div class="about-features">
+        <div class="about-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <div><strong>محتوى موثوق</strong>من مصادرَ معتمدة</div>
+        </div>
+        <div class="about-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <div><strong>تجربة خالية</strong>من الإزعاج والإعلانات</div>
+        </div>
+        <div class="about-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <div><strong>متعدد اللغات</strong>لخدمة المسلمين كافة</div>
+        </div>
+        <div class="about-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <div><strong>مفتوح للمطورين</strong>عبر API ومكتبة</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual" data-r="left">
+      <div class="about-visual-content">
+        <div class="mark">۞</div>
+        <p class="quote">«مَن سَلَكَ طَريقًا يَلْتَمِسُ فيه عِلْمًا سَهَّلَ اللهُ لَهُ به طَريقًا إلى الجَنَّة»</p>
+        <div class="ref">رواه مسلم</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="section-head" style="justify-content:center;text-align:center;display:flex;flex-direction:column;align-items:center">
+    <div data-r="fade" style="text-align:center">
+      <span class="eyebrow">الأسئلة الشائعة</span>
+      <h2>أجوبةٌ على <span class="g">استفساراتك</span></h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto">كل ما تريد معرفته عن مكتبة الحكمة وخدماتها.</p>
+    </div>
+  </div>
+  <div class="faq-list stagger">
+    <details class="faq-item" open>
+      <summary class="faq-q">هل استخدام مكتبة الحكمة مجاني بالكامل؟
+        <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-a">نعم، جميع خدمات مكتبة الحكمة مجانية بالكامل وخالية من الإعلانات المزعجة. نهدف إلى نشر العلم النافع دون أي عوائق مادية، تبرّعًا احتسابًا لوجه الله تعالى.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">هل يتوفر تفسيرٌ وترجمةٌ للقرآن الكريم؟
+        <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-a">نعم، نوفر تفاسير متعددة (ابن كثير، الميسر، السعدي...) وترجمات لأكثر من ١٠ لغات، مع إمكانية التبديل بينها بسهولةٍ أثناء القراءة.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">هل التطبيقات متوفرة على iOS و Android؟
+        <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-a">نعم، جميع تطبيقاتنا متوفرة على متجر آبل (App Store) وجوجل بلاي (Google Play) ومتاجر هواوي، ويمكنك تصفحها من قسم "تطبيقاتنا".</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">هل تقدمون واجهة برمجية (API) للمطورين؟
+        <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-a">نعم، نوفّر مكتبة quran_library مفتوحة المصدر، وواجهة API لمجموعة البيانات القرآنية، يمكن للمطورين الاطلاع عليها من قسم "المطورون".</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">كيف يمكنني التواصل معكم؟
+        <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <div class="faq-a">يمكنك التواصل معنا عبر صفحة "اتصل بنا"، ونحن سعداء بسماع ملاحظاتك واقتراحاتك لتحسين خدماتنا.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">مكتبة <span class="g">الحكمة</span></div>
+        <p class="footer-desc">منصة إسلامية شاملة لنشر العلم النافع وخدمة كتاب الله وسنة نبيه ﷺ، عبر محتوى موثوق وتجربة استخدامٍ راقية.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.8.4-1.6.6-2.5.7.9-.5 1.6-1.4 1.9-2.4-.8.5-1.8.9-2.7 1.1-.8-.9-2-1.4-3.2-1.4-2.5 0-4.5 2-4.5 4.5 0 .3 0 .7.1 1C7.4 9.1 4 7.4 1.8 4.6c-.4.7-.6 1.4-.6 2.3 0 1.5.8 2.9 2 3.7-.7 0-1.4-.2-2-.5v.1c0 2.2 1.5 4 3.6 4.4-.4.1-.7.2-1.1.2-.3 0-.5 0-.8-.1.5 1.8 2.2 3.1 4.1 3.1-1.5 1.2-3.4 1.9-5.5 1.9H0c2 1.3 4.3 2 6.9 2 8.3 0 12.8-6.8 12.8-12.8v-.6c.9-.6 1.6-1.4 2.3-2.4z"/></svg></a>
+          <a href="#" aria-label="youtube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5c-.3-1.2-1.1-2-2.3-2.3C18.5 4.7 12 4.7 12 4.7s-6.5 0-8.7.5C2.1 5.5 1.3 6.3 1 7.5.5 9.7.5 12 .5 12s0 2.3.5 4.5c.3 1.2 1.1 2 2.3 2.3 2.2.5 8.7.5 8.7.5s6.5 0 8.7-.5c1.2-.3 2-1.1 2.3-2.3.5-2.2.5-4.5.5-4.5s0-2.3-.5-4.5zM9.7 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+          <a href="#" aria-label="telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 4.3l-3.3 15.6c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-.9.5l.3-4.9L19.5 6c.4-.3-.1-.5-.6-.2L7.5 13.5l-4.7-1.5c-1-.3-1-1 .2-1.5L21.7 3c.8-.3 1.6.2 1.3 1.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>روابط سريعة</h5><a href="#">الرئيسية</a><a href="#">القرآن الكريم</a><a href="#">تطبيقاتنا</a><a href="#">من نحن</a></div>
+      <div class="footer-col"><h5>الخدمات</h5><a href="#">القرآن</a><a href="#">الصوتيات</a><a href="#">القلائد</a><a href="#">الأذكار</a></div>
+      <div class="footer-col"><h5>المطورون</h5><a href="#">المكتبة</a><a href="#">واجهة API</a><a href="#">التحميلات</a><a href="#">التوثيق</a></div>
+      <div class="footer-col"><h5>تواصل معنا</h5><a href="#">اتصل بنا</a><a href="#">الأسئلة الشائعة</a><a href="#">سياسة الخصوصية</a><a href="#">الشروط والأحكام</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ١٤٤٦هـ · مكتبة الحكمة. جميع الحقوق محفوظة.</span>
+      <span>صُنع بإتقانٍ لخدمة كتاب الله وسنة نبيه ﷺ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('[data-r], .stagger').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-r], .stagger').forEach(el => el.classList.add('in'));
+  }
+  const bar = document.getElementById('bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = ((h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100) + '%';
+  }, { passive: true });
+  const toAr = (n) => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[+d]);
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.count, dur = 1500, start = performance.now();
+      const tick = (now) => {
+        const t = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = toAr(Math.floor(eased * target));
+        if (t < 1) requestAnimationFrame(tick); else el.textContent = toAr(target);
+      };
+      requestAnimationFrame(tick); cio.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>

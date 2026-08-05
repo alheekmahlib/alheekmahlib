@@ -7,6 +7,7 @@ import '../../presentation/controllers/general_controller.dart';
 import '../../presentation/controllers/settings_controller.dart';
 import '../../presentation/controllers/theme_controller.dart';
 import '../../presentation/controllers/translate_controller.dart';
+import '../../presentation/developers/controllers/developers_controller.dart';
 import '../../presentation/our_apps/our_apps.dart';
 import '../utils/helpers/app_router.dart';
 
@@ -26,6 +27,9 @@ class ServicesLocator {
 
     sl.registerLazySingleton<AppsInfoController>(() =>
         Get.put<AppsInfoController>(AppsInfoController(), permanent: true));
+
+    sl.registerLazySingleton<DevelopersController>(() =>
+        Get.put<DevelopersController>(DevelopersController(), permanent: true));
 
     sl.registerLazySingleton<TranslateDataController>(() =>
         Get.put<TranslateDataController>(TranslateDataController(),

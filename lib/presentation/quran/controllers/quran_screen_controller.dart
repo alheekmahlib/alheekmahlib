@@ -22,6 +22,7 @@ class QuranScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    QuranLibrary.quranCtrl.state.fontsSelected.value = 0;
     _parseDeepLink();
     _pageUrlSyncWorker = debounce<int>(
       QuranCtrl.instance.state.currentPageNumber,

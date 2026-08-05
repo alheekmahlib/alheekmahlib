@@ -15,7 +15,7 @@ class AzkarView extends StatelessWidget {
       child: Container(
         color: Theme.of(context).colorScheme.surface,
         child: Padding(
-          padding: const EdgeInsets.only(top: 32.0, bottom: 48.0),
+          padding: const EdgeInsets.only(top: 32.0),
           child: widgetScreenSize(
             context,
             const Padding(

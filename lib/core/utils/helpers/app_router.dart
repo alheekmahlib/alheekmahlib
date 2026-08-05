@@ -10,6 +10,9 @@ import '../../../presentation/athkar_screen/screens/alzkar_view.dart';
 import '../../../presentation/athkar_screen/screens/azkar_item.dart';
 import '../../../presentation/books/books.dart';
 import '../../../presentation/contact_us/screens/contact_us_page.dart';
+import '../../../presentation/developers/dashboard/developers_dashboard_screen.dart';
+import '../../../presentation/developers/developers_screen.dart';
+import '../../../presentation/developers/models/developer_models.dart';
 import '../../../presentation/download_redirect/screens/download_redirect_screen.dart';
 import '../../../presentation/home_screen/alheekmah_screen.dart';
 import '../../../presentation/home_screen/home_screen.dart';
@@ -34,6 +37,10 @@ class AppRouter {
   static const String routeBooks = '/books';
   static const String routeAthkar = '/athkar';
   static const String routeContactUs = '/contact-us';
+  static const String routeDevelopers = '/developers';
+  static const String routeDevelopersDashboard = '/developers-dashboard';
+  static const String routeDevelopersApi = '/developers/api';
+  static const String routeDevelopersLibrary = '/developers/library';
 
   // Keep a single controller instance to avoid losing attachment during rebuilds.
   final PageController pageController = PageController();
@@ -72,6 +79,38 @@ class AppRouter {
             path: routeContactUs,
             builder: (BuildContext context, GoRouterState state) {
               return const ContactUsPage();
+            },
+          ),
+          GoRoute(
+            path: routeDevelopers,
+            builder: (BuildContext context, GoRouterState state) {
+              return const DevelopersScreen();
+            },
+          ),
+          GoRoute(
+            path: '$routeDevelopersApi/:id',
+            builder: (BuildContext context, GoRouterState state) {
+              final id = state.pathParameters['id'] ?? '';
+              return DevelopersScreen(
+                openType: DevelopersOpenType.api,
+                openItemId: id,
+              );
+            },
+          ),
+          GoRoute(
+            path: '$routeDevelopersLibrary/:id',
+            builder: (BuildContext context, GoRouterState state) {
+              final id = state.pathParameters['id'] ?? '';
+              return DevelopersScreen(
+                openType: DevelopersOpenType.libraries,
+                openItemId: id,
+              );
+            },
+          ),
+          GoRoute(
+            path: routeDevelopersDashboard,
+            builder: (BuildContext context, GoRouterState state) {
+              return const DevelopersDashboardScreen();
             },
           ),
           GoRoute(
@@ -212,6 +251,8 @@ class AppRouter {
     if (location.startsWith(routeBooks)) return 3;
     if (location.startsWith(routeAthkar)) return 4;
     if (location.startsWith(routeContactUs)) return 5;
+    if (location.startsWith(routeDevelopersDashboard)) return 7;
+    if (location.startsWith(routeDevelopers)) return 6;
     return 0;
   }
 
@@ -242,6 +283,14 @@ class AppRouter {
         pageIndex = 5;
         GoRouter.of(context).go(routeContactUs);
         break;
+      case 6:
+        pageIndex = 6;
+        GoRouter.of(context).go(routeDevelopers);
+        break;
+      case 7:
+        pageIndex = 7;
+        GoRouter.of(context).go(routeDevelopersDashboard);
+        break;
     }
     if (pageIndex != null) {
       pageController.animateToPage(pageIndex,
@@ -261,6 +310,12 @@ class AppRouter {
     } else if (path.startsWith(routeContactUs)) {
       pageIndex = 5;
       sl<GeneralController>().tapIndex.value = 5;
+    } else if (path.startsWith(routeDevelopersDashboard)) {
+      pageIndex = 7;
+      sl<GeneralController>().tapIndex.value = 7;
+    } else if (path.startsWith(routeDevelopers)) {
+      pageIndex = 6;
+      sl<GeneralController>().tapIndex.value = 6;
     } else if (path.startsWith(routeQuran)) {
       pageIndex = 1;
       sl<GeneralController>().tapIndex.value = 1;

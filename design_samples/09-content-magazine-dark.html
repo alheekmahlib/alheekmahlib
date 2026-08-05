@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الحكمة · مجلة داكنة عصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0D;
+    --bg-2:#101013;
+    --surface:#15151A;
+    --surface-2:#1C1C22;
+    --surface-3:#232329;
+    --ink:#F2EFE6;
+    --ink-soft:#A8A8B0;
+    --ink-faint:#6A6A72;
+    --gold:#E0B84C;
+    --gold-bright:#F4D77A;
+    --gold-deep:#9A7B1A;
+    --emerald:#3DA66B;
+    --line:rgba(255,255,255,.07);
+    --line-2:rgba(255,255,255,.12);
+    --line-gold:rgba(224,184,76,.25);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Tajawal',sans-serif;
+    background:var(--bg);color:var(--ink);
+    line-height:1.7;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--bg)}
+
+  /* ambient gradient bg */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(circle at 15% 20%,rgba(61,166,107,.08),transparent 40%),
+      radial-gradient(circle at 85% 80%,rgba(224,184,76,.08),transparent 40%);
+  }
+  .wrap{position:relative;z-index:1}
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  [data-reveal]{opacity:0;transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)}
+  [data-reveal="up"]{transform:translateY(50px)}
+  [data-reveal="right"]{transform:translateX(60px)}
+  [data-reveal="left"]{transform:translateX(-60px)}
+  [data-reveal="scale"]{transform:scale(.9);filter:blur(8px)}
+  [data-reveal="blur"]{filter:blur(12px)}
+  [data-reveal].in{opacity:1;transform:none;filter:none}
+
+  .stagger > *{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .stagger.in > *{opacity:1;transform:none}
+  .stagger.in > *:nth-child(1){transition-delay:.05s}
+  .stagger.in > *:nth-child(2){transition-delay:.13s}
+  .stagger.in > *:nth-child(3){transition-delay:.21s}
+  .stagger.in > *:nth-child(4){transition-delay:.29s}
+  .stagger.in > *:nth-child(5){transition-delay:.37s}
+  .stagger.in > *:nth-child(6){transition-delay:.45s}
+
+  /* progress */
+  #progress{position:fixed;top:0;right:0;height:2px;width:0;z-index:200;
+    background:linear-gradient(90deg,var(--emerald),var(--gold));transition:width .1s}
+
+  /* ===== Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(11,11,13,.7);backdrop-filter:blur(24px) saturate(180%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1300px;margin:0 auto;padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+  .brand-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    display:grid;place-items:center;
+    box-shadow:0 4px 14px rgba(224,184,76,.3);
+  }
+  .brand-mark svg{width:20px;height:20px;color:var(--bg)}
+  .brand-name{font-family:'Reem Kufi';font-weight:700;font-size:1.15rem;color:var(--ink)}
+  .nav-links{display:flex;align-items:center;gap:2px}
+  .nav-links a{
+    font-size:.9rem;font-weight:500;color:var(--ink-soft);text-decoration:none;
+    padding:8px 14px;border-radius:8px;transition:all .2s;
+  }
+  .nav-links a:hover{color:var(--ink);background:var(--surface)}
+  .nav-links a.active{color:var(--gold);background:rgba(224,184,76,.08)}
+  .nav-search{
+    display:flex;align-items:center;gap:8px;background:var(--surface);
+    border:1px solid var(--line);padding:7px 14px;border-radius:8px;cursor:text;
+    font-size:.85rem;color:var(--ink-faint);transition:all .2s;
+  }
+  .nav-search:hover{border-color:var(--line-2)}
+  .icon-btn{
+    width:36px;height:36px;border-radius:8px;border:1px solid var(--line);
+    background:var(--surface);display:grid;place-items:center;cursor:pointer;
+    color:var(--ink-soft);transition:all .2s;
+  }
+  .icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;padding:80px 32px 60px;
+    border-bottom:1px solid var(--line);overflow:hidden;
+  }
+  .hero-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.78rem;font-weight:600;color:var(--gold);letter-spacing:3px;
+    text-transform:uppercase;margin-bottom:24px;
+  }
+  .hero-eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 12px var(--gold);animation:pulse 2.5s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  h1.hero-title{
+    font-family:'Reem Kufi';font-weight:700;
+    font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.1;letter-spacing:-1px;
+    margin-bottom:24px;
+  }
+  h1.hero-title .gold{
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{
+    font-size:1.12rem;color:var(--ink-soft);max-width:520px;
+    margin-bottom:36px;line-height:1.8;
+  }
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-primary{
+    font-family:'Tajawal';font-weight:700;font-size:.95rem;
+    padding:14px 28px;border-radius:10px;border:none;cursor:pointer;
+    background:var(--gold);color:var(--bg);
+    display:inline-flex;align-items:center;gap:8px;transition:all .25s;
+    box-shadow:0 8px 24px rgba(224,184,76,.25);
+  }
+  .btn-primary:hover{transform:translateY(-2px);background:var(--gold-bright);box-shadow:0 12px 30px rgba(224,184,76,.4)}
+  .btn-ghost{
+    font-family:'Tajawal';font-weight:600;font-size:.95rem;
+    padding:14px 28px;border-radius:10px;cursor:pointer;
+    background:transparent;color:var(--ink);
+    border:1px solid var(--line-2);
+    display:inline-flex;align-items:center;gap:8px;transition:all .25s;
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* hero stats card */
+  .hero-card{
+    background:linear-gradient(180deg,var(--surface),var(--bg-2));
+    border:1px solid var(--line);border-radius:20px;padding:32px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden;
+  }
+  .hero-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .hero-card-label{
+    font-size:.74rem;color:var(--ink-faint);letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:20px;
+  }
+  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+  .stat-row:last-child{border:none}
+  .stat-row .num{font-family:'Reem Kufi';font-size:1.6rem;font-weight:700;color:var(--gold)}
+  .stat-row .lbl{font-size:.85rem;color:var(--ink-soft)}
+
+  /* ===== Sections ===== */
+  .section{max-width:1300px;margin:0 auto;padding:80px 32px}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:24px;flex-wrap:wrap}
+  .section-head .eyebrow{font-size:.74rem;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+  .section-title{font-family:'Reem Kufi';font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-.3px}
+  .section-link{
+    font-size:.88rem;font-weight:600;color:var(--gold);text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 16px;border:1px solid var(--line-gold);border-radius:8px;
+    background:rgba(224,184,76,.05);transition:all .2s;
+  }
+  .section-link:hover{background:rgba(224,184,76,.12);gap:10px}
+
+  /* ===== Featured article ===== */
+  .featured{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:20px;overflow:hidden;cursor:pointer;transition:all .4s;
+  }
+  .featured:hover{border-color:var(--line-gold);transform:translateY(-3px);box-shadow:0 30px 70px rgba(0,0,0,.4)}
+  .featured-img{
+    min-height:360px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#1B4332,#0F2E22);
+    display:grid;place-items:center;
+  }
+  .featured-img::before{
+    content:'';position:absolute;inset:0;opacity:.18;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z' fill='none' stroke='%23F4D77A' stroke-width='1'/%3E%3C/svg%3E");
+    background-size:70px;
+  }
+  .featured-img-content{position:relative;z-index:2;text-align:center;color:var(--gold-bright);padding:32px}
+  .featured-img-content .ayah{font-family:'Amiri';font-size:1.6rem;line-height:1.7;margin-bottom:16px}
+  .featured-img-content svg{width:50px;height:50px;color:var(--gold)}
+  .featured-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .article-cat{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .article-cat::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .featured-body h3{font-family:'Reem Kufi';font-size:1.8rem;font-weight:700;line-height:1.3;margin-bottom:14px}
+  .featured-body p{color:var(--ink-soft);font-size:.98rem;margin-bottom:22px;line-height:1.8}
+  .article-meta{display:flex;align-items:center;gap:14px;font-size:.85rem;color:var(--ink-faint);padding-top:18px;border-top:1px solid var(--line)}
+  .author-chip{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink-soft)}
+  .author-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--emerald));display:grid;place-items:center;color:var(--bg);font-size:.78rem;font-weight:700}
+
+  /* ===== Articles grid ===== */
+  .articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .article-card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;cursor:pointer;
+    transition:all .35s cubic-bezier(.16,1,.3,1);
+    display:flex;flex-direction:column;
+  }
+  .article-card:hover{transform:translateY(-5px);border-color:var(--line-gold);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+  .article-card-img{height:170px;position:relative;overflow:hidden;display:grid;place-items:center}
+  .article-card-img.a1{background:linear-gradient(135deg,#2D6A4F,#1B4332)}
+  .article-card-img.a2{background:linear-gradient(135deg,#9A7B1A,#6B5837)}
+  .article-card-img.a3{background:linear-gradient(135deg,#3A5A40,#1B4332)}
+  .article-card-img.a4{background:linear-gradient(135deg,#6B5837,#8B6914)}
+  .article-card-img.a5{background:linear-gradient(135deg,#1B4332,#0F2E22)}
+  .article-card-img.a6{background:linear-gradient(135deg,#9A7B1A,#B8860B)}
+  .article-card-img svg{width:42px;height:42px;color:rgba(255,255,255,.6);transition:transform .4s}
+  .article-card:hover .article-card-img svg{transform:scale(1.2)}
+  .article-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.4))}
+  .article-cat-badge{
+    position:absolute;top:12px;right:12px;z-index:2;
+    background:rgba(11,11,13,.8);backdrop-filter:blur(8px);border:1px solid var(--line-2);
+    font-size:.7rem;font-weight:600;color:var(--gold);
+    padding:4px 10px;border-radius:12px;
+  }
+  .article-body{padding:22px;flex:1;display:flex;flex-direction:column}
+  .article-body h4{font-family:'Reem Kufi';font-size:1.18rem;font-weight:600;line-height:1.4;margin-bottom:10px;transition:color .2s}
+  .article-card:hover .article-body h4{color:var(--gold)}
+  .article-body p{font-size:.88rem;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;flex:1}
+  .article-meta-sm{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--line);font-size:.78rem;color:var(--ink-faint)}
+
+  /* ===== Services ===== */
+  .services-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .service-pill{
+    display:flex;align-items:center;gap:14px;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:18px;cursor:pointer;transition:all .3s;
+  }
+  .service-pill:hover{transform:translateY(-3px);border-color:var(--line-gold);background:var(--surface-2)}
+  .service-pill-icon{width:44px;height:44px;border-radius:10px;flex-shrink:0;background:var(--surface-2);display:grid;place-items:center;color:var(--gold);transition:all .3s}
+  .service-pill:hover .service-pill-icon{background:var(--gold);color:var(--bg)}
+  .service-pill-icon svg{width:22px;height:22px}
+  .service-pill-info h5{font-weight:700;font-size:.95rem;margin-bottom:2px}
+  .service-pill-info p{font-size:.76rem;color:var(--ink-faint)}
+
+  /* ===== Ayah feature ===== */
+  .ayah-feature{
+    position:relative;padding:100px 32px;text-align:center;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at center,var(--bg-2),var(--bg));
+  }
+  .ayah-feature::before{
+    content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,184,76,.06),transparent 60%);
+    pointer-events:none;
+  }
+  .ayah-feature .label{font-size:.74rem;font-weight:600;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:30px;position:relative}
+  .ayah-feature .text{font-family:'Amiri';font-weight:700;font-style:italic;font-size:clamp(1.9rem,4.5vw,3.2rem);line-height:1.5;max-width:900px;margin:0 auto 22px;position:relative}
+  .ayah-feature .text .hl{color:var(--gold)}
+  .ayah-feature .ref{font-size:.9rem;color:var(--ink-faint);letter-spacing:1px;position:relative}
+
+  /* ===== Authors ===== */
+  .authors-row{display:flex;gap:18px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+  .authors-row::-webkit-scrollbar{height:6px}
+  .authors-row::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:3px}
+  .author-card{flex:0 0 190px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:all .3s}
+  .author-card:hover{transform:translateY(-3px);border-color:var(--line-gold)}
+  .author-img-lg{width:68px;height:68px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--emerald),var(--gold));display:grid;place-items:center;color:var(--bg);font-size:1.4rem;font-weight:700;font-family:'Reem Kufi'}
+  .author-card h5{font-weight:700;font-size:.98rem;margin-bottom:3px}
+  .author-card p{font-size:.76rem;color:var(--ink-faint)}
+
+  /* ===== Footer ===== */
+  footer{background:var(--bg-2);border-top:1px solid var(--line);padding:56px 32px 28px;margin-top:40px}
+  .footer-inner{max-width:1300px;margin:0 auto}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+  .footer-brand{font-family:'Reem Kufi';font-size:1.4rem;font-weight:700;margin-bottom:12px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .footer-desc{color:var(--ink-soft);font-size:.92rem;max-width:300px;line-height:1.8}
+  .footer-col h5{font-weight:700;font-size:.88rem;margin-bottom:14px;color:var(--gold);letter-spacing:.5px}
+  .footer-col a{display:block;color:var(--ink-soft);text-decoration:none;font-size:.9rem;padding:5px 0;transition:color .2s}
+  .footer-col a:hover{color:var(--gold)}
+  .footer-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;color:var(--ink-faint);font-size:.85rem}
+
+  @media(max-width:920px){
+    .nav-links,.nav-search{display:none}
+    .hero-inner{grid-template-columns:1fr;gap:32px}
+    .featured{grid-template-columns:1fr}
+    .featured-img{min-height:200px}
+    .articles-grid{grid-template-columns:1fr 1fr}
+    .services-strip{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){.articles-grid,.services-strip{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="progress"></div>
+
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg></div>
+      <span class="brand-name">الحكمة</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#">القرآن</a>
+      <a href="#">المقالات</a>
+      <a href="#">القلايد</a>
+      <a href="#">الأذكار</a>
+      <a href="#">اتصل بنا</a>
+    </div>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>ابحث...</span>
+    </div>
+    <button class="icon-btn" title="تبديل النمط"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div data-reveal="right">
+      <span class="hero-eyebrow"><span class="dot"></span> منصة إسلامية متكاملة</span>
+      <h1 class="hero-title">حيث يُكتب<br><span class="gold">العلم النافع</span></h1>
+      <p class="hero-sub">مكتبة شاملة للقرآن الكريم ومرتليه، ومقالات وبحوث رصينة في العلوم القرآنية، والأذكار — في تجربة قراءة عميقة وهادئة.</p>
+      <div class="cta-row">
+        <button class="btn-primary">
+          تصفّح المقالات
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+        </button>
+        <button class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          اقرأ القرآن
+        </button>
+      </div>
+    </div>
+    <div class="hero-card" data-reveal="left">
+      <div class="hero-card-label">— إحصائيات المكتبة</div>
+      <div class="stat-row"><span class="lbl">صفحة قرآنية</span><span class="num" data-count="604">٠</span></div>
+      <div class="stat-row"><span class="lbl">سورة</span><span class="num" data-count="114">٠</span></div>
+      <div class="stat-row"><span class="lbl">مقال وبحث</span><span class="num" data-count="1247">٠</span></div>
+      <div class="stat-row"><span class="lbl">قارئ مرتل</span><span class="num" data-count="53">٠</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div data-reveal="right">
+      <div class="eyebrow">المقال المميز</div>
+      <h2 class="section-title">أحدث ما نُشر</h2>
+    </div>
+    <a href="#" class="section-link" data-reveal="left">كل المقالات
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="featured" data-reveal="up">
+    <div class="featured-img">
+      <div class="featured-img-content">
+        <div class="ayah">«وَنُنَزِّلُ مِنَ الْقُرْآنِ<br>مَا هُوَ شِفَاءٌ وَرَحْمَةٌ»</div>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.39 8.26L21 9.27L16 14.14L17.18 21L12 17.77L6.82 21L8 14.14L3 9.27L9.61 8.26L12 2Z"/></svg>
+      </div>
+    </div>
+    <div class="featured-body">
+      <span class="article-cat">علوم القرآن</span>
+      <h3>الغنيان في تفسير القرآن الكريم: دراسة في المفهوم والاستعمال</h3>
+      <p>يتناول هذا البحث مفهوم "الغنيان" في التفسير، ويستعرض استعمالاته في القرآن الكريم من خلال تحليل لغوي وسياقي معمّق، مع الاستشهاد بأقوال المفسرين المتقدمين والمعاصرين.</p>
+      <div class="article-meta">
+        <div class="author-chip"><div class="author-avatar">د</div><span>د. عبدالله الحكمي</span></div>
+        <span>·</span><span>١٢ رجب ١٤٤٦هـ</span><span>·</span><span>١٥ دقيقة قراءة</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="section-head">
+    <div data-reveal="right">
+      <div class="eyebrow">مقالات وبحوث</div>
+      <h2 class="section-title">من المكتبة</h2>
+    </div>
+    <a href="#" class="section-link" data-reveal="left">تصفح الكل
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="articles-grid stagger">
+    <div class="article-card">
+      <div class="article-card-img a1"><span class="article-cat-badge">تفسير</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <div class="article-body"><h4>أصول التفسير عند المتقدمين</h4><p>نظرة على منهج المفسرين الأوائل وكيفية تعاملهم مع النص.</p><div class="article-meta-sm"><span>د. أحمد سالم</span><span>٨ دقائق</span></div></div>
+    </div>
+    <div class="article-card">
+      <div class="article-card-img a2"><span class="article-cat-badge">قراءات</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="article-body"><h4>القراءات العشر ومنهجها في التوجيه</h4><p>دراسة في قواعد القراءات وأثرها في المعنى القرآني.</p><div class="article-meta-sm"><span>د. مصطفى العزب</span><span>١٢ دقيقة</span></div></div>
+    </div>
+    <div class="article-card">
+      <div class="article-card-img a3"><span class="article-cat-badge">أذكار</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/></svg></div>
+      <div class="article-body"><h4>أذكار الصباح والمساء وثمراتها</h4><p>جمع لأهم الأذكار مع بيان فضلها وثمراتها.</p><div class="article-meta-sm"><span>أ. خالد المهدي</span><span>٦ دقائق</span></div></div>
+    </div>
+    <div class="article-card">
+      <div class="article-card-img a4"><span class="article-cat-badge">حديث</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="article-body"><h4>منهج المحدثين في نقد الروايات</h4><p>كيف بنى المحدثون الجرح والتعديل وأثره في السنة.</p><div class="article-meta-sm"><span>د. سعد الحمد</span><span>١٠ دقائق</span></div></div>
+    </div>
+    <div class="article-card">
+      <div class="article-card-img a5"><span class="article-cat-badge">تفسير</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <div class="article-body"><h4>الإعجاز العلمي: ضوابط وآداب</h4><p>بحث في ضوابط التعامل مع الإعجاز العلمي وتجنب التكلّف.</p><div class="article-meta-sm"><span>د. عبدالله الحكمي</span><span>١٤ دقيقة</span></div></div>
+    </div>
+    <div class="article-card">
+      <div class="article-card-img a6"><span class="article-cat-badge">تجويد</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <div class="article-body"><h4>أحكام التجويد: المبتدئ والمنتهي</h4><p>مقدمة ميسّرة في أحكام التجويد تطبيقيًا.</p><div class="article-meta-sm"><span>أ. محمد صدّيق</span><span>٩ دقائق</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div data-reveal="right">
+      <div class="eyebrow">خدماتنا</div>
+      <h2 class="section-title">بوابات الحكمة</h2>
+    </div>
+  </div>
+  <div class="services-strip stagger">
+    <div class="service-pill">
+      <div class="service-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <div class="service-pill-info"><h5>القرآن الكريم</h5><p>٦٠٤ صفحة · ١١٤ سورة</p></div>
+    </div>
+    <div class="service-pill">
+      <div class="service-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="service-pill-info"><h5>الصوتيات</h5><p>+٥٠ قارئًا</p></div>
+    </div>
+    <div class="service-pill">
+      <div class="service-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="service-pill-info"><h5>القلائد</h5><p>مكتبة كتب وحديث</p></div>
+    </div>
+    <div class="service-pill">
+      <div class="service-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/></svg></div>
+      <div class="service-pill-info"><h5>الأذكار</h5><p>حصن المسلم</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ayah-feature" data-reveal="scale">
+  <div class="label">— من القرآن الكريم —</div>
+  <p class="text">وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ <span class="hl">شِفَاءٌ وَرَحْمَةٌ</span> لِّلْمُؤْمِنِينَ</p>
+  <div class="ref">سورة الإسراء · آية ٨٢</div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div data-reveal="right">
+      <div class="eyebrow">الكُتّاب والمؤلفون</div>
+      <h2 class="section-title">من يكتب لنا</h2>
+    </div>
+    <a href="#" class="section-link" data-reveal="left">كل الكتاب
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="authors-row stagger">
+    <div class="author-card"><div class="author-img-lg">ع</div><h5>د. عبدالله الحكمي</h5><p>أستاذ التفسير</p></div>
+    <div class="author-card"><div class="author-img-lg">أ</div><h5>د. أحمد سالم</h5><p>باحث قرآني</p></div>
+    <div class="author-card"><div class="author-img-lg">م</div><h5>د. مصطفى العزب</h5><p>متخصص قراءات</p></div>
+    <div class="author-card"><div class="author-img-lg">خ</div><h5>أ. خالد المهدي</h5><p>داعية وكاتب</p></div>
+    <div class="author-card"><div class="author-img-lg">س</div><h5>د. سعد الحمد</h5><p>أستاذ الحديث</p></div>
+    <div class="author-card"><div class="author-img-lg">م</div><h5>أ. محمد صدّيق</h5><p>معلم تجويد</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">الحكمة</div>
+        <p class="footer-desc">منصة إسلامية شاملة لنشر العلم النافع وخدمة كتاب الله وسنة نبيه ﷺ، عبر مقالات وبحوث رصينة.</p>
+      </div>
+      <div class="footer-col"><h5>روابط</h5><a href="#">القرآن</a><a href="#">المقالات</a><a href="#">القلايد</a><a href="#">الأذكار</a></div>
+      <div class="footer-col"><h5>المطورون</h5><a href="#">المكتبة</a><a href="#">واجهة API</a><a href="#">التحميلات</a></div>
+      <div class="footer-col"><h5>تواصل</h5><a href="#">اتصل بنا</a><a href="#">من نحن</a><a href="#">الخصوصية</a></div>
+    </div>
+    <div class="footer-bottom"><span>© مكتبة الحكمة · ١٤٤٦هـ</span><span>صُنع بإتقان لخدمة كتاب الله</span></div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  // ===== Scroll reveal =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('[data-reveal], .stagger').forEach(el => observer.observe(el));
+
+  // ===== Progress bar =====
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = scrolled + '%';
+  }, { passive: true });
+
+  // ===== Count-up animation for hero stats =====
+  const toArabicDigits = (n) => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[+d]);
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.dataset.count;
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = toArabicDigits(Math.floor(eased * target));
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = toArabicDigits(target);
+      };
+      requestAnimationFrame(tick);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+  // ===== Parallax on hero card =====
+  const heroCard = document.querySelector('.hero-card');
+  if (heroCard) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 700) heroCard.style.transform = `translateY(${y * 0.06}px)`;
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>

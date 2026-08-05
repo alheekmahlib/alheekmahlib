@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الحكمة · مجلة تحريرية احترافية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Mada:wght@300;400;500;600;700;800;900&family=Marhey:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Editorial palette — warm parchment + ink + gold + emerald */
+    --bg:#F6F2E9;
+    --bg-warm:#EFE9DA;
+    --paper:#FDFBF5;
+    --paper-2:#F9F4E9;
+    --ink:#16140F;
+    --ink-2:#2B2820;
+    --ink-soft:#5C5648;
+    --ink-faint:#9B9483;
+    --gold:#A8842C;
+    --gold-bright:#C9A227;
+    --gold-soft:#E8D49C;
+    --emerald:#1F3D2E;
+    --emerald-soft:#2D5A44;
+    --rule:#D9D2C0;
+    --rule-soft:#E8E2D2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    font-family:'Mada',sans-serif;
+    background:var(--bg);color:var(--ink);
+    line-height:1.7;font-feature-settings:"kern","liga";
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--paper)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ===== Typography scale (editorial) ===== */
+  .display{font-family:'Amiri',serif;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+  .display-it{font-family:'Amiri',serif;font-style:italic;font-weight:400}
+  .eyebrow{font-family:'Mada';font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .lead{font-size:1.2rem;line-height:1.7;color:var(--ink-soft);font-weight:400}
+  .meta{font-size:.78rem;color:var(--ink-faint);letter-spacing:.04em}
+
+  /* ===== Scroll reveal (respects reduced motion) ===== */
+  [data-r]{opacity:0;transform:translateY(48px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+  [data-r=fade]{transform:none}
+  [data-r=right]{transform:translateX(56px)}
+  [data-r=left]{transform:translateX(-56px)}
+  [data-r=zoom]{transform:scale(.94)}
+  [data-r].in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .stagger.in>*{opacity:1;transform:none}
+  .stagger.in>*:nth-child(1){transition-delay:0ms}
+  .stagger.in>*:nth-child(2){transition-delay:90ms}
+  .stagger.in>*:nth-child(3){transition-delay:180ms}
+  .stagger.in>*:nth-child(4){transition-delay:270ms}
+  .stagger.in>*:nth-child(5){transition-delay:360ms}
+  .stagger.in>*:nth-child(6){transition-delay:450ms}
+
+  /* Reading progress */
+  #bar{position:fixed;top:0;right:0;height:2px;width:0;z-index:300;background:var(--gold);transition:width .08s linear}
+
+  /* ===== Top utility bar ===== */
+  .utility{
+    background:var(--ink);color:var(--paper);
+    font-size:.74rem;letter-spacing:.04em;
+  }
+  .utility-inner{
+    max-width:1320px;margin:0 auto;padding:8px 32px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .utility .date{color:var(--gold-soft)}
+  .utility-links{display:flex;gap:18px}
+  .utility-links a{color:rgba(253,251,245,.7);transition:color .2s}
+  .utility-links a:hover{color:var(--gold-soft)}
+
+  /* ===== Masthead / Nav ===== */
+  header.masthead{
+    position:sticky;top:0;z-index:100;
+    background:rgba(246,242,233,.92);backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav{
+    max-width:1320px;margin:0 auto;padding:18px 32px;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+  }
+  .nav-left{display:flex;align-items:center;gap:18px}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{font-size:.88rem;font-weight:600;color:var(--ink-soft);position:relative;padding:4px 0;transition:color .2s}
+  .nav-links a::after{content:'';position:absolute;bottom:0;right:0;left:0;height:1.5px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .nav-links a:hover,.nav-links a.active{color:var(--ink)}
+  .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+
+  .brand-center{text-align:center;cursor:pointer}
+  .brand-name{font-family:'Amiri';font-weight:700;font-size:1.9rem;letter-spacing:.5px;color:var(--ink);line-height:1}
+  .brand-tag{font-size:.62rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-top:4px;font-weight:600}
+
+  .nav-right{display:flex;justify-content:flex-end;align-items:center;gap:12px}
+  .search-box{
+    display:flex;align-items:center;gap:8px;
+    background:var(--paper);border:1px solid var(--rule);
+    padding:8px 14px;border-radius:24px;cursor:text;
+    font-size:.82rem;color:var(--ink-faint);transition:all .2s;min-width:180px;
+  }
+  .search-box:hover{border-color:var(--ink)}
+  .icon-btn{
+    width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);
+    background:var(--paper);display:grid;place-items:center;cursor:pointer;
+    color:var(--ink-soft);transition:all .2s;
+  }
+  .icon-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn-sub{
+    font-size:.82rem;font-weight:700;color:var(--paper);background:var(--ink);
+    padding:9px 18px;border-radius:24px;border:none;cursor:pointer;transition:all .2s;
+  }
+  .btn-sub:hover{background:var(--gold);color:var(--ink)}
+
+  /* ===== HERO — full-bleed editorial ===== */
+  .hero{
+    max-width:1320px;margin:0 auto;padding:48px 32px 64px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:32px;align-items:end;
+  }
+  .hero-text{grid-column:1/8}
+  .hero-kicker{
+    display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .hero-kicker .line{width:48px;height:1px;background:var(--gold)}
+  h1.hero-title{
+    font-family:'Amiri';font-weight:700;
+    font-size:clamp(3rem,7vw,6rem);line-height:1.02;letter-spacing:-1.5px;
+    color:var(--ink);margin-bottom:0;
+  }
+  h1.hero-title .it{font-style:italic;font-weight:400;color:var(--gold)}
+  .hero-lead{
+    grid-column:9/13;font-size:1.12rem;color:var(--ink-soft);
+    line-height:1.7;padding-bottom:8px;
+  }
+  .hero-lead .drop{
+    font-family:'Amiri';font-weight:700;font-size:3.4rem;float:right;
+    line-height:.85;margin:6px 0 0 12px;color:var(--gold);
+  }
+  .hero-meta-strip{
+    grid-column:1/13;margin-top:48px;padding-top:24px;
+    border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  }
+  .hero-stats{display:flex;gap:48px}
+  .hero-stat .n{font-family:'Amiri';font-size:2rem;font-weight:700;color:var(--ink);line-height:1}
+  .hero-stat .n .g{color:var(--gold)}
+  .hero-stat .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.1em;margin-top:6px;text-transform:uppercase}
+
+  /* ===== Featured story (asymmetric magazine layout) ===== */
+  .featured{
+    max-width:1320px;margin:0 auto;padding:48px 32px;
+    display:grid;grid-template-columns:repeat(12,1fr);gap:0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  .featured-img{
+    grid-column:1/8;position:relative;min-height:480px;overflow:hidden;
+    background:linear-gradient(135deg,var(--emerald),#0F2418);
+  }
+  .featured-img::before{
+    content:'';position:absolute;inset:0;opacity:.15;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23E8D49C' stroke-width='1'%3E%3Cpath d='M50 0L62 38L100 50L62 62L50 100L38 62L0 50L38 38Z'/%3E%3Ccircle cx='50' cy='50' r='32'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:90px;
+  }
+  .featured-img-inner{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:48px;text-align:center;
+    color:var(--gold-soft);z-index:2;
+  }
+  .featured-img-inner .ayah-mark{
+    font-family:'Amiri';font-style:italic;font-size:1.1rem;letter-spacing:.3em;
+    color:var(--gold);margin-bottom:24px;
+  }
+  .featured-img-inner .ayah{
+    font-family:'Amiri';font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);
+    line-height:1.6;max-width:520px;
+  }
+  .featured-img-inner .ref{
+    margin-top:24px;font-size:.8rem;letter-spacing:.2em;color:rgba(232,212,156,.7);
+  }
+  .featured-body{
+    grid-column:8/13;padding:56px 48px;display:flex;flex-direction:column;justify-content:center;
+    background:var(--paper);
+  }
+  .featured-body .cat{
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;
+  }
+  .featured-body .cat::before{content:'';width:24px;height:1px;background:var(--gold)}
+  .featured-body h2{
+    font-family:'Amiri';font-weight:700;font-size:clamp(1.8rem,3vw,2.6rem);
+    line-height:1.2;letter-spacing:-.5px;margin-bottom:18px;color:var(--ink);
+  }
+  .featured-body .dek{font-size:1rem;color:var(--ink-soft);line-height:1.8;margin-bottom:28px}
+  .byline{
+    display:flex;align-items:center;gap:12px;padding-top:20px;
+    border-top:1px solid var(--rule);
+  }
+  .byline-avatar{
+    width:40px;height:40px;border-radius:50%;
+    background:linear-gradient(135deg,var(--emerald),var(--gold));
+    display:grid;place-items:center;color:var(--paper);
+    font-family:'Amiri';font-weight:700;font-size:1.1rem;
+  }
+  .byline-info .name{font-weight:700;font-size:.92rem}
+  .byline-info .role{font-size:.78rem;color:var(--ink-faint)}
+  .byline-extra{margin-right:auto;display:flex;gap:14px;align-items:center;font-size:.8rem;color:var(--ink-faint)}
+  .read-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.86rem;font-weight:700;color:var(--ink);
+    padding-bottom:2px;border-bottom:1.5px solid var(--gold);
+    transition:gap .25s;
+  }
+  .read-link:hover{gap:12px}
+
+  /* ===== Section heading ===== */
+  .section{max-width:1320px;margin:0 auto;padding:80px 32px}
+  .section-head{
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;
+    margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--rule);
+  }
+  .section-head h2{font-family:'Amiri';font-weight:700;font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.5px;line-height:1.1}
+  .section-head .lede{font-size:.95rem;color:var(--ink-soft);margin-top:8px;max-width:480px}
+  .section-head .more{
+    font-size:.84rem;font-weight:700;color:var(--ink);
+    display:inline-flex;align-items:center;gap:8px;transition:gap .25s;
+  }
+  .section-head .more:hover{gap:12px;color:var(--gold)}
+  .section-head .more svg{transition:transform .25s}
+  .section-head .more:hover svg{transform:translateX(-3px)}
+
+  /* ===== Articles masonry-style grid ===== */
+  .articles{display:grid;grid-template-columns:repeat(12,1fr);gap:32px}
+  .article{cursor:pointer;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .article:hover{transform:translateY(-4px)}
+  .article-img{
+    position:relative;overflow:hidden;border-radius:4px;margin-bottom:18px;
+    aspect-ratio:4/3;display:grid;place-items:center;
+  }
+  .article-img svg{width:48px;height:48px;color:rgba(255,255,255,.75);transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:2;position:relative}
+  .article:hover .article-img svg{transform:scale(1.18)}
+  .article-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45))}
+  .article-img.a1{background:linear-gradient(135deg,#2D5A44,#1F3D2E)}
+  .article-img.a2{background:linear-gradient(135deg,#A8842C,#6B5837)}
+  .article-img.a3{background:linear-gradient(135deg,#3A5A40,#1F3D2E)}
+  .article-img.a4{background:linear-gradient(135deg,#6B5837,#8B6914)}
+  .article-img.a5{background:linear-gradient(135deg,#1F3D2E,#0F2418)}
+  .article-img.a6{background:linear-gradient(135deg,#A8842C,#C9A227)}
+  .article-cat-tag{
+    position:absolute;top:14px;right:14px;z-index:3;
+    font-family:'Mada';font-size:.68rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--paper);
+    background:rgba(22,20,15,.7);backdrop-filter:blur(8px);
+    padding:5px 11px;border-radius:3px;border:1px solid rgba(232,212,156,.25);
+  }
+  .article h3{
+    font-family:'Amiri';font-weight:700;font-size:1.4rem;line-height:1.3;
+    margin-bottom:10px;letter-spacing:-.2px;transition:color .2s;
+  }
+  .article:hover h3{color:var(--gold)}
+  .article p{font-size:.92rem;color:var(--ink-soft);line-height:1.7;margin-bottom:14px}
+  .article .by{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:12px;border-top:1px solid var(--rule-soft);
+    font-size:.78rem;color:var(--ink-faint);
+  }
+  .article .by .au{font-weight:600;color:var(--ink-soft)}
+
+  /* sizing variation */
+  .article.lg{grid-column:span 6}
+  .article.lg h3{font-size:1.8rem}
+  .article.md{grid-column:span 3}
+  .article.sm{grid-column:span 4}
+
+  /* ===== Pull quote feature ===== */
+  .pullquote{
+    max-width:1320px;margin:40px auto;padding:120px 32px;
+    text-align:center;position:relative;
+    background:var(--ink);color:var(--paper);overflow:hidden;
+  }
+  .pullquote::before{
+    content:'';position:absolute;inset:0;opacity:.08;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M60 0L74 46L120 60L74 74L60 120L46 74L0 60L46 46Z' fill='none' stroke='%23E8D49C' stroke-width='1'/%3E%3C/svg%3E");
+    background-size:100px;
+  }
+  .pullquote::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at center,transparent 30%,rgba(22,20,15,.6));
+  }
+  .pq-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+  .pq-mark{font-family:'Amiri';font-size:5rem;color:var(--gold);line-height:.5;margin-bottom:8px}
+  .pq-text{
+    font-family:'Amiri';font-weight:400;font-style:italic;
+    font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.4;color:var(--gold-soft);
+    margin-bottom:32px;
+  }
+  .pq-text .em{font-weight:700;font-style:normal;color:var(--paper)}
+  .pq-ref{font-size:.84rem;letter-spacing:.25em;color:rgba(232,212,156,.6);text-transform:uppercase}
+
+  /* ===== Services row ===== */
+  .services{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .service{
+    padding:36px 28px;border-left:1px solid var(--rule);cursor:pointer;
+    transition:background .3s;position:relative;
+  }
+  .service:first-child{border-left:none}
+  .service::before{
+    content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--gold);transition:width .4s cubic-bezier(.16,1,.3,1);
+  }
+  .service:hover{background:var(--paper)}
+  .service:hover::before{width:100%}
+  .service-num{font-family:'Amiri';font-size:.95rem;color:var(--gold);font-weight:700;margin-bottom:14px;letter-spacing:.1em}
+  .service-ic{
+    width:48px;height:48px;margin-bottom:18px;color:var(--ink);
+    transition:transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .service:hover .service-ic{transform:translateY(-4px) scale(1.05);color:var(--gold)}
+  .service h4{font-family:'Amiri';font-size:1.35rem;font-weight:700;margin-bottom:8px}
+  .service p{font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+
+  /* ===== Authors ===== */
+  .authors{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+  .author{
+    text-align:center;cursor:pointer;padding:24px 12px;
+    border:1px solid var(--rule);background:var(--paper);
+    transition:all .3s cubic-bezier(.16,1,.3,1);
+  }
+  .author:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 16px 40px rgba(22,20,15,.08)}
+  .author-av{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(135deg,var(--emerald),var(--gold));
+    display:grid;place-items:center;color:var(--paper);
+    font-family:'Amiri';font-weight:700;font-size:1.5rem;
+  }
+  .author h5{font-family:'Amiri';font-weight:700;font-size:1.05rem;margin-bottom:4px}
+  .author p{font-size:.76rem;color:var(--ink-faint)}
+
+  /* ===== Newsletter ===== */
+  .newsletter{
+    max-width:1320px;margin:40px auto;padding:80px 32px;
+    background:var(--paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  }
+  .newsletter h3{font-family:'Amiri';font-weight:700;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.2;margin-bottom:12px}
+  .newsletter p{color:var(--ink-soft);font-size:1rem}
+  .nl-form{display:flex;gap:10px}
+  .nl-form input{
+    flex:1;font-family:inherit;font-size:.95rem;
+    padding:14px 18px;border:1px solid var(--rule);background:var(--bg);
+    border-radius:4px;color:var(--ink);outline:none;transition:border-color .2s;
+  }
+  .nl-form input:focus{border-color:var(--gold)}
+  .nl-form button{
+    font-family:inherit;font-weight:700;font-size:.92rem;color:var(--paper);
+    background:var(--ink);padding:14px 28px;border:none;border-radius:4px;cursor:pointer;
+    transition:background .2s;white-space:nowrap;
+  }
+  .nl-form button:hover{background:var(--gold);color:var(--ink)}
+
+  /* ===== Footer ===== */
+  footer{background:var(--ink);color:var(--paper);padding:72px 32px 32px}
+  .footer-inner{max-width:1320px;margin:0 auto}
+  .footer-top{
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.5fr;gap:40px;margin-bottom:48px;
+    padding-bottom:40px;border-bottom:1px solid rgba(232,212,156,.15);
+  }
+  .footer-brand-name{font-family:'Amiri';font-weight:700;font-size:2rem;margin-bottom:14px;color:var(--gold-soft)}
+  .footer-brand-name .it{font-style:italic;color:var(--gold)}
+  .footer-desc{color:rgba(253,251,245,.65);font-size:.92rem;line-height:1.8;max-width:300px}
+  .footer-col h5{font-family:'Amiri';font-size:1.1rem;font-weight:700;margin-bottom:18px;color:var(--gold-soft)}
+  .footer-col a{display:block;color:rgba(253,251,245,.65);font-size:.9rem;padding:6px 0;transition:color .2s}
+  .footer-col a:hover{color:var(--gold-soft)}
+  .footer-social{display:flex;gap:10px;margin-top:14px}
+  .footer-social a{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(232,212,156,.2);display:grid;place-items:center;
+    color:rgba(253,251,245,.7);transition:all .25s;
+  }
+  .footer-social a:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    color:rgba(253,251,245,.5);font-size:.84rem;flex-wrap:wrap;gap:12px;
+  }
+
+  /* ===== Responsive ===== */
+  @media(max-width:1024px){
+    .nav{grid-template-columns:auto 1fr auto}
+    .nav-left .nav-links{display:none}
+    .hero-text,.hero-lead,.featured-img,.featured-body{grid-column:1/13}
+    .featured-body{padding:32px}
+    .article.lg,.article.md,.article.sm{grid-column:span 6}
+    .authors{grid-template-columns:repeat(3,1fr)}
+    .newsletter{grid-template-columns:1fr}
+    .footer-top{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .nav-links,.search-box,.btn-sub{display:none}
+    .utility-links{display:none}
+    .hero-stats{gap:24px;flex-wrap:wrap}
+    .services{grid-template-columns:1fr 1fr}
+    .service{border-left:none;border-top:1px solid var(--rule)}
+    .article.lg,.article.md,.article.sm{grid-column:1/13}
+    .authors{grid-template-columns:1fr 1fr}
+    .footer-top{grid-template-columns:1fr}
+    .nl-form{flex-direction:column}
+  }
+
+  /* Respect reduced motion */
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    [data-r],.stagger>*{opacity:1!important;transform:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- Utility bar -->
+<div class="utility">
+  <div class="utility-inner">
+    <span class="date">الجمعة ١٢ رجب ١٤٤٦هـ · ١٧ يوليو ٢٠٢٦</span>
+    <div class="utility-links">
+      <a href="#">المكتبة</a>
+      <a href="#">المطورون</a>
+      <a href="#">تطبيقاتنا</a>
+      <a href="#">RSS</a>
+    </div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<header class="masthead">
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-links">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">القرآن</a>
+        <a href="#">المقالات</a>
+        <a href="#">القلايد</a>
+        <a href="#">الأذكار</a>
+      </div>
+    </div>
+    <div class="brand-center">
+      <div class="brand-name">مكتبة الحكمة</div>
+      <div class="brand-tag">AL HEEKMAH · EST ٢٠٢٦</div>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>ابحث في المكتبة...</span>
+      </div>
+      <button class="icon-btn" title="تبديل النمط"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <button class="btn-sub">اشترك</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text" data-r="right">
+      <div class="hero-kicker">
+        <span class="line"></span>
+        <span class="eyebrow">العدد ١٢ · مجلة العلوم القرآنية</span>
+      </div>
+      <h1 class="hero-title">حيث يُتلى <span class="it">القرآن</span><br>وتُكتب الحكمة</h1>
+    </div>
+    <div class="hero-lead" data-r="left">
+      <p><span class="drop">م</span>كتبة الحكمة منصة علمية متكاملة، تجمع القرآن الكريم بصوتياته ومرتليه، ومقالات وبحوثًا رصينة في العلوم القرآنية وعلوم الحديث، والأذكار، والعلم النافع — في تجربة قراءة عميقة وصافية.</p>
+    </div>
+    <div class="hero-meta-strip">
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="n"><span class="g" data-count="604">٠</span></div><div class="l">صفحة قرآنية</div></div>
+        <div class="hero-stat"><div class="n" data-count="114">٠</div><div class="l">سورة</div></div>
+        <div class="hero-stat"><div class="n"><span class="g" data-count="1247">٠</span></div><div class="l">مقال وبحث</div></div>
+        <div class="hero-stat"><div class="n" data-count="53">٠</div><div class="l">قارئ مرتل</div></div>
+      </div>
+      <a href="#" class="read-link">تصفّح الأرشيف الكامل
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured story -->
+<article class="featured">
+  <div class="featured-img" data-r="right">
+    <div class="featured-img-inner">
+      <div class="ayah-mark">۞ من القرآن ۞</div>
+      <div class="ayah">وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ</div>
+      <div class="ref">سورة الإسراء · آية ٨٢</div>
+    </div>
+  </div>
+  <div class="featured-body" data-r="left">
+    <span class="cat eyebrow">علوم القرآن · التحليل اللغوي</span>
+    <h2>الغنيان في تفسير القرآن الكريم: دراسةٌ في المفهوم والاستعمال</h2>
+    <p class="dek">يتناول هذا البحث مفهوم "الغنيان" في التفسير، ويستعرض استعمالاته في القرآن الكريم عبر تحليلٍ لغويٍّ وسياقيٍّ معمَّق، مع الاستشهاد بأقوال المفسرين المتقدمين والمعاصرين، وبناء تصوّرٍ منهجيٍّ متكامل.</p>
+    <div class="byline">
+      <div class="byline-avatar">ع</div>
+      <div class="byline-info">
+        <div class="name">د. عبدالله الحكمي</div>
+        <div class="role">أستاذ التفسير وعلوم القرآن</div>
+      </div>
+      <div class="byline-extra">
+        <span>١٢ رجب ١٤٤٦</span>
+        <span>·</span>
+        <span>١٥ دقيقة قراءة</span>
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      <a href="#" class="read-link">اقرأ المقال كاملًا
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </a>
+    </div>
+  </div>
+</article>
+
+<!-- Articles grid -->
+<section class="section">
+  <div class="section-head">
+    <div data-r="right">
+      <span class="eyebrow">من المكتبة</span>
+      <h2>أحدث المقالات والبحوث</h2>
+      <p class="lede">مقالات وبحوث محكَّمة في العلوم القرآنية وعلوم الحديث والفقه واللغة.</p>
+    </div>
+    <a href="#" class="more" data-r="left">كل المقالات
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="articles stagger">
+    <article class="article lg">
+      <div class="article-img a1">
+        <span class="article-cat-tag">تفسير</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3>أصول التفسير عند المتقدمين: قراءةٌ في المنهج والتطبيق</h3>
+      <p>نظرةٌ تحليلية على منهج المفسرين الأوائل، وكيفية تعاملهم مع النص القرآني، وأثر ذلك في تشكيل علم التفسير كما نعرفه اليوم.</p>
+      <div class="by"><span class="au">د. أحمد سالم</span><span>٨ دقائق · ١٠ رجب</span></div>
+    </article>
+    <article class="article md">
+      <div class="article-img a2">
+        <span class="article-cat-tag">قراءات</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <h3>القراءات العشر ومنهجها في التوجيه</h3>
+      <p>دراسةٌ في قواعد القراءات وأثرها في توجيه المعنى.</p>
+      <div class="by"><span class="au">د. مصطفى العزب</span><span>١٢ د</span></div>
+    </article>
+    <article class="article md">
+      <div class="article-img a3">
+        <span class="article-cat-tag">أذكار</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/></svg>
+      </div>
+      <h3>أذكار الصباح والمساء وثمراتها</h3>
+      <p>جمعٌ لأهم الأذكار مع بيان فضلها وثمراتها.</p>
+      <div class="by"><span class="au">أ. خالد المهدي</span><span>٦ د</span></div>
+    </article>
+    <article class="article sm">
+      <div class="article-img a4">
+        <span class="article-cat-tag">حديث</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>منهج المحدّثين في نقد الروايات</h3>
+      <p>كيف بنى المحدّثون علم الجرح والتعديل.</p>
+      <div class="by"><span class="au">د. سعد الحمد</span><span>١٠ د</span></div>
+    </article>
+    <article class="article sm">
+      <div class="article-img a5">
+        <span class="article-cat-tag">تفسير</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3>الإعجاز العلمي: ضوابط وآداب</h3>
+      <p>بحثٌ في ضوابط التعامل مع الإعجاز العلمي.</p>
+      <div class="by"><span class="au">د. عبدالله الحكمي</span><span>١٤ د</span></div>
+    </article>
+    <article class="article sm">
+      <div class="article-img a6">
+        <span class="article-cat-tag">تجويد</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>أحكام التجويد للمبتدئين</h3>
+      <p>مقدمة ميسّرة في أحكام التجويد تطبيقيًا.</p>
+      <div class="by"><span class="au">أ. محمد صدّيق</span><span>٩ د</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- Pull quote -->
+<section class="pullquote" data-r="zoom">
+  <div class="pq-inner">
+    <div class="pq-mark">»</div>
+    <p class="pq-text">إنَّ هذا <span class="em">القرآن</span> يهدي للتي هي أقوم، ويبشّر المؤمنين الذين يعملون الصالحات أنَّ لهم أجرًا كبيرًا</p>
+    <div class="pq-ref">سورة الإسراء · الآيتان ٩ − ١٠</div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section" style="padding-top:0">
+  <div class="section-head">
+    <div data-r="right">
+      <span class="eyebrow">بوابات المكتبة</span>
+      <h2>خدماتٌ متكاملة</h2>
+    </div>
+  </div>
+  <div class="services stagger">
+    <div class="service">
+      <div class="service-num">٠١</div>
+      <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <h4>القرآن الكريم</h4>
+      <p>٦٠٤ صفحات بالرسم العثماني، مع التفسير والترجمة.</p>
+    </div>
+    <div class="service">
+      <div class="service-num">٠٢</div>
+      <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <h4>الصوتيات</h4>
+      <p>أكثر من ٥٠ قارئًا بأصواتٍ متقنة ومؤثرة.</p>
+    </div>
+    <div class="service">
+      <div class="service-num">٠٣</div>
+      <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <h4>القلائد</h4>
+      <p>مكتبة كتب وحديث وتفسير منتقاة بعناية.</p>
+    </div>
+    <div class="service">
+      <div class="service-num">٠٤</div>
+      <svg class="service-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><path d="M9 9h6M12 6v6"/></svg>
+      <h4>الأذكار</h4>
+      <p>أذكار الصباح والمساء وحصن المسلم.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Authors -->
+<section class="section">
+  <div class="section-head">
+    <div data-r="right">
+      <span class="eyebrow">هيئة التحرير</span>
+      <h2>من يكتب لنا</h2>
+      <p class="lede">نخبةٌ من العلماء والباحثين المتخصصين في العلوم الشرعية.</p>
+    </div>
+    <a href="#" class="more" data-r="left">كل الكُتّاب
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+  </div>
+  <div class="authors stagger">
+    <div class="author"><div class="author-av">ع</div><h5>د. عبدالله الحكمي</h5><p>أستاذ التفسير</p></div>
+    <div class="author"><div class="author-av">أ</div><h5>د. أحمد سالم</h5><p>باحث قرآني</p></div>
+    <div class="author"><div class="author-av">م</div><h5>د. مصطفى العزب</h5><p>متخصص قراءات</p></div>
+    <div class="author"><div class="author-av">خ</div><h5>أ. خالد المهدي</h5><p>داعية وكاتب</p></div>
+    <div class="author"><div class="author-av">س</div><h5>د. سعد الحمد</h5><p>أستاذ الحديث</p></div>
+    <div class="author"><div class="author-av">م</div><h5>أ. محمد صدّيق</h5><p>معلم تجويد</p></div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div data-r="right">
+    <span class="eyebrow">النشرة البريدية</span>
+    <h3>وردٌ علميٌّ أسبوعيٌّ في بريدك</h3>
+    <p>اشترك لتصلك أحدث المقالات والبحوث، ووردك القرآني الأسبوعي.</p>
+  </div>
+  <form class="nl-form" data-r="left" onsubmit="return false">
+    <input type="email" placeholder="بريدك الإلكتروني..." aria-label="البريد الإلكتروني">
+    <button type="submit">اشترك الآن</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">مكتبة <span class="it">الحكمة</span></div>
+        <p class="footer-desc">منصة علمية إسلامية شاملة لنشر العلم النافع وخدمة كتاب الله وسنة نبيه ﷺ، عبر مقالات وبحوث محكَّمة ومحتوى موثوق.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.8.4-1.6.6-2.5.7.9-.5 1.6-1.4 1.9-2.4-.8.5-1.8.9-2.7 1.1-.8-.9-2-1.4-3.2-1.4-2.5 0-4.5 2-4.5 4.5 0 .3 0 .7.1 1C7.4 9.1 4 7.4 1.8 4.6c-.4.7-.6 1.4-.6 2.3 0 1.5.8 2.9 2 3.7-.7 0-1.4-.2-2-.5v.1c0 2.2 1.5 4 3.6 4.4-.4.1-.7.2-1.1.2-.3 0-.5 0-.8-.1.5 1.8 2.2 3.1 4.1 3.1-1.5 1.2-3.4 1.9-5.5 1.9H0c2 1.3 4.3 2 6.9 2 8.3 0 12.8-6.8 12.8-12.8v-.6c.9-.6 1.6-1.4 2.3-2.4z"/></svg></a>
+          <a href="#" aria-label="youtube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5c-.3-1.2-1.1-2-2.3-2.3C18.5 4.7 12 4.7 12 4.7s-6.5 0-8.7.5C2.1 5.5 1.3 6.3 1 7.5.5 9.7.5 12 .5 12s0 2.3.5 4.5c.3 1.2 1.1 2 2.3 2.3 2.2.5 8.7.5 8.7.5s6.5 0 8.7-.5c1.2-.3 2-1.1 2.3-2.3.5-2.2.5-4.5.5-4.5s0-2.3-.5-4.5zM9.7 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+          <a href="#" aria-label="telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 4.3l-3.3 15.6c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-.9.5l.3-4.9L19.5 6c.4-.3-.1-.5-.6-.2L7.5 13.5l-4.7-1.5c-1-.3-1-1 .2-1.5L21.7 3c.8-.3 1.6.2 1.3 1.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>روابط</h5><a href="#">القرآن الكريم</a><a href="#">المقالات</a><a href="#">القلايد</a><a href="#">الأذكار</a></div>
+      <div class="footer-col"><h5>الأقسام</h5><a href="#">تفسير</a><a href="#">قراءات</a><a href="#">حديث</a><a href="#">فقه</a></div>
+      <div class="footer-col"><h5>المطورون</h5><a href="#">المكتبة</a><a href="#">واجهة API</a><a href="#">التحميلات</a><a href="#">التوثيق</a></div>
+      <div class="footer-col"><h5>تواصل</h5><a href="#">اتصل بنا</a><a href="#">من نحن</a><a href="#">الخصوصية</a><a href="#">الشروط</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ١٤٤٦هـ · مكتبة الحكمة. جميع الحقوق محفوظة.</span>
+      <span>صُنع بإتقانٍ لخدمة كتاب الله وسنة نبيه ﷺ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll (respects reduced motion)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('[data-r], .stagger').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-r], .stagger').forEach(el => el.classList.add('in'));
+  }
+
+  // Progress bar
+  const bar = document.getElementById('bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = ((h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100) + '%';
+  }, { passive: true });
+
+  // Count-up for stats (Arabic digits)
+  const toAr = (n) => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[+d]);
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.count, dur = 1600, start = performance.now();
+      const tick = (now) => {
+        const t = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = toAr(Math.floor(eased * target));
+        if (t < 1) requestAnimationFrame(tick); else el.textContent = toAr(target);
+      };
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  // Parallax on featured image
+  if (!reduce) {
+    const fi = document.querySelector('.featured-img');
+    if (fi) {
+      window.addEventListener('scroll', () => {
+        const r = fi.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) {
+          const off = (r.top - window.innerHeight) * 0.08;
+          fi.style.backgroundPositionY = off + 'px';
+        }
+      }, { passive: true });
+    }
+  }
+</script>
+</body>
+</html>

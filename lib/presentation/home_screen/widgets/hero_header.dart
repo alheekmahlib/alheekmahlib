@@ -87,7 +87,7 @@ class HeroHeader extends StatelessWidget {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              content,
+              Expanded(child: content),
               const Gap(24),
               SizedBox(width: 380, child: _heroVisual(context)),
             ],

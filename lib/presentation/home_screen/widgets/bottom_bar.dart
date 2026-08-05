@@ -13,11 +13,91 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final width = MediaQuery.sizeOf(context).width;
     final isWide = width > 820;
+    final isCompact = width < 520;
+
+    final buttonPadding = EdgeInsets.symmetric(
+      horizontal: isCompact ? 12 : 14,
+      vertical: isCompact ? 8 : 10,
+    );
+    final buttonDensity =
+        isCompact ? VisualDensity.compact : VisualDensity.standard;
+    final buttonTextStyle = textTheme.labelLarge?.copyWith(
+      fontFamily: 'cairo',
+      fontWeight: FontWeight.w600,
+      height: .7,
+    );
+
+    final copyrightBadge = Container(
+      height: 26,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: scheme.outlineVariant.withValues(alpha: 0.6),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.copyright, size: 14, color: scheme.onSurfaceVariant),
+          const Gap(6),
+          Text(
+            '${'appName'.tr} • ${'1446'.convertNumbers()}',
+            style: TextStyle(
+              color: scheme.onSurfaceVariant,
+              fontFamily: 'cairo',
+              height: 1.3,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final actions = Wrap(
+      spacing: 10,
+      runSpacing: 10,
+      alignment: WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        ElevatedButton.icon(
+          onPressed: () => sl<AppRouter>().onItemTapped(6, context),
+          icon: const Icon(Icons.code, size: 16),
+          label: Text('developers_title'.tr, style: buttonTextStyle),
+          style: ElevatedButton.styleFrom(
+            padding: buttonPadding,
+            elevation: 0,
+            visualDensity: buttonDensity,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            backgroundColor: scheme.secondaryContainer,
+            foregroundColor: scheme.onSecondaryContainer,
+            shape: const StadiumBorder(),
+            minimumSize: const Size(150, 40),
+          ),
+        ),
+        ElevatedButton.icon(
+          onPressed: () => sl<AppRouter>().onItemTapped(5, context),
+          icon: const Icon(Icons.send_outlined, size: 16),
+          label: Text('cta_start_project'.tr, style: buttonTextStyle),
+          style: ElevatedButton.styleFrom(
+            padding: buttonPadding,
+            elevation: 0,
+            visualDensity: buttonDensity,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            backgroundColor: scheme.primary,
+            foregroundColor: scheme.onPrimary,
+            shape: const StadiumBorder(),
+            minimumSize: const Size(150, 40),
+          ),
+        ),
+        const LanguageList(),
+      ],
+    );
 
     return Container(
-      height: 50,
       width: width,
       decoration: BoxDecoration(
         color: scheme.surface,
@@ -25,6 +105,13 @@ class BottomBar extends StatelessWidget {
           topLeft: Radius.circular(12.0),
           topRight: Radius.circular(12.0),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: scheme.shadow.withValues(alpha: 0.06),
+            blurRadius: 16,
+            offset: const Offset(0, -4),
+          ),
+        ],
         border: Border(
           top: BorderSide(color: scheme.outlineVariant, width: 1),
         ),
@@ -40,58 +127,25 @@ class BottomBar extends StatelessWidget {
               crossAxisAlignment:
                   isWide ? CrossAxisAlignment.center : CrossAxisAlignment.start,
               children: [
-                Gap(isWide ? 6 : 4),
-                // CTA + حقوق النشر
-                Row(
-                  mainAxisAlignment: isWide
-                      ? MainAxisAlignment.spaceBetween
-                      : MainAxisAlignment.start,
-                  children: [
-                    // حقوق النشر
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.copyright,
-                            size: 14, color: scheme.onSurfaceVariant),
-                        const Gap(6),
-                        Text(
-                          '${'appName'.tr} • ${'1446'.convertNumbers()}',
-                          style: TextStyle(
-                            color: scheme.onSurfaceVariant,
-                            fontFamily: 'cairo',
-                            fontSize: 12,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(12),
-                    // زر رئيسي لبدء المشروع
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        isWide
-                            ? ElevatedButton.icon(
-                                onPressed: () =>
-                                    sl<AppRouter>().onItemTapped(5, context),
-                                icon: const Icon(Icons.send_outlined, size: 16),
-                                label: Text(
-                                  'cta_start_project'.tr,
-                                  style: const TextStyle(fontFamily: 'cairo'),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 14, vertical: 10),
-                                  shape: const StadiumBorder(),
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                        const Gap(12),
-                        const LanguageList(),
-                      ],
-                    )
-                  ],
-                ),
+                Gap(isWide ? 10 : 8),
+                if (isWide)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      copyrightBadge,
+                      actions,
+                    ],
+                  )
+                else
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      copyrightBadge,
+                      const Gap(10),
+                      actions,
+                    ],
+                  ),
+                Gap(isWide ? 10 : 8),
               ],
             ),
           ),

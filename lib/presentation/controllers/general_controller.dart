@@ -11,6 +11,8 @@ import '../../core/utils/constants/shared_preferences_constants.dart';
 import '../athkar_screen/screens/alzkar_view.dart';
 import '../books/books.dart';
 import '../contact_us/screens/contact_us_page.dart';
+import '../developers/dashboard/developers_dashboard_screen.dart';
+import '../developers/developers_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../our_apps/data/model/our_app_info_model.dart';
 import '../quran/screens/quran_screen.dart';
@@ -115,6 +117,8 @@ class GeneralController extends GetxController {
     BooksScreen(),
     AzkarView(),
     ContactUsPage(),
+    DevelopersScreen(),
+    DevelopersDashboardScreen(),
   ];
 
   Future<List<OurAppInfo>> fetchApps() async {

@@ -11,15 +11,14 @@ environment:
 dependencies:
   animated_custom_dropdown: ^3.1.1
   animated_search_bar: ^2.8.0
-  animated_toggle_switch: ^0.8.5
+  animated_toggle_switch: ^0.8.7
   animations: ^2.1.1
   another_xlider: ^3.0.2
   arabic_numbers: ^1.0.0
-  auto_size_text: ^3.0.0
   bot_toast: ^4.1.3
-  clipboard: ^3.0.9
+  clipboard: ^3.0.14
   cupertino_icons: ^1.0.8
-  dio: ^5.9.0
+  dio: ^5.9.1
   dropdown_button2: ^2.3.9
   easy_image_viewer: ^1.5.1
   expansion_tile_card: ^3.0.0
@@ -27,9 +26,10 @@ dependencies:
   floating_menu_expendable: ^1.0.0
   flutter:
     sdk: flutter
-  flutter_animate_on_scroll: ^0.3.0
+  flutter_json_view: ^1.1.5
   flutter_localizations:
     sdk: flutter
+  flutter_markdown: ^0.7.7+1
   flutter_native_splash: ^2.4.7
   flutter_rounded_progress_bar: ^0.3.2
   flutter_screenutil: ^5.9.3
@@ -41,9 +41,9 @@ dependencies:
     sdk: flutter
   gap: ^3.0.1
   get: ^4.7.3
-  get_it: ^9.2.0
+  get_it: ^9.2.1
   get_storage: ^2.1.1
-  go_router: ^17.0.1
+  go_router: ^17.1.0
   google_huawei_availability:
     git:
       ref: dev
@@ -55,7 +55,7 @@ dependencies:
   just_audio: ^0.10.5
   lottie: ^3.3.2
   path_provider: ^2.1.5
-  quran_library: ^2.3.5
+  quran_library: ^3.2.0
   rxdart: ^0.28.0
   scrollable_positioned_list: ^0.3.8
   seo_renderer: ^0.6.0
@@ -88,6 +88,7 @@ flutter:
     - assets/locales/
     - assets/svg/juz/
   #   - images/a_dot_ham.jpeg
+  
 flutter_assets:
   # assets_path: assets/lottie/
   assets_path: assets/svg/
