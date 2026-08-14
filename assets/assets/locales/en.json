@@ -1,0 +1,370 @@
+{
+  "appName": "Al Heekmah Library",
+  "@appName": {
+    "description": "The App Name"
+  },
+  "lastRead": "Last Read",
+  "@lastRead": {
+    "description": "The Last Read"
+  },
+  "appLang": "App Language",
+  "@appLang": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "Search",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeTheme": "Change Theme",
+  "@changeTheme": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "brown": "Brown Mode",
+  "@brown": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dark": "Dark Mode",
+  "@dark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "books": "the Garlanded",
+  "@books": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quran": "Quran",
+  "@quran": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readMore": "Read More",
+  "@readMore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readLess": "Read Less",
+  "@readLess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutBook": "About Book",
+  "@aboutBook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "athkar": "Athkar",
+  "@athkar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAzkarText": "The Azkar has been copied!",
+  "@copyAzkarText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_us": "About App",
+  "@about_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app": "The application of the Qur’an Al Kareem is characterized by its approval of the edition of the King Fahd Complex for Printing the Noble Qur’an in Madinah because of its reliability and mastery.\nThe Quran Al Kareem application is sponsored by the \"Al-Heekmah Library\".\nIt is a well-designed application that allows you to read interactively with the text of the electronic Quran, listen to recitations, study the  Quran Al Kareem and memorize it with ease.",
+  "@about_app": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app2": "Among the most important features of the application :",
+  "@about_app2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutQuranApp3": "◉ This application enables you to read the Quran as if you were reading in the Mus'haf, and you can read in vertical and horizontal mode.\n◉ You can also read in variable mode that enables you to zoom in and out as you like.\n◉ The application has the feature of textual search in the verses of the Qur’an through real-time search and display of results with pages in addition to the possibility of going to the page as needed.\n◉ Addition to bookmarks so that the reader can save the page and return to it whenever he wants.\n◉ Addition to notes.\n◉ Ability to listen to each verse in voice of different readers.\n◉ The app allows interpretation for each verse, you can change between interpretations, and you can resize the interpretation line.\n◉ Index of Surahs.\n◉ Move between Surahs easily.\n◉ The app lets you read the meaning of stop signs.\n◉ The application enables you to read the Muslim fortress in full and divided by remembrance so that it is easy for the reader to navigate between sections, and you can add any mention to favorites.\n◉ The application allows the reader to read to change color patterns, including the dark pattern, which changes the background color in black and white lines to give the reader complete comfort when reading in a low-light atmosphere.",
+  "@about_app3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutAzkaryApp3": "◉ This application allows you to save your favorite dhikrs (remembrances) in a special list, making them easily accessible and reviewable at any time.\n◉ You can control the font size and enlarge or reduce it according to your preference for more comfortable reading.\n◉ The application also offers three user interface modes - green, blue, and dark - giving you the ability to customize the app's appearance according to your preferences.\n◉ What distinguishes \"My Dhikr from the Book and Sunnah\" is also the ability to easily share dhikrs with friends and family.\n◉ You can share directly in text or by sending an image containing the dhikr, enriching and deepening the experience of communication and interaction with others.\n◉ You can specify the times you prefer to read the dhikrs, and the application will remind you accurately at those times.",
+  "@aboutAzkaryApp3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appStoreI": "Download from |App Store| for Iphone",
+  "@appStoreI": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playStore": "Download from |Google Store|",
+  "@playStore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appGallery": "Download from |App Gallery|",
+  "@appGallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appStoreD": "Download from |App Store| for Desktop",
+  "@appStoreD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "Delete",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dwaaDaily": "Daily Dwaa",
+  "@dwaaDaily": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ourApps": "Our Apps",
+  "@ourApps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aya_count": "Number of verses",
+  "@aya_count": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAyah": "The verse has been copied",
+  "@copyAyah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "translation": "The Translation",
+  "@translation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader1": "Abdul Basit",
+  "@reader1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader2": "Mohamed Siddiq El-Minshawi",
+  "@reader2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader3": "Mahmoud Khalil Al-Hussary",
+  "@reader3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader5": "Maher Al Muaiqly",
+  "@reader5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader6": "Saad Al Ghamdi",
+  "@reader6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select_player": "Reader selected",
+  "@select_player": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "azkar": "Al Athkar",
+  "@azkar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hero_title": "We build professional apps for mobile, web, and desktop",
+  "hero_subtitle": "Turn your idea into a polished digital experience that works smoothly on iOS, Android, Web, and Desktop with high quality and performance.",
+  "cta_start_project": "Start your project",
+  "cta_our_apps": "Our apps",
+  "cta_quran": "Quran",
+  "cta_books": "Books",
+  "cta_athkar": "Athkar",
+  "services_title": "Services",
+  "services_head": "What We Provide",
+  "svc_quran": "Mushaf Text",
+  "svc_quran_desc": "Advanced reading with search and quick navigation.",
+  "svc_books": "Books",
+  "svc_books_desc": "A curated set of helpful garlanded books.",
+  "svc_azkar": "Athkar",
+  "svc_azkar_desc": "Daily athkar with neat organization and gentle reminders.",
+  "svc_apps": "App Development",
+  "svc_apps_desc": "We build modern mobile apps with high performance and smooth UX.",
+  "svc_pro": "Professional Delivery",
+  "svc_pro_desc": "Quality execution, on-time delivery, and attention to details from start to publish.",
+  "svc_multi": "Multi-platform Support",
+  "svc_multi_desc": "Ship to iOS, Android, and Web from one codebase with platform tuning.",
+  "faq_title": "Questions? Look here.",
+  "faq_q1": "How to switch light/dark theme?",
+  "faq_a1": "Use the theme icon in the top bar.",
+  "faq_q2": "Does it work offline?",
+  "faq_a2": "Some sections work offline after initial load.",
+  "faq_q3": "How do I search inside the Qur'an?",
+  "faq_a3": "Use the search bar or the Quran tab.",
+  "faq_q4": "Responsive for phone and desktop?",
+  "faq_a4": "Yes, the UI adapts to all sizes.",
+  "faq_q5": "How do I start a project with you?",
+  "faq_a5": "Send us a brief via the \"Start your project\" button and we'll reply within 24–48 hours with clear next steps.",
+  "faq_q6": "Which platforms do you support?",
+  "faq_a6": "We target iOS, Android, and Web from a single codebase with platform tuning.",
+  "faq_q7": "How long does development take?",
+  "faq_a7": "Depends on scope; usually 2–8 weeks for small to medium apps.",
+  "faq_q8": "How is pricing determined?",
+  "faq_a8": "Based on scope and required features. We share a detailed quote after understanding requirements.",
+  "faq_q9": "Do you provide maintenance and updates?",
+  "faq_a9": "Yes. We offer monthly plans or on-demand updates, improvements, and bug fixes.",
+  "faq_q10": "What about data privacy?",
+  "faq_a10": "We protect your data, don't share it with third parties, and use trusted infrastructure.",
+  "faq_q11": "What payment methods are available?",
+  "faq_a11": "Bank transfer and common online gateways depending on your country.",
+  "faq_q12": "How can I contact you directly?",
+  "faq_a12": "From the \"Contact\" tab on this site; your message goes straight to our team without opening a mail app.",
+  "about_title": "About Us",
+  "about_head": "Al Heekmah Library",
+  "about_body": "We are a library specialized in developing and building applications with Islamic and educational character. We aim to provide reliable and easy-to-use digital solutions that help Muslims read, learn, and stay committed to remembering Allah through beautiful and refined technical experiences. We focus on high performance, accessibility, and multi-platform support to ensure benefits reach the largest number of users.",
+  "about_contact_cta": "We'd love to hear from you — write to us below:",
+  "contact_title": "Contact",
+  "contact_head": "Let’s talk about your next project",
+  "contact_name": "Full Name",
+  "contact_email": "Email",
+  "contact_subject": "Subject",
+  "contact_message": "Message",
+  "send": "Send",
+  "sending": "Sending...",
+  "contact_success": "Your message has been sent.",
+  "contact_error": "Failed to send the message. Please try again later.",
+  "required_field": "This field is required",
+  "invalid_email": "Invalid email address"
+  ,
+  "download_page_title": "Download App",
+  "redirecting_store": "You'll be redirected to the right store shortly...",
+  "open_store_button": "Open Store Now",
+  "app_not_found": "Couldn't find the requested app.",
+  "detecting_platform": "Detecting your platform for automatic redirection...",
+  "allBooks": "All Books",
+  "myLibrary": "My Library",
+  "hadiths": "Hadith",
+  "tafsir": "Tafsir",
+  "aboutBooks": "About the Book",
+  "bookJuz": "Book Parts",
+  "chapterBook": "Book Chapters",
+  "errorLoadingData": "Error loading data",
+  "pages": "pages",
+  "page": "page",
+  "chapter": "Chapter",
+  "goToStartOfJuz": "Go to the beginning of the part",
+  "noChaptersInThisJuz": "No chapters in this part",
+  "Error": "Error",
+  "noPagesFound": "No pages found for this book.",
+  "noBooksFoundForSearch": "No books found for this search.",
+  "sixthBooks": "Sixth Books",
+  "ninthBooks": "Ninth Books",
+  "bookRemovedFromLastRead": "Book removed from last read",
+  "noBooksReadedYet": "No books read yet",
+  "searchInBooks": "Search in books",
+  "downloading...": "Downloading...",
+  "noBooksDownloaded": "No books downloaded yet",
+  "juz": "Juz",
+  "sajda": "Prostration",
+  "surahNames": "Surah Names",
+  "aboutSurah": "About the Surah",
+  "ayah_copied": "Verse copied",
+  "translate": "Translations",
+  "tafsirIsEmptyNote": "\n\nThe interpretation of this verse is in the previous verses",
+  "footnotes": "Footnotes",
+  "ayah": "Verse",
+  "ayahs": "Verses",
+  "last_listen": "Last Listen",
+  "readers": "Reciters",
+  "index": "Index",
+  "bookmarks": "Bookmarks",
+  "surahs": "Surahs",
+  "juzz": "Parts",
+  "quran_sounds": "Listen to Quran",
+  "no_bookmarks_yet": "No bookmarks yet",
+  "greenBookmarks": "Green Bookmarks",
+  "yellowBookmarks": "Yellow Bookmarks",
+  "redBookmarks": "Red Bookmarks",
+  "hizb": "Hizb",
+  "developers_title": "Developers",
+  "developers_libraries": "Libraries",
+  "developers_api": "API",
+  "developers_docs": "Documentation",
+  "developers_github": "GitHub",
+  "developers_download": "Download",
+  "developers_open": "Open",
+  "developers_base_url": "Base URL:",
+  "developers_version": "Version:",
+  "developers_endpoints": "Endpoints",
+  "developers_updated": "Last update:",
+  "developers_empty": "No data available.",
+  "developers_dashboard": "Developers Dashboard",
+  "developers_dashboard_hint": "Upload or paste the JSON to review data and export the final file.",
+  "developers_upload_json": "Upload JSON",
+  "developers_export_json": "Export JSON",
+  "developers_validate_json": "Validate",
+  "developers_json_hint": "Paste developers.json content here...",
+  "developers_json_invalid": "Invalid JSON file.",
+  "developers_json_valid": "JSON is valid.",
+  "developers_json_empty": "File is empty.",
+  "developers_export_done": "File exported.",
+  "developers_preview": "Sections Preview",
+  "developers_preview_empty": "No preview yet.",
+  "developers_sections_count": "Sections:",
+  "developers_items_count": "Items:",
+  "developers_open_dashboard": "Open Dashboard",
+  "developers_json_loaded": "Data loaded.",
+  "developers_reload": "Reload",
+  "developers_import_json": "Import JSON",
+  "developers_sections": "Sections",
+  "developers_add_section": "Add Section",
+  "developers_edit_section": "Edit Section",
+  "developers_section_slug": "Section Slug",
+  "developers_section_type": "Section Type",
+  "developers_enabled": "Enabled",
+  "developers_disabled": "Disabled",
+  "developers_title_label": "Title",
+  "developers_description_label": "Description",
+  "developers_items": "Items",
+  "developers_add_item": "Add Item",
+  "developers_edit_item": "Edit Item",
+  "developers_item_id": "Item ID",
+  "developers_banner_url": "Banner URL",
+  "developers_logo_url": "Logo URL",
+  "developers_docs_url": "Docs URL",
+  "developers_github_url": "GitHub URL",
+  "developers_download_url": "Download URL",
+  "developers_screenshots": "Screenshots",
+  "developers_add_url": "Add URL",
+  "developers_open_url": "Open URL",
+  "developers_base_url_label": "Base URL",
+  "developers_version_label": "Version",
+  "developers_endpoint_method": "Method",
+  "developers_endpoint_path": "Path",
+  "developers_endpoint_summary_en": "Summary EN",
+  "developers_endpoint_summary_ar": "Summary AR",
+  "developers_add_endpoint": "Add Endpoint",
+  "developers_save": "Save",
+  "developers_cancel": "Cancel",
+  "developers_select_section": "Select a section from the list",
+  "developers_lang_en": "EN",
+  "developers_lang_ar": "AR",
+  "developers_readme": "Library README",
+  "developers_readme_url": "README URL",
+  "developers_readme_error": "Failed to load README.",
+  "CreateAnAPIKey": "Create an API Key",
+  "Email": "Email",
+  "Sending...": "Sending...",
+  "send OTP": "Send OTP",
+  "Creating...": "Creating...",
+  "create token": "Create Token"
+}

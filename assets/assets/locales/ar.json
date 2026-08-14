@@ -1,0 +1,371 @@
+{
+  "appName": "مكتبة الحكمة",
+  "@appName": {
+    "description": "The App Name"
+  },
+  "lastRead": "آخر قراءة",
+  "@lastRead": {
+    "description": "The Last Read"
+  },
+  "appLang": "لغة التطبيق",
+  "@appLang": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "البحث",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeTheme": "تغيير النمط",
+  "@changeTheme": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "brown": "النمط البني",
+  "@brown": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dark": "النمط الغامق",
+  "@dark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "books": "القلائد",
+  "@books": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quran": "القرآن الكريم",
+  "@quran": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readMore": "أقرأ المزيد",
+  "@readMore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readLess": "أقرأ أقل",
+  "@readLess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutBook": "عن الكتاب",
+  "@aboutBook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "athkar": "الأذكار",
+  "@athkar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAzkarText": "تم نسخ الذكر",
+  "@copyAzkarText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_us": "عن التطبيق",
+  "@about_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app": "عن التطبيق",
+  "@about_app": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app2": "من اهم مميزات البرنامج :",
+  "@about_app2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutQuranApp3": "◉ يُمَكِنُكَ هذا التطبيق من قراءة القرآن كما لو كنت تقرأ في المصحف، ويمكنك القراءة بالوضع العامودي والأفقي.\n◉ كما يُمْكِنُكَ القراءة بالوضع المتغير الذي يمكنك من تكبير وتصغير كما تريد.\n◉ يحتوي التطبيق على خاصية البحث النصي في آيات القرآن من خلال البحث اللحظي وعرض النتائج مع الصفحات بالإضافة إلى إمكانية الذهاب للصفحة\n◉ إضافة فواصل للقراءة بحيث يتمكن القارئ من حفظ الصفحة والعودة لها متى شاء.\n◉ إضافة ملاحظات.\n◉ الاستماع لكل آية بصوت عدد من القراء.\n◉ يتيح التطبيق التفسير لكل آية، كما يُمْكِنُكَ التغيير بين التفاسير كما يُمْكِنُكَ تغيير حجم خط التفسير.\n◉ فهرس للسور.\n◉ التنقل بين السّور بسهولة.\n◉ يتيح التطبيق قراءة علامات الوقف.\n◉ يُمْكِنُكَ التطبيق من قراءة حصن المسلم كاملًا ومقسم بحسب الأذكار بحيث يسهل على القارئ التنقل بين الأقسام، كما يُمْكِنُكَ إضافة أي ذكر إلى المفضلة.\n◉ يتيح التطبيق للقارئ القراءة تغيير أنماط الألوان ومنها النمط الداكن والذي يغير لون الخلفية باللون الأسود والخطوط البيضاء لتعطي القارئ الراحة التامة عند القراءة في أجواء منخفضة الإضاءة.",
+  "@about_app3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutAzkaryApp3": "◉ يتيح لك هذا التطبيق القابلية لحفظ الأذكار المفضلة لديك في قائمة خاصة، مما يجعلها سهلة الوصول والاستعراض في أي وقت.\n◉ بإمكانك التحكم بحجم الخط وتكبيره أو تصغيره حسب رغبتك للقراءة الأكثر راحة.\n◉ كما يقدم التطبيق ثلاثة أنماط لواجهة المستخدم - الأخضر، الأزرق، والداكن - مما يعطيك القدرة لتخصيص شكل التطبيق وفقا لتفضيلاتك.\n◉ ما يميز \"أذكاري من الكتاب والسنة\" أيضا، هو إمكانية مشاركة الأذكار بسهولة مع الأصدقاء والعائلة.\n◉ يمكنك المشاركة بالنص مباشرة أو بإرسال صورة تحتوي على الذكر، مما يجعل تجربة التواصل والتفاعل مع الآخرين أكثر غنى وعمقا.\n◉ يمكنك تحديد الأوقات التي تفضل فيها قراءة الأذكار، وسوف يقوم التطبيق بتذكيرك في تلك الأوقات بدقة.",
+  "@aboutAzkaryApp3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appStoreI": "للتحميل من متجر |App Store|",
+  "@appStoreI": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playStore": "للتحميل من متجر |Google Store|",
+  "@playStore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appGallery": "للتحميل من متجر |App Gallery|",
+  "@appGallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appStoreD": "للتحميل من متجر |App Store| لسطح المكتب",
+  "@appStoreD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "حذف",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dwaaDaily": "دعاء اليوم",
+  "@dwaaDaily": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ourApps": "تطبيقاتنا",
+  "@ourApps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aya_count": "عدد الايآت",
+  "@aya_count": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAyah": "تم نسخ الآية",
+  "@copyAyah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "translation": "الترجمة",
+  "@translation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader1": "عبد الباسط عبد الصمد",
+  "@reader1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader2": "محمد صديق المنشاوي",
+  "@reader2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader3": "محمود خليل الحصري",
+  "@reader3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader5": "ماهر المعيقلي",
+  "@reader5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader6": "سعد الغامدي",
+  "@reader6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select_player": "إختر القارئ",
+  "@select_player": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "azkar": "الأذكار",
+  "@azkar": {
+    "type": "text",
+    "placeholders": {}
+  }
+  ,
+  "hero_title": "نبني تطبيقات احترافية للهاتف والويب وسطح المكتب",
+  "hero_subtitle": "نحوّل فكرتك إلى تجربة رقمية متقنة تعمل بسلاسة على iOS وAndroid والويب وسطح المكتب، بجودة وأداء عاليين.",
+  "cta_start_project": "ابدأ مشروعك",
+  "cta_our_apps": "تطبيقاتنا",
+  "cta_quran": "القرآن الكريم",
+  "cta_books": "القلائد",
+  "cta_athkar": "الأذكار",
+  "services_title": "الخدمات",
+  "services_head": "ماذا نقدّم؟",
+  "svc_quran": "نص المصحف",
+  "svc_quran_desc": "قراءة وتصفح متقدّم مع بحث وتنقل سريع.",
+  "svc_books": "الكتب",
+  "svc_books_desc": "مجموعة من القلائد والمراجع المفيدة.",
+  "svc_azkar": "الأذكار",
+  "svc_azkar_desc": "أذكار يومية بتنظيم جميل وإشعارات لطيفة.",
+  "svc_apps": "صناعة التطبيقات",
+  "svc_apps_desc": "نطوّر تطبيقات جوال حديثة بأداء عالٍ وتجربة استخدام مريحة.",
+  "svc_pro": "احترافية في العمل",
+  "svc_pro_desc": "جودة في التنفيذ، التزام بالمواعيد، واهتمام بالتفاصيل من البداية للنشر.",
+  "svc_multi": "دعم أكثر من منصة",
+  "svc_multi_desc": "نستهدف iOS، Android، والويب من قاعدة كود واحدة مع تحسينات لكل منصة.",
+  "faq_title": "أسئلة شائعة",
+  "faq_q1": "كيف أبدّل بين الثيم الفاتح والداكن؟",
+  "faq_a1": "من أيقونة الثيم في الشريط العلوي.",
+  "faq_q2": "هل يعمل بدون إنترنت؟",
+  "faq_a2": "بعض الأقسام تعمل دون إنترنت بعد التحميل الأولي.",
+  "faq_q3": "كيف أبحث داخل القرآن؟",
+  "faq_a3": "من خانة البحث أو من تبويب القرآن.",
+  "faq_q4": "هل هناك وضع للهاتف والكمبيوتر؟",
+  "faq_a4": "نعم، الواجهة متجاوبة لكافة المقاسات.",
+  "faq_q5": "كيف أبدأ مشروع تطبيق معي؟",
+  "faq_a5": "أرسل لنا ملخصًا عبر زر \"ابدأ مشروعك\" وسنعود إليك خلال 24–48 ساعة بخطوات واضحة.",
+  "faq_q6": "ما المنصات التي ندعمها؟",
+  "faq_a6": "نستهدف iOS وAndroid والويب من قاعدة كود واحدة مع تحسينات لكل منصة.",
+  "faq_q7": "كم يستغرق تطوير التطبيق؟",
+  "faq_a7": "يعتمد على حجم ونطاق المشروع؛ عادةً من 2 إلى 8 أسابيع للمشاريع الصغيرة والمتوسطة.",
+  "faq_q8": "كيف يتم التسعير؟",
+  "faq_a8": "حسب النطاق والخصائص المطلوبة. نرسل عرض سعر مفصل بعد فهم المتطلبات.",
+  "faq_q9": "هل تقدّمون صيانة وتحديثات؟",
+  "faq_a9": "نعم، نوفر خطط صيانة شهرية أو حسب الطلب للتحديثات والتحسينات وإصلاح الأخطاء.",
+  "faq_q10": "ماذا عن خصوصية البيانات؟",
+  "faq_a10": "نحافظ على خصوصية بياناتك ولا نشاركها مع أطراف ثالثة، ونستخدم بنى تحتية موثوقة.",
+  "faq_q11": "ما وسائل الدفع المتاحة؟",
+  "faq_a11": "تحويل بنكي وبوابات دفع إلكترونية شائعة حسب البلد.",
+  "faq_q12": "كيف أتواصل معكم مباشرة؟",
+  "faq_a12": "من تبويب \"تواصل\" داخل الموقع، تصل رسالتك مباشرة إلى فريقنا دون فتح تطبيق بريد.",
+  "about_title": "من نحن",
+  "about_head": "مكتبة الحكمة",
+  "about_body": "نحن مكتبة متخصصة في تطوير وصناعة التطبيقات ذات الطابع الإسلامي والتعليمي. نهدف إلى تقديم حلول رقمية موثوقة وسهلة الاستخدام تساعد المسلمين على القراءة والتعلم والالتزام بذكر الله من خلال تجارب تقنية جميلة ومتقنة. نركز على الأداء العالي، قابلية الوصول، ودعم منصات متعددة لضمان وصول الفائدة لأكبر عدد من المستخدمين.",
+  "about_contact_cta": "يسعدنا تواصلك معنا — اكتب لنا أدناه:",
+  "contact_title": "تواصل",
+  "contact_head": "لنبدأ مشروعك القادم",
+  "contact_name": "الاسم الكامل",
+  "contact_email": "البريد الإلكتروني",
+  "contact_subject": "الموضوع",
+  "contact_message": "رسالتك",
+  "send": "إرسال",
+  "sending": "جارٍ الإرسال...",
+  "contact_success": "تم إرسال رسالتك بنجاح.",
+  "contact_error": "تعذّر إرسال الرسالة. حاول لاحقًا.",
+  "required_field": "هذا الحقل مطلوب",
+  "invalid_email": "البريد الإلكتروني غير صالح"
+  ,
+  "download_page_title": "تحميل التطبيق",
+  "redirecting_store": "سيتم تحويلك إلى متجر التطبيقات المناسب خلال لحظات...",
+  "open_store_button": "فتح المتجر الآن",
+  "app_not_found": "تعذّر العثور على التطبيق المطلوب.",
+  "detecting_platform": "جارٍ تحديد منصّتك للتحويل تلقائيًا...",
+  "allBooks": "كل الكتب",
+  "myLibrary": "مكتبتي",
+  "hadiths": "الحديث",
+  "tafsir": "التفسير",
+  "aboutBooks": "عن الكتاب",
+  "bookJuz": "أجزاء الكتاب",
+  "chapterBook": "فصول الكتاب",
+  "errorLoadingData": "خطأ في تحميل البيانات",
+  "pages": "صفحات",
+  "page": "صفحة",
+  "chapter": "الفصل",
+  "goToStartOfJuz": "اذهب إلى بداية الجزء",
+  "noChaptersInThisJuz": "لا توجد فصول في هذا الجزء",
+  "Error": "خطأ",
+  "noPagesFound": "لم يتم العثور على صفحات لهذا الكتاب.",
+  "noBooksFoundForSearch": "لم يتم العثور على كتب لهذا البحث.",
+  "sixthBooks": "الكتب السادسة",
+  "ninthBooks": "الكتب التاسعة",
+  "bookRemovedFromLastRead": "تم حذف الكتاب من آخر قراءة",
+  "noBooksReadedYet": "لا توجد كتب مقروءة بعد",
+  "searchInBooks": "ابحث في الكتب",
+  "downloading...": "تحميل...",
+  "noBooksDownloaded": "لا توجد كتب تم تحميلها بعد",
+  "juz": "الجزء",
+  "sajda": "سجدة",
+  "surahNames": "أسماء السورة",
+  "aboutSurah": "عن السورة",
+  "ayah_copied": "تم نسخ الآية",
+  "translate": "الترجمات",
+  "tafsirIsEmptyNote": "\n\nتفسير هذه الآية في الأيات السابقة",
+  "footnotes": "الحاشية",
+  "ayah": "آية",
+  "ayahs": "آيات",
+  "last_listen": "آخر استماع",
+  "readers": "القراء",
+  "index": "الفهرس",
+  "bookmarks": "الفواصل",
+  "surahs": "السور",
+  "juzz": "الأجزاء",
+  "quran_sounds": "الإستماع للقرآن",
+  "no_bookmarks_yet": "لا توجد فواصل بعد",
+  "greenBookmarks": "فواصل خضراء",
+  "yellowBookmarks": "فواصل صفراء",
+  "redBookmarks": "فواصل حمراء",
+  "hizb": "الحزب",
+  "developers_title": "قسم المطورين",
+  "developers_libraries": "المكتبات",
+  "developers_api": "الـ API",
+  "developers_docs": "التوثيق",
+  "developers_github": "GitHub",
+  "developers_download": "تحميل",
+  "developers_open": "فتح",
+  "developers_base_url": "الرابط الأساسي:",
+  "developers_version": "الإصدار:",
+  "developers_endpoints": "المسارات",
+  "developers_updated": "آخر تحديث:",
+  "developers_empty": "لا توجد بيانات حالياً",
+  "developers_dashboard": "لوحة المطورين",
+  "developers_dashboard_hint": "قم برفع ملف JSON أو لصقه لمراجعة البيانات وتصدير النسخة النهائية.",
+  "developers_upload_json": "رفع JSON",
+  "developers_export_json": "تصدير JSON",
+  "developers_validate_json": "تحقق",
+  "developers_json_hint": "الصق محتوى ملف developers.json هنا...",
+  "developers_json_invalid": "ملف JSON غير صالح.",
+  "developers_json_valid": "تم التحقق من صحة JSON.",
+  "developers_json_empty": "الملف فارغ.",
+  "developers_export_done": "تم تصدير الملف.",
+  "developers_preview": "معاينة الأقسام",
+  "developers_preview_empty": "لا توجد معاينة بعد.",
+  "developers_sections_count": "عدد الأقسام:",
+  "developers_items_count": "العناصر:",
+  "developers_open_dashboard": "فتح الداشبورد",
+  "developers_json_loaded": "تم تحميل البيانات.",
+  "developers_reload": "تحديث",
+  "developers_import_json": "استيراد JSON",
+  "developers_sections": "الأقسام",
+  "developers_add_section": "إضافة قسم",
+  "developers_edit_section": "تعديل القسم",
+  "developers_section_slug": "Slug القسم",
+  "developers_section_type": "نوع القسم",
+  "developers_enabled": "مفعل",
+  "developers_disabled": "غير مفعل",
+  "developers_title_label": "العنوان",
+  "developers_description_label": "الوصف",
+  "developers_items": "العناصر",
+  "developers_add_item": "إضافة عنصر",
+  "developers_edit_item": "تعديل عنصر",
+  "developers_item_id": "معرّف العنصر",
+  "developers_banner_url": "رابط البانر",
+  "developers_logo_url": "رابط الشعار",
+  "developers_docs_url": "رابط التوثيق",
+  "developers_github_url": "رابط GitHub",
+  "developers_download_url": "رابط التحميل",
+  "developers_screenshots": "صور",
+  "developers_add_url": "إضافة رابط",
+  "developers_open_url": "رابط الفتح",
+  "developers_base_url_label": "Base URL",
+  "developers_version_label": "الإصدار",
+  "developers_endpoint_method": "Method",
+  "developers_endpoint_path": "Path",
+  "developers_endpoint_summary_en": "وصف EN",
+  "developers_endpoint_summary_ar": "وصف AR",
+  "developers_add_endpoint": "إضافة مسار",
+  "developers_save": "حفظ",
+  "developers_cancel": "إلغاء",
+  "developers_select_section": "اختر قسمًا من القائمة",
+  "developers_lang_en": "EN",
+  "developers_lang_ar": "AR",
+  "developers_readme": "شرح المكتبة",
+  "developers_readme_url": "رابط README",
+  "developers_readme_error": "تعذّر تحميل ملف README.",
+  "CreateAnAPIKey": "إنشاء مفتاح API",
+  "Email": "البريد الإلكتروني",
+  "Sending...": "جاري الإرسال...",
+  "send OTP": "إرسال OTP",
+  "Creating...": "جاري الإنشاء...",
+  "create token": "إنشاء توكن"
+}

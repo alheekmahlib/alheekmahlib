@@ -1,0 +1,104 @@
+{
+  "updatedAt": "2026-02-07",
+  "sections": [
+    {
+      "slug": "libraries",
+      "enabled": true,
+      "type": "libraries",
+      "title": {"en": "Libraries", "ar": "المكتبات"},
+      "description": {
+        "en": "Flutter libraries and UI kits from Alheekmah.",
+        "ar": "مكتبات وأدوات Flutter من مكتبة الحكمة."
+      },
+      "items": [
+        {
+          "id": "quran-library",
+          "enabled": true,
+          "title": {"en": "Quran Library", "ar": "مكتبة القرآن"},
+          "description": {
+            "en": "Read, search, and navigate the Quran with rich tooling.",
+            "ar": "قراءة وبحث وتصفح القرآن بأدوات متقدمة."
+          },
+          "bannerUrl": "https://example.com/banners/quran_library.jpg",
+          "logoUrl": "https://example.com/logos/quran_library.svg",
+          "docsUrl": "https://example.com/docs/quran-library",
+          "githubUrl": "https://github.com/alheekmahlib/quran_library",
+          "downloadUrl": "https://pub.dev/packages/quran_library",
+          "readmeUrl": "https://raw.githubusercontent.com/alheekmahlib/quran_library/main/README.md",
+          "screenshots": [
+            "https://example.com/screens/quran_library_1.png",
+            "https://example.com/screens/quran_library_2.png"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "api",
+      "enabled": true,
+      "type": "api",
+      "title": {"en": "API", "ar": "الـ API"},
+      "description": {
+        "en": "Public APIs for Quran datasets.",
+        "ar": "واجهات برمجية عامة لبيانات القرآن."
+      },
+      "items": [
+        {
+          "id": "quran-api",
+          "enabled": true,
+          "title": {"en": "Quran JSON API", "ar": "API القرآن"},
+          "description": {
+            "en": "Endpoints for surahs, ayahs, and translations. Requires Bearer token.",
+            "ar": "مسارات للسور والآيات والترجمات. تتطلب توكن Bearer."
+          },
+          "baseUrl": "https://quran-api-phi-lemon.vercel.app",
+          "version": "v1",
+          "docsUrl": "https://example.com/docs/quran-api",
+          "endpoints": [
+            {
+              "method": "GET",
+              "path": "/surahs",
+              "summary": {"en": "List surahs", "ar": "عرض السور"}
+            },
+            {
+              "method": "GET",
+              "path": "/surah/{id}",
+              "summary": {"en": "Get surah", "ar": "تفاصيل سورة"}
+            },
+            {
+              "method": "GET",
+              "path": "/ayah?surah={surah}&number={number}",
+              "summary": {"en": "Get ayah", "ar": "تفاصيل آية"}
+            },
+            {
+              "method": "GET",
+              "path": "/search?keyword={keyword}",
+              "summary": {"en": "Search", "ar": "بحث"}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "downloads",
+      "enabled": true,
+      "type": "downloads",
+      "title": {"en": "Downloads", "ar": "التحميلات"},
+      "description": {
+        "en": "Direct files and releases for Alheekmah resources.",
+        "ar": "ملفات وإصدارات مباشرة لموارد مكتبة الحكمة."
+      },
+      "items": [
+        {
+          "id": "quran-data",
+          "enabled": true,
+          "title": {"en": "Quran Dataset", "ar": "بيانات القرآن"},
+          "description": {
+            "en": "Download the latest Quran JSON dataset.",
+            "ar": "تحميل أحدث نسخة من بيانات القرآن بصيغة JSON."
+          },
+          "downloadUrl": "https://example.com/files/quran.json"
+        }
+      ]
+    }
+  ]
+}
