@@ -1,5 +1,3 @@
-<img align="right" width="170" src="https://github.com/alheekmahlib.png?size=170" alt="Hawazen Mahmood" />
-
 # Hi there, I'm Hawazen 👋
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&duration=3000&pause=1000&color=F7768E&repeat=true&width=520&height=55&lines=Mobile+App+Developer;Flutter+%7C+Dart+Specialist;Open-Source+Islamic+Apps+%26+Packages;Turning+ideas+into+polished+products" alt="Typing SVG" />
